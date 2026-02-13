@@ -25,7 +25,7 @@ public class ChatWebSocketServer extends WebSocketServer {
     private static final Logger logger = LoggerFactory.getLogger(ChatWebSocketServer.class);
     private final ObjectMapper objectMapper;
     private final Map<WebSocket, String> connectionRooms;
-    private final Pattern roomPattern = Pattern.compile("/chat/(\\d+)");
+    private final Pattern roomPattern = Pattern.compile("^/chat/(\\d+)$");  // Strict: only /chat/{roomId}
     
     public ChatWebSocketServer(int port) {
         super(new InetSocketAddress(port));
@@ -39,17 +39,25 @@ public class ChatWebSocketServer extends WebSocketServer {
     @Override
     public void onOpen(WebSocket conn, ClientHandshake handshake) {
         String resourceDescriptor = handshake.getResourceDescriptor();
-        logger.debug("New connection from {}: {}", conn.getRemoteSocketAddress(), resourceDescriptor);
+        logger.debug("New connection attempt from {}: {}", conn.getRemoteSocketAddress(), resourceDescriptor);
         
-        // Extract room ID from path
+        // Validate and extract room ID from path
         Matcher matcher = roomPattern.matcher(resourceDescriptor);
-        if (matcher.find()) {
+        if (matcher.matches()) {
             String roomId = matcher.group(1);
-            connectionRooms.put(conn, roomId);
-            logger.info("Client connected to room {}", roomId);
+            int roomNum = Integer.parseInt(roomId);
+            
+            // Validate room number is between 1-20
+            if (roomNum >= 1 && roomNum <= 20) {
+                connectionRooms.put(conn, roomId);
+                logger.info("Client connected to room {}", roomId);
+            } else {
+                logger.warn("Invalid room number: {} (must be 1-20)", roomNum);
+                conn.close(1003, "Invalid room number. Room must be between 1 and 20");
+            }
         } else {
             logger.warn("Invalid connection path: {}", resourceDescriptor);
-            conn.close(1003, "Invalid path. Use /chat/{roomId}");
+            conn.close(1003, "Invalid endpoint. Use /chat/{roomId} where roomId is 1-20");
         }
     }
     
@@ -76,7 +84,7 @@ public class ChatWebSocketServer extends WebSocketServer {
                 ErrorResponse errorResponse = new ErrorResponse(validationErrors);
                 String errorJson = objectMapper.writeValueAsString(errorResponse);
                 conn.send(errorJson);
-                logger.warn("Validation failed for room {}: {}", roomId, validationErrors);
+                // logger.warn("Validation failed for room {}: {}", roomId, validationErrors);
                 return;
             }
             
@@ -124,7 +132,6 @@ public class ChatWebSocketServer extends WebSocketServer {
         logger.info("ChatWebSocketServer started successfully!");
         logger.info("Listening on port {}", this.getPort());
         logger.info("WebSocket endpoint: ws://localhost:{}/chat/{{roomId}}", this.getPort());
-        setConnectionLostTimeout(0);
         setConnectionLostTimeout(100);
     }
     
