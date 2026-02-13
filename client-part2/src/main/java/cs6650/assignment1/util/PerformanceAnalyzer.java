@@ -21,7 +21,8 @@ public class PerformanceAnalyzer {
         public long minLatency;
         public long maxLatency;
         public Map<String, Integer> messageTypeDistribution;
-        public Map<Integer, Integer> throughputPerRoom;
+        public Map<Integer, Integer> messageCountPerRoom;
+        public Map<Integer, Double> throughputPerRoom;
         public int totalMessages;
         
         @Override
@@ -41,9 +42,12 @@ public class PerformanceAnalyzer {
             messageTypeDistribution.forEach((type, count) -> 
                 sb.append(String.format("  %s: %d (%.1f%%)\n", type, count, 
                     100.0 * count / totalMessages)));
-            sb.append("\nThroughput Per Room:\n");
-            throughputPerRoom.forEach((room, count) -> 
+            sb.append("\nMessage Count Per Room:\n");
+            messageCountPerRoom.forEach((room, count) -> 
                 sb.append(String.format("  Room %d: %d messages\n", room, count)));
+            sb.append("\nThroughput Per Room:\n");
+            throughputPerRoom.forEach((room, throughput) -> 
+                sb.append(String.format("  Room %d: %.2f messages/second\n", room, throughput)));
             sb.append("========================================\n");
             return sb.toString();
         }
@@ -55,6 +59,8 @@ public class PerformanceAnalyzer {
         List<Long> latencies = new ArrayList<>();
         Map<String, Integer> messageTypeCount = new HashMap<>();
         Map<Integer, Integer> roomCount = new HashMap<>();
+        Map<Integer, Long> roomFirstTimestamp = new HashMap<>();
+        Map<Integer, Long> roomLastTimestamp = new HashMap<>();
         
         try (BufferedReader reader = new BufferedReader(new FileReader(csvFilePath))) {
             String line;
@@ -65,6 +71,7 @@ public class PerformanceAnalyzer {
                 String[] parts = line.split(",");
                 if (parts.length >= 5) {
                     try {
+                        long timestamp = Long.parseLong(parts[0]);
                         long latency = Long.parseLong(parts[2]);
                         String messageType = parts[1];
                         int roomId = Integer.parseInt(parts[4]);
@@ -72,6 +79,12 @@ public class PerformanceAnalyzer {
                         latencies.add(latency);
                         messageTypeCount.put(messageType, messageTypeCount.getOrDefault(messageType, 0) + 1);
                         roomCount.put(roomId, roomCount.getOrDefault(roomId, 0) + 1);
+                        
+                        // Track timestamps per room
+                        roomFirstTimestamp.put(roomId, 
+                            Math.min(roomFirstTimestamp.getOrDefault(roomId, Long.MAX_VALUE), timestamp));
+                        roomLastTimestamp.put(roomId, 
+                            Math.max(roomLastTimestamp.getOrDefault(roomId, Long.MIN_VALUE), timestamp));
                     } catch (NumberFormatException e) {
                         logger.warn("Skipping invalid line: {}", line);
                     }
@@ -112,8 +125,22 @@ public class PerformanceAnalyzer {
         
         // Distributions
         stats.messageTypeDistribution = messageTypeCount;
-        stats.throughputPerRoom = roomCount;
+        stats.messageCountPerRoom = roomCount;
         
+                // Calculate throughput per room (messages/second)
+        stats.throughputPerRoom = new HashMap<>();
+        for (Map.Entry<Integer, Integer> entry : roomCount.entrySet()) {
+            int roomId = entry.getKey();
+            int count = entry.getValue();
+            long firstTs = roomFirstTimestamp.get(roomId);
+            long lastTs = roomLastTimestamp.get(roomId);
+            double durationSeconds = (lastTs - firstTs) / 1000.0;
+            
+            // Avoid division by zero
+            double throughput = durationSeconds > 0 ? count / durationSeconds : count;
+            stats.throughputPerRoom.put(roomId, throughput);
+        }
+
         logger.info("Analysis completed");
         return stats;
     }
@@ -181,5 +208,27 @@ public class PerformanceAnalyzer {
         
         logger.info("Throughput calculation completed. {} buckets created", throughputBuckets.size());
         return throughputBuckets;
+    }
+    
+    /**
+     * Save throughput data to a text file for visualization
+     */
+    public static void saveThroughputData(Map<Long, Integer> throughputData, String outputPath) {
+        logger.info("Saving throughput data to: {}", outputPath);
+        
+        try (java.io.PrintWriter writer = new java.io.PrintWriter(outputPath)) {
+            writer.println("Throughput Over Time");
+            writer.println("====================");
+            writer.println("Time (seconds), Messages/Second");
+            
+            for (Map.Entry<Long, Integer> entry : throughputData.entrySet()) {
+                double messagesPerSecond = entry.getValue() / 10.0; // Assuming 10-second buckets
+                writer.printf("%d, %.2f%n", entry.getKey(), messagesPerSecond);
+            }
+            
+            logger.info("Throughput data saved to text file");
+        } catch (java.io.IOException e) {
+            logger.error("Error saving throughput data", e);
+        }
     }
 }

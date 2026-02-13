@@ -11,6 +11,7 @@ import org.slf4j.LoggerFactory;
 
 import java.net.URI;
 import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class ChatWebSocketClient extends WebSocketClient {
@@ -69,18 +70,23 @@ public class ChatWebSocketClient extends WebSocketClient {
                 responseLatch = new CountDownLatch(1);
                 String json = objectMapper.writeValueAsString(chatMessage);
                 send(json);
+
+                // Wait for response (with timeout)
+                boolean received = responseLatch.await(1000, java.util.concurrent.TimeUnit.MILLISECONDS);
+
+                if (!received) {
+                    logger.warn("Timeout waiting for response (attempt {}/{})", attempt + 1, maxRetries);
+                    failureCount.incrementAndGet();
+                    if (attempt < maxRetries - 1) {
+                        continue; // Retry
+                    }
+                    return false;
+                }
+                
                 return true;
             } catch (Exception e) {
                 logger.error("Error sending message (attempt {}/{})", attempt + 1, maxRetries, e);
-                if (attempt < maxRetries - 1) {
-                    try {
-                        // Exponential backoff
-                        Thread.sleep((long) Math.pow(2, attempt) * 100);
-                    } catch (InterruptedException ie) {
-                        Thread.currentThread().interrupt();
-                        return false;
-                    }
-                }
+                return false;
             }
         }
         return false;

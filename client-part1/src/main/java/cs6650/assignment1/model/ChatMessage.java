@@ -1,6 +1,7 @@
 package cs6650.assignment1.model;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.time.Instant;
 
 public class ChatMessage {
@@ -14,6 +15,9 @@ public class ChatMessage {
     
     private MessageType messageType;
     
+    @JsonIgnore
+    private Integer roomId;
+    
     public enum MessageType {
         TEXT, JOIN, LEAVE
     }
@@ -22,12 +26,13 @@ public class ChatMessage {
     public ChatMessage() {
     }
     
-    public ChatMessage(Integer userId, String username, String message, Instant timestamp, MessageType messageType) {
+    public ChatMessage(Integer userId, String username, String message, Instant timestamp, MessageType messageType, Integer roomId) {
         this.userId = userId;
         this.username = username;
         this.message = message;
         this.timestamp = timestamp;
         this.messageType = messageType;
+        this.roomId = roomId;
     }
     
     // Getters and Setters
@@ -69,5 +74,13 @@ public class ChatMessage {
     
     public void setMessageType(MessageType messageType) {
         this.messageType = messageType;
+    }
+    
+    public Integer getRoomId() {
+        return roomId;
+    }
+    
+    public void setRoomId(Integer roomId) {
+        this.roomId = roomId;
     }
 }

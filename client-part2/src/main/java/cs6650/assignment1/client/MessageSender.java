@@ -5,9 +5,6 @@ import cs6650.assignment1.model.MetricRecord;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.io.BufferedWriter;
-import java.io.FileWriter;
-import java.io.IOException;
 import java.net.URI;
 import java.util.Random;
 import java.util.concurrent.BlockingQueue;
@@ -27,10 +24,9 @@ public class MessageSender implements Runnable {
     private final int messagesToSend;
     private final Random random;
     private final BlockingQueue<MetricRecord> metricsQueue;
-    private final int roomId;
     
-    public MessageSender(BlockingQueue<ChatMessage> messageQueue, String serverUrl, 
-                        AtomicInteger successCount, AtomicInteger failureCount, 
+    public MessageSender(BlockingQueue<ChatMessage> messageQueue, String serverUrl,
+                        AtomicInteger successCount, AtomicInteger failureCount,
                         AtomicInteger reconnectionCount, int messagesToSend,
                         BlockingQueue<MetricRecord> metricsQueue) {
         this.messageQueue = messageQueue;
@@ -41,15 +37,15 @@ public class MessageSender implements Runnable {
         this.messagesToSend = messagesToSend;
         this.random = new Random();
         this.metricsQueue = metricsQueue;
-        this.roomId = random.nextInt(20) + 1;
     }
     
     @Override
     public void run() {
         ChatWebSocketClient client = null;
+        int roomId = random.nextInt(20) + 1;
         
         try {
-            // Establish WebSocket connection
+            // Establish ONE persistent WebSocket connection for this thread
             URI serverUri = new URI(serverUrl + "/chat/" + roomId);
             client = new ChatWebSocketClient(serverUri, successCount, failureCount);
             
@@ -59,7 +55,9 @@ public class MessageSender implements Runnable {
                 return;
             }
             
-            // Send messages
+            logger.debug("Thread {} connected to room {}", Thread.currentThread().getName(), roomId);
+            
+            // Send all messages through this ONE persistent connection
             for (int i = 0; i < messagesToSend; i++) {
                 ChatMessage message = messageQueue.take();
                 
@@ -92,19 +90,14 @@ public class MessageSender implements Runnable {
                 }
                 
                 if (!sent) {
-                    failureCount.incrementAndGet();
                     logger.warn("Failed to send message after {} retries", MAX_RETRIES);
-                }
-                
-                // Small delay to prevent overwhelming the server
-                if (i % 100 == 0) {
-                    Thread.sleep(1);
                 }
             }
             
         } catch (Exception e) {
             logger.error("Error in message sender", e);
         } finally {
+            // Close the persistent connection when thread is done
             if (client != null) {
                 try {
                     client.closeBlocking();

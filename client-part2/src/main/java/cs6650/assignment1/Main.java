@@ -6,7 +6,6 @@ import cs6650.assignment1.model.ChatMessage;
 import cs6650.assignment1.model.MetricRecord;
 import cs6650.assignment1.util.CsvWriter;
 import cs6650.assignment1.util.PerformanceAnalyzer;
-import cs6650.assignment1.util.ThroughputVisualizer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -30,7 +29,7 @@ public class Main {
     private static final int MAIN_PHASE_MESSAGES = TOTAL_MESSAGES - WARMUP_TOTAL;
     
     // Server URL - CHANGE THIS TO YOUR SERVER URL
-    private static final String SERVER_URL = "ws://localhost:8080";
+    private static final String SERVER_URL = "ws://16.147.50.158:8081";
     
     // Metrics
     private static final AtomicInteger successCount = new AtomicInteger(0);
@@ -123,16 +122,13 @@ public class Main {
                 System.out.println(stats.toString());
             }
             
-            // Calculate and visualize throughput over time
+            // Calculate throughput over time
             logger.info("Calculating throughput over time...");
             Map<Long, Integer> throughputData = PerformanceAnalyzer.calculateThroughputOverTime(csvFilePath, 10);
             
             if (!throughputData.isEmpty()) {
-                ThroughputVisualizer.saveChartAsText(throughputData, chartFilePath);
+                PerformanceAnalyzer.saveThroughputData(throughputData, chartFilePath);
                 logger.info("Throughput data saved to: {}", chartFilePath);
-                
-                // Display visual chart
-                ThroughputVisualizer.createThroughputChart(throughputData, "ChatFlow Throughput Analysis");
             }
             
             logger.info("\n========================================");
@@ -176,7 +172,7 @@ public class Main {
     private static void runMainPhase(BlockingQueue<ChatMessage> messageQueue,
                                     BlockingQueue<MetricRecord> metricsQueue) throws InterruptedException {
         // Optimize thread count for main phase
-        int optimalThreads = Runtime.getRuntime().availableProcessors() * 4;
+        int optimalThreads = 64;
         int messagesPerThread = MAIN_PHASE_MESSAGES / optimalThreads;
         int remainderMessages = MAIN_PHASE_MESSAGES % optimalThreads;
         
@@ -226,7 +222,7 @@ public class Main {
         logger.info("   - Main phase throughput: {} messages/second", 
                    (MAIN_PHASE_MESSAGES * 1000.0) / mainDuration);
         logger.info("5. Connection statistics:");
-        logger.info("   - Total connections: {}", totalConnections.get());
+        logger.info("   - Total persistent connections: {}", totalConnections.get());
         logger.info("   - Reconnections: {}", reconnectionCount.get());
         logger.info("========================================");
     }

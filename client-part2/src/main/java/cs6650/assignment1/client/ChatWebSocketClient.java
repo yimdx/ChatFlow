@@ -123,7 +123,7 @@ public class ChatWebSocketClient extends WebSocketClient {
             send(json);
             
             // Set a timeout
-            future.orTimeout(10, java.util.concurrent.TimeUnit.SECONDS)
+            future.orTimeout(1, java.util.concurrent.TimeUnit.SECONDS)
                 .exceptionally(throwable -> {
                     pendingMessages.remove(messageId);
                     return new ResponseData("timeout", 0);

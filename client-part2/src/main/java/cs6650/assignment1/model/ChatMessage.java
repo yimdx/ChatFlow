@@ -1,7 +1,6 @@
 package cs6650.assignment1.model;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-import java.time.Instant;
+import com.fasterxml.jackson.annotation.JsonProperty;import com.fasterxml.jackson.annotation.JsonIgnore;import java.time.Instant;
 
 public class ChatMessage {
     
@@ -27,7 +26,7 @@ public class ChatMessage {
     public ChatMessage() {
     }
     
-    public ChatMessage(int userId, String username, String message, Instant timestamp, MessageType messageType) {
+    public ChatMessage(Integer userId, String username, String message, Instant timestamp, MessageType messageType) {
         this.userId = userId;
         this.username = username;
         this.message = message;

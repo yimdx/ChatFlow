@@ -1,0 +1,179 @@
+14:00:11.692 [main] INFO  cs6650.assignment1.Main - ========================================
+14:00:11.693 [main] INFO  cs6650.assignment1.Main - ChatFlow Client - Part 2 (Performance Analysis)
+14:00:11.693 [main] INFO  cs6650.assignment1.Main - ========================================
+14:00:11.693 [main] INFO  cs6650.assignment1.Main - Server URL: ws://16.147.50.158:8081
+14:00:11.693 [main] INFO  cs6650.assignment1.Main - Total messages to send: 500000
+14:00:11.693 [main] INFO  cs6650.assignment1.Main - Warmup threads: 32
+14:00:11.694 [main] INFO  cs6650.assignment1.Main - Warmup messages per thread: 1000
+14:00:11.694 [main] INFO  cs6650.assignment1.Main - ========================================
+14:00:11.708 [CsvWriter] INFO  cs6650.assignment1.util.CsvWriter - CSV Writer started. Output file: results/metrics_20260213_140011.csv
+14:00:11.709 [main] INFO  cs6650.assignment1.Main - Waiting for initial message generation...
+14:00:11.709 [MessageGenerator] INFO  c.a.client.MessageGenerator - Message generator started
+14:00:11.725 [MessageGenerator] INFO  c.a.client.MessageGenerator - Generated 50000 messages
+14:00:11.748 [MessageGenerator] INFO  c.a.client.MessageGenerator - Generated 100000 messages
+14:00:11.755 [MessageGenerator] INFO  c.a.client.MessageGenerator - Generated 150000 messages
+14:00:11.761 [MessageGenerator] INFO  c.a.client.MessageGenerator - Generated 200000 messages
+14:00:11.788 [MessageGenerator] INFO  c.a.client.MessageGenerator - Generated 250000 messages
+14:00:11.807 [MessageGenerator] INFO  c.a.client.MessageGenerator - Generated 300000 messages
+14:00:11.810 [MessageGenerator] INFO  c.a.client.MessageGenerator - Generated 350000 messages
+14:00:11.813 [MessageGenerator] INFO  c.a.client.MessageGenerator - Generated 400000 messages
+14:00:11.815 [MessageGenerator] INFO  c.a.client.MessageGenerator - Generated 450000 messages
+14:00:11.843 [MessageGenerator] INFO  c.a.client.MessageGenerator - Generated 500000 messages
+14:00:11.843 [MessageGenerator] INFO  c.a.client.MessageGenerator - Message generation completed. Total: 500000 messages
+14:00:13.715 [main] INFO  cs6650.assignment1.Main - Starting Warmup Phase...
+14:00:24.011 [CsvWriter] INFO  cs6650.assignment1.util.CsvWriter - Written 10000 records to CSV
+14:00:33.986 [CsvWriter] INFO  cs6650.assignment1.util.CsvWriter - Written 20000 records to CSV
+14:00:44.713 [CsvWriter] INFO  cs6650.assignment1.util.CsvWriter - Written 30000 records to CSV
+14:00:48.229 [main] INFO  cs6650.assignment1.Main - Warmup Phase completed in 34511 ms
+14:00:48.230 [main] INFO  cs6650.assignment1.Main - Warmup throughput: 927.2405899568254 messages/second
+14:00:48.230 [main] INFO  cs6650.assignment1.Main - Starting Main Phase...
+14:00:48.230 [main] INFO  cs6650.assignment1.Main - Main phase using 64 threads
+14:00:48.230 [main] INFO  cs6650.assignment1.Main - Messages per thread: 7312
+14:00:52.837 [CsvWriter] INFO  cs6650.assignment1.util.CsvWriter - Written 40000 records to CSV
+14:00:58.333 [CsvWriter] INFO  cs6650.assignment1.util.CsvWriter - Written 50000 records to CSV
+14:01:03.960 [CsvWriter] INFO  cs6650.assignment1.util.CsvWriter - Written 60000 records to CSV
+14:01:09.536 [CsvWriter] INFO  cs6650.assignment1.util.CsvWriter - Written 70000 records to CSV
+14:01:15.028 [CsvWriter] INFO  cs6650.assignment1.util.CsvWriter - Written 80000 records to CSV
+14:01:20.642 [CsvWriter] INFO  cs6650.assignment1.util.CsvWriter - Written 90000 records to CSV
+14:01:25.850 [CsvWriter] INFO  cs6650.assignment1.util.CsvWriter - Written 100000 records to CSV
+14:01:31.182 [CsvWriter] INFO  cs6650.assignment1.util.CsvWriter - Written 110000 records to CSV
+14:01:36.510 [CsvWriter] INFO  cs6650.assignment1.util.CsvWriter - Written 120000 records to CSV
+14:01:41.661 [CsvWriter] INFO  cs6650.assignment1.util.CsvWriter - Written 130000 records to CSV
+14:01:47.095 [CsvWriter] INFO  cs6650.assignment1.util.CsvWriter - Written 140000 records to CSV
+14:01:52.398 [CsvWriter] INFO  cs6650.assignment1.util.CsvWriter - Written 150000 records to CSV
+14:01:57.719 [CsvWriter] INFO  cs6650.assignment1.util.CsvWriter - Written 160000 records to CSV
+14:02:03.459 [CsvWriter] INFO  cs6650.assignment1.util.CsvWriter - Written 170000 records to CSV
+14:02:08.988 [CsvWriter] INFO  cs6650.assignment1.util.CsvWriter - Written 180000 records to CSV
+14:02:11.926 [pool-34-thread-7] WARN  c.assignment1.client.MessageSender - Send attempt 1 failed
+14:02:14.407 [CsvWriter] INFO  cs6650.assignment1.util.CsvWriter - Written 190000 records to CSV
+14:02:19.799 [CsvWriter] INFO  cs6650.assignment1.util.CsvWriter - Written 200000 records to CSV
+14:02:25.340 [CsvWriter] INFO  cs6650.assignment1.util.CsvWriter - Written 210000 records to CSV
+14:02:30.963 [CsvWriter] INFO  cs6650.assignment1.util.CsvWriter - Written 220000 records to CSV
+14:02:36.371 [CsvWriter] INFO  cs6650.assignment1.util.CsvWriter - Written 230000 records to CSV
+14:02:41.883 [CsvWriter] INFO  cs6650.assignment1.util.CsvWriter - Written 240000 records to CSV
+14:02:47.278 [CsvWriter] INFO  cs6650.assignment1.util.CsvWriter - Written 250000 records to CSV
+14:02:52.678 [CsvWriter] INFO  cs6650.assignment1.util.CsvWriter - Written 260000 records to CSV
+14:02:58.177 [CsvWriter] INFO  cs6650.assignment1.util.CsvWriter - Written 270000 records to CSV
+14:03:03.470 [CsvWriter] INFO  cs6650.assignment1.util.CsvWriter - Written 280000 records to CSV
+14:03:08.766 [CsvWriter] INFO  cs6650.assignment1.util.CsvWriter - Written 290000 records to CSV
+14:03:14.164 [CsvWriter] INFO  cs6650.assignment1.util.CsvWriter - Written 300000 records to CSV
+14:03:19.694 [CsvWriter] INFO  cs6650.assignment1.util.CsvWriter - Written 310000 records to CSV
+14:03:24.896 [CsvWriter] INFO  cs6650.assignment1.util.CsvWriter - Written 320000 records to CSV
+14:03:30.324 [CsvWriter] INFO  cs6650.assignment1.util.CsvWriter - Written 330000 records to CSV
+14:03:35.633 [CsvWriter] INFO  cs6650.assignment1.util.CsvWriter - Written 340000 records to CSV
+14:03:41.161 [CsvWriter] INFO  cs6650.assignment1.util.CsvWriter - Written 350000 records to CSV
+14:03:46.596 [CsvWriter] INFO  cs6650.assignment1.util.CsvWriter - Written 360000 records to CSV
+14:03:51.803 [CsvWriter] INFO  cs6650.assignment1.util.CsvWriter - Written 370000 records to CSV
+14:03:55.700 [pool-34-thread-60] WARN  c.assignment1.client.MessageSender - Send attempt 1 failed
+14:03:56.996 [CsvWriter] INFO  cs6650.assignment1.util.CsvWriter - Written 380000 records to CSV
+14:04:02.204 [CsvWriter] INFO  cs6650.assignment1.util.CsvWriter - Written 390000 records to CSV
+14:04:07.716 [CsvWriter] INFO  cs6650.assignment1.util.CsvWriter - Written 400000 records to CSV
+14:04:13.015 [CsvWriter] INFO  cs6650.assignment1.util.CsvWriter - Written 410000 records to CSV
+14:04:18.324 [CsvWriter] INFO  cs6650.assignment1.util.CsvWriter - Written 420000 records to CSV
+14:04:23.424 [CsvWriter] INFO  cs6650.assignment1.util.CsvWriter - Written 430000 records to CSV
+14:04:28.642 [CsvWriter] INFO  cs6650.assignment1.util.CsvWriter - Written 440000 records to CSV
+14:04:33.955 [CsvWriter] INFO  cs6650.assignment1.util.CsvWriter - Written 450000 records to CSV
+14:04:39.454 [CsvWriter] INFO  cs6650.assignment1.util.CsvWriter - Written 460000 records to CSV
+14:04:44.987 [CsvWriter] INFO  cs6650.assignment1.util.CsvWriter - Written 470000 records to CSV
+14:04:51.019 [CsvWriter] INFO  cs6650.assignment1.util.CsvWriter - Written 480000 records to CSV
+14:04:57.749 [CsvWriter] INFO  cs6650.assignment1.util.CsvWriter - Written 490000 records to CSV
+14:05:13.221 [main] INFO  cs6650.assignment1.Main - Main Phase completed in 264991 ms
+14:05:13.222 [main] INFO  cs6650.assignment1.Main - Waiting for CSV writer to complete...
+14:05:13.226 [CsvWriter] INFO  cs6650.assignment1.util.CsvWriter - Written 500000 records to CSV
+14:05:15.306 [CsvWriter] INFO  cs6650.assignment1.util.CsvWriter - CSV Writer completed. Total records: 500000
+14:05:15.308 [main] INFO  cs6650.assignment1.Main - 
+14:05:15.308 [main] INFO  cs6650.assignment1.Main - ========================================
+14:05:15.308 [main] INFO  cs6650.assignment1.Main - BASIC PERFORMANCE RESULTS
+14:05:15.308 [main] INFO  cs6650.assignment1.Main - ========================================
+14:05:15.308 [main] INFO  cs6650.assignment1.Main - 1. Successful messages sent: 500000
+14:05:15.308 [main] INFO  cs6650.assignment1.Main - 2. Failed messages: 0
+14:05:15.308 [main] INFO  cs6650.assignment1.Main - 3. Total runtime: 303600 ms (303.6 seconds)
+14:05:15.308 [main] INFO  cs6650.assignment1.Main -    - Warmup phase: 34511 ms
+14:05:15.308 [main] INFO  cs6650.assignment1.Main -    - Main phase: 264991 ms
+14:05:15.308 [main] INFO  cs6650.assignment1.Main - 4. Overall throughput: 1646.9038208168643 messages/second
+14:05:15.308 [main] INFO  cs6650.assignment1.Main -    - Warmup throughput: 927.2405899568254 messages/second
+14:05:15.308 [main] INFO  cs6650.assignment1.Main -    - Main phase throughput: 1766.0977165262216 messages/second
+14:05:15.308 [main] INFO  cs6650.assignment1.Main - 5. Connection statistics:
+14:05:15.308 [main] INFO  cs6650.assignment1.Main -    - Total persistent connections: 96
+14:05:15.308 [main] INFO  cs6650.assignment1.Main -    - Reconnections: 0
+14:05:15.308 [main] INFO  cs6650.assignment1.Main - ========================================
+14:05:15.308 [main] INFO  cs6650.assignment1.Main - 
+Performing statistical analysis...
+14:05:15.311 [main] INFO  c.a.util.PerformanceAnalyzer - Analyzing metrics from: results/metrics_20260213_140011.csv
+14:05:15.572 [main] INFO  c.a.util.PerformanceAnalyzer - Analysis completed
+
+========================================
+STATISTICAL ANALYSIS
+========================================
+Total Messages: 500000
+Mean Response Time: 34.02 ms
+Median Response Time: 32.00 ms
+95th Percentile: 50.00 ms
+99th Percentile: 68.00 ms
+Min Response Time: 1 ms
+Max Response Time: 281 ms
+
+Message Type Distribution:
+  LEAVE: 24923 (5.0%)
+  JOIN: 24857 (5.0%)
+  TEXT: 450220 (90.0%)
+
+Message Count Per Room:
+  Room 1: 40560 messages
+  Room 2: 36560 messages
+  Room 3: 7312 messages
+  Room 4: 9312 messages
+  Room 5: 17624 messages
+  Room 6: 30248 messages
+  Room 7: 7312 messages
+  Room 8: 8312 messages
+  Room 9: 7312 messages
+  Room 10: 22936 messages
+  Room 11: 38560 messages
+  Room 12: 28936 messages
+  Room 13: 3000 messages
+  Room 14: 22936 messages
+  Room 15: 73152 messages
+  Room 16: 22936 messages
+  Room 17: 66808 messages
+  Room 18: 23936 messages
+  Room 19: 22936 messages
+  Room 20: 9312 messages
+
+Throughput Per Room:
+  Room 1: 136.28 messages/second
+  Room 2: 138.56 messages/second
+  Room 3: 29.09 messages/second
+  Room 4: 33.87 messages/second
+  Room 5: 59.95 messages/second
+  Room 6: 104.90 messages/second
+  Room 7: 29.36 messages/second
+  Room 8: 30.62 messages/second
+  Room 9: 30.43 messages/second
+  Room 10: 79.19 messages/second
+  Room 11: 128.97 messages/second
+  Room 12: 100.21 messages/second
+  Room 13: 87.79 messages/second
+  Room 14: 76.65 messages/second
+  Room 15: 278.75 messages/second
+  Room 16: 77.35 messages/second
+  Room 17: 226.77 messages/second
+  Room 18: 80.30 messages/second
+  Room 19: 77.59 messages/second
+  Room 20: 32.94 messages/second
+========================================
+
+14:05:15.576 [main] INFO  cs6650.assignment1.Main - Calculating throughput over time...
+14:05:15.576 [main] INFO  c.a.util.PerformanceAnalyzer - Calculating throughput over time with 10-second buckets
+14:05:15.784 [main] INFO  c.a.util.PerformanceAnalyzer - Throughput calculation completed. 30 buckets created
+14:05:15.789 [main] INFO  c.a.util.ThroughputVisualizer - Saving throughput chart as text to: results/throughput_20260213_140011.txt
+14:05:15.790 [main] INFO  c.a.util.ThroughputVisualizer - Chart data saved to text file
+14:05:15.790 [main] INFO  cs6650.assignment1.Main - Throughput data saved to: results/throughput_20260213_140011.txt
+14:05:15.790 [main] INFO  c.a.util.ThroughputVisualizer - Creating throughput visualization
+14:05:16.357 [main] INFO  cs6650.assignment1.Main - 
+========================================
+14:05:16.358 [main] INFO  cs6650.assignment1.Main - RESULTS SAVED:
+14:05:16.358 [main] INFO  cs6650.assignment1.Main -   - Metrics CSV: results/metrics_20260213_140011.csv
+14:05:16.358 [main] INFO  cs6650.assignment1.Main -   - Throughput Chart: results/throughput_20260213_140011.txt
+14:05:16.358 [main] INFO  cs6650.assignment1.Main - ========================================
+14:05:17.019 [AWT-EventQueue-0] INFO  c.a.util.ThroughputVisualizer - Throughput chart displayed

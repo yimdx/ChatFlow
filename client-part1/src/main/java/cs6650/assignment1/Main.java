@@ -22,7 +22,7 @@ public class Main {
     private static final int MAIN_PHASE_MESSAGES = TOTAL_MESSAGES - WARMUP_TOTAL;
     
     // Server URL - CHANGE THIS TO YOUR SERVER URL
-    private static final String SERVER_URL = "ws://localhost:8080";
+    private static final String SERVER_URL = "ws://16.147.50.158:8081";
     
     // Metrics
     private static final AtomicInteger successCount = new AtomicInteger(0);
@@ -52,7 +52,7 @@ public class Main {
             
             // Wait for some messages to be generated before starting senders
             logger.info("Waiting for initial message generation...");
-            Thread.sleep(2000);
+            Thread.sleep(10000);
             
             // Phase 1: Warmup
             logger.info("Starting Warmup Phase...");
@@ -116,7 +116,7 @@ public class Main {
     
     private static void runMainPhase(BlockingQueue<ChatMessage> messageQueue) throws InterruptedException {
         // Optimize thread count for main phase
-        int optimalThreads = Runtime.getRuntime().availableProcessors() * 4;
+        int optimalThreads = 64;
         int messagesPerThread = MAIN_PHASE_MESSAGES / optimalThreads;
         int remainderMessages = MAIN_PHASE_MESSAGES % optimalThreads;
         
@@ -166,7 +166,7 @@ public class Main {
         logger.info("   - Main phase throughput: {} messages/second", 
                    (MAIN_PHASE_MESSAGES * 1000.0) / mainDuration);
         logger.info("5. Connection statistics:");
-        logger.info("   - Total connections: {}", totalConnections.get());
+        logger.info("   - Total persistent connections: {}", totalConnections.get());
         logger.info("   - Reconnections: {}", reconnectionCount.get());
         logger.info("========================================");
     }

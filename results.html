@@ -1,0 +1,615 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>results.md</title>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+
+<style>
+/* https://github.com/microsoft/vscode/blob/master/extensions/markdown-language-features/media/markdown.css */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+body {
+	font-family: var(--vscode-markdown-font-family, -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif);
+	font-size: var(--vscode-markdown-font-size, 14px);
+	padding: 0 26px;
+	line-height: var(--vscode-markdown-line-height, 22px);
+	word-wrap: break-word;
+}
+
+#code-csp-warning {
+	position: fixed;
+	top: 0;
+	right: 0;
+	color: white;
+	margin: 16px;
+	text-align: center;
+	font-size: 12px;
+	font-family: sans-serif;
+	background-color:#444444;
+	cursor: pointer;
+	padding: 6px;
+	box-shadow: 1px 1px 1px rgba(0,0,0,.25);
+}
+
+#code-csp-warning:hover {
+	text-decoration: none;
+	background-color:#007acc;
+	box-shadow: 2px 2px 2px rgba(0,0,0,.25);
+}
+
+body.scrollBeyondLastLine {
+	margin-bottom: calc(100vh - 22px);
+}
+
+body.showEditorSelection .code-line {
+	position: relative;
+}
+
+body.showEditorSelection .code-active-line:before,
+body.showEditorSelection .code-line:hover:before {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 0;
+	left: -12px;
+	height: 100%;
+}
+
+body.showEditorSelection li.code-active-line:before,
+body.showEditorSelection li.code-line:hover:before {
+	left: -30px;
+}
+
+.vscode-light.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.15);
+}
+
+.vscode-light.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.40);
+}
+
+.vscode-light.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-dark.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.4);
+}
+
+.vscode-dark.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.60);
+}
+
+.vscode-dark.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-high-contrast.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 160, 0, 0.7);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 160, 0, 1);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+img {
+	max-width: 100%;
+	max-height: 100%;
+}
+
+a {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+a:focus,
+input:focus,
+select:focus,
+textarea:focus {
+	outline: 1px solid -webkit-focus-ring-color;
+	outline-offset: -1px;
+}
+
+hr {
+	border: 0;
+	height: 2px;
+	border-bottom: 2px solid;
+}
+
+h1 {
+	padding-bottom: 0.3em;
+	line-height: 1.2;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+}
+
+h1, h2, h3 {
+	font-weight: normal;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+table > thead > tr > th {
+	text-align: left;
+	border-bottom: 1px solid;
+}
+
+table > thead > tr > th,
+table > thead > tr > td,
+table > tbody > tr > th,
+table > tbody > tr > td {
+	padding: 5px 10px;
+}
+
+table > tbody > tr + tr > td {
+	border-top: 1px solid;
+}
+
+blockquote {
+	margin: 0 7px 0 5px;
+	padding: 0 16px 0 10px;
+	border-left-width: 5px;
+	border-left-style: solid;
+}
+
+code {
+	font-family: Menlo, Monaco, Consolas, "Droid Sans Mono", "Courier New", monospace, "Droid Sans Fallback";
+	font-size: 1em;
+	line-height: 1.357em;
+}
+
+body.wordWrap pre {
+	white-space: pre-wrap;
+}
+
+pre:not(.hljs),
+pre.hljs code > div {
+	padding: 16px;
+	border-radius: 3px;
+	overflow: auto;
+}
+
+pre code {
+	color: var(--vscode-editor-foreground);
+	tab-size: 4;
+}
+
+/** Theming */
+
+.vscode-light pre {
+	background-color: rgba(220, 220, 220, 0.4);
+}
+
+.vscode-dark pre {
+	background-color: rgba(10, 10, 10, 0.4);
+}
+
+.vscode-high-contrast pre {
+	background-color: rgb(0, 0, 0);
+}
+
+.vscode-high-contrast h1 {
+	border-color: rgb(0, 0, 0);
+}
+
+.vscode-light table > thead > tr > th {
+	border-color: rgba(0, 0, 0, 0.69);
+}
+
+.vscode-dark table > thead > tr > th {
+	border-color: rgba(255, 255, 255, 0.69);
+}
+
+.vscode-light h1,
+.vscode-light hr,
+.vscode-light table > tbody > tr + tr > td {
+	border-color: rgba(0, 0, 0, 0.18);
+}
+
+.vscode-dark h1,
+.vscode-dark hr,
+.vscode-dark table > tbody > tr + tr > td {
+	border-color: rgba(255, 255, 255, 0.18);
+}
+
+</style>
+
+<style>
+/* Tomorrow Theme */
+/* http://jmblog.github.com/color-themes-for-google-code-highlightjs */
+/* Original theme - https://github.com/chriskempson/tomorrow-theme */
+
+/* Tomorrow Comment */
+.hljs-comment,
+.hljs-quote {
+	color: #8e908c;
+}
+
+/* Tomorrow Red */
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-regexp,
+.hljs-deletion {
+	color: #c82829;
+}
+
+/* Tomorrow Orange */
+.hljs-number,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-literal,
+.hljs-type,
+.hljs-params,
+.hljs-meta,
+.hljs-link {
+	color: #f5871f;
+}
+
+/* Tomorrow Yellow */
+.hljs-attribute {
+	color: #eab700;
+}
+
+/* Tomorrow Green */
+.hljs-string,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-addition {
+	color: #718c00;
+}
+
+/* Tomorrow Blue */
+.hljs-title,
+.hljs-section {
+	color: #4271ae;
+}
+
+/* Tomorrow Purple */
+.hljs-keyword,
+.hljs-selector-tag {
+	color: #8959a8;
+}
+
+.hljs {
+	display: block;
+	overflow-x: auto;
+	color: #4d4d4c;
+	padding: 0.5em;
+}
+
+.hljs-emphasis {
+	font-style: italic;
+}
+
+.hljs-strong {
+	font-weight: bold;
+}
+</style>
+
+<style>
+/*
+ * Markdown PDF CSS
+ */
+
+ body {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif, "Meiryo";
+	padding: 0 12px;
+}
+
+pre {
+	background-color: #f8f8f8;
+	border: 1px solid #cccccc;
+	border-radius: 3px;
+	overflow-x: auto;
+	white-space: pre-wrap;
+	overflow-wrap: break-word;
+}
+
+pre:not(.hljs) {
+	padding: 23px;
+	line-height: 19px;
+}
+
+blockquote {
+	background: rgba(127, 127, 127, 0.1);
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.emoji {
+	height: 1.4em;
+}
+
+code {
+	font-size: 14px;
+	line-height: 19px;
+}
+
+/* for inline code */
+:not(pre):not(.hljs) > code {
+	color: #C9AE75; /* Change the old color so it seems less like an error */
+	font-size: inherit;
+}
+
+/* Page Break : use <div class="page"/> to insert page break
+-------------------------------------------------------- */
+.page {
+	page-break-after: always;
+}
+
+</style>
+
+<script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+</head>
+<body>
+  <script>
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: document.body.classList.contains('vscode-dark') || document.body.classList.contains('vscode-high-contrast')
+          ? 'dark'
+          : 'default'
+    });
+  </script>
+<h1 id="chatflow-websocket-server">ChatFlow WebSocket Server</h1>
+<h2 id="1-github">1. github</h2>
+<p>https://github.com/yimdx/ChatFlow</p>
+<h2 id="2-system-architecture">2. System Architecture</h2>
+<h3 id="architecture-diagram">Architecture Diagram</h3>
+<pre class="hljs"><code><div>┌─────────────────────────────────────────────────────────────────┐
+│                         Client Layer                             │
+├─────────────────┬───────────────────────┬───────────────────────┤
+│  MessageGenerator│   MessageSender      │  ChatWebSocketClient  │
+│  (Producer)      │   (Consumer)         │  (Connection)         │
+│  - Generates 500K│   - 32 warmup threads│  - Persistent conn    │
+│  - BlockingQueue │   - 64 main threads  │  - Per-thread socket  │
+└─────────────────┴───────────────────────┴───────────────────────┘
+                            / \
+                             │ WebSocket (ws://{ip}:{port}/chat/{roomId})
+                            \ /
+┌─────────────────────────────────────────────────────────────────┐
+│                       Server Layer (EC2)                         │
+├─────────────────┬───────────────────────┬───────────────────────┤
+│ HealthCheckServer│ ChatWebSocketServer  │                       │
+│ (Port 8080)      │ (Port 8081)          │                       │
+│ - HTTP REST      │ - WebSocket Protocol │                       │
+│ - /health        │ - /chat/{roomId}     │                       │
+└─────────────────┴───────────────────────┴───────────────────────┘
+                           / \
+                            │
+                           \ /
+┌─────────────────────────────────────────────────────────────────┐
+│                    Validation &amp; Processing                       │
+│  MessageValidator → ChatMessage → ChatResponse                  │
+└─────────────────────────────────────────────────────────────────┘
+</div></code></pre>
+<h3 id="major-classes-and-relationships">Major Classes and Relationships</h3>
+<h4 id="server-side-classes">Server-Side Classes</h4>
+<p><strong>ChatWebSocketServer</strong> (Main Server)</p>
+<ul>
+<li>Extends <code>WebSocketServer</code> from Java-WebSocket library</li>
+<li>Manages WebSocket lifecycle: <code>onOpen</code>, <code>onMessage</code>, <code>onClose</code>, <code>onError</code>
+<ul>
+<li>Build connection with client, recieve <code>ChatMessage</code> and return <code>ChatResponse</code></li>
+</ul>
+</li>
+<li>Validates room IDs (1-20) using regex pattern <code>^/chat/(\\d+)$</code></li>
+</ul>
+<p><strong>HealthCheckServer</strong> (HTTP Health Endpoint)</p>
+<ul>
+<li>Uses <code>HttpServer</code> from JDK</li>
+<li>Serves <code>/health</code> endpoint on port 8080</li>
+<li>Returns JSON: <code>{&quot;status&quot;:&quot;healthy&quot;}</code></li>
+</ul>
+<p><strong>MessageValidator</strong></p>
+<ul>
+<li>Validates <code>ChatMessage</code> fields (username, message length, etc.)</li>
+<li>Returns list of validation errors</li>
+</ul>
+<p><strong>Models:</strong></p>
+<ul>
+<li><code>ChatMessage</code>: Request model (userId, username, message, timestamp, messageType, roomId)</li>
+<li><code>ChatResponse</code>: Response model (includes serverTimestamp, status)</li>
+<li><code>ErrorResponse</code>: Error handling model</li>
+</ul>
+<h4 id="client-side-classes">Client-Side Classes</h4>
+<p><strong>MessageGenerator</strong> (Producer Thread)</p>
+<ul>
+<li>Implements <code>Runnable</code></li>
+<li>Generates 500,000 random pre-defined messages</li>
+<li>Populates <code>BlockingQueue&lt;ChatMessage&gt;</code></li>
+<li>Random message types: 90% TEXT, 5% JOIN, 5% LEAVE</li>
+</ul>
+<p><strong>MessageSender</strong> (Consumer Thread)</p>
+<ul>
+<li>Implements <code>Runnable</code></li>
+<li>Creates ONE persistent WebSocket connection per thread</li>
+<li>Consumes messages from <code>BlockingQueue</code></li>
+<li>Sends messages sequentially with response waiting</li>
+<li>Tracks success/failure counts atomically</li>
+</ul>
+<p><strong>ChatWebSocketClient</strong> (WebSocket Connection)</p>
+<ul>
+<li>Extends <code>WebSocketClient</code> from Java-WebSocket library</li>
+<li>Manages connection lifecycle and message serialization</li>
+<li>Tracks metrics: success count, failure count, latency</li>
+</ul>
+<p><strong>Part 2 Additional Classes:</strong></p>
+<ul>
+<li><code>MetricRecord</code>: Records per-message metrics (timestamp, latency, room)</li>
+<li><code>CsvWriter</code>: Writes metrics to CSV for analysis</li>
+<li><code>PerformanceAnalyzer</code>: Calculates statistics (mean, median, p95, p99, throughput per room)</li>
+<li><code>ThroughputVisualizer</code>: Generates throughput-over-time analysis</li>
+</ul>
+<h3 id="threading-model">Threading Model</h3>
+<ol>
+<li>
+<p><strong>Generator Thread (1 thread)</strong></p>
+<ul>
+<li>Runs independently</li>
+<li>Produces all 500K messages upfront</li>
+<li>Non-blocking producer to <code>BlockingQueue</code></li>
+</ul>
+</li>
+<li>
+<p><strong>Warmup Phase (32 threads)</strong></p>
+<ul>
+<li>Fixed thread pool: <code>Executors.newFixedThreadPool(32)</code></li>
+<li>Each thread: 1,000 messages (32K total)</li>
+<li>Each thread maintains ONE persistent WebSocket connection</li>
+<li>Duration: ~20 seconds (with 20ms latency)</li>
+</ul>
+</li>
+<li>
+<p><strong>Main Phase (64 threads)</strong></p>
+<ul>
+<li>Thread count: <code>64</code></li>
+<li>Each thread: ~14,625 messages (468K total)</li>
+<li>Duration: ~150 seconds (with 20ms latency)</li>
+</ul>
+</li>
+</ol>
+<p><strong>Thread Lifecycle:</strong></p>
+<pre class="hljs"><code><div>Thread Start → Create WebSocket → Connect (blocking)
+     ↓
+For each message:
+  → Take from queue (blocking)
+  → Send message
+  → Wait for response (1s timeout)
+  → Increment success/fail counter
+     ↓
+Close WebSocket → Thread Exit
+</div></code></pre>
+<p><strong>Synchronization Mechanisms:</strong></p>
+<ul>
+<li><code>BlockingQueue&lt;ChatMessage&gt;</code>: Thread-safe message queue</li>
+<li><code>AtomicInteger</code>: Lock-free counters (success, failure, reconnections)</li>
+<li><code>ExecutorService</code>: Managed thread lifecycle</li>
+<li><code>ConcurrentHashMap</code> for thread-safe room management</li>
+</ul>
+<h2 id="4-websocket-connection-management-strategy">4. WebSocket Connection Management Strategy</h2>
+<h3 id="client-side-strategy-thread-persistent-connections">Client-Side Strategy: <strong>Thread-Persistent Connections</strong></h3>
+<p><strong>Design Decision:</strong> Each thread maintains ONE persistent connection for its entire lifecycle.</p>
+<p><strong>Key Properties:</strong></p>
+<ul>
+<li><strong>Connection Count:</strong> 96 total (32 warmup + 64 main, sequential phases)</li>
+<li><strong>Connection Reuse:</strong> No pooling or sharing between threads</li>
+<li><strong>Room Distribution:</strong> Uniform random (each thread picks room 1-20)</li>
+<li><strong>Failure Handling:</strong> Exponential backoff retry (up to 5 attempts)</li>
+</ul>
+<h2 id="5-littles-law-calculations-and-predictions">5. Little's Law Calculations and Predictions</h2>
+<h3 id="littles-law-formula">Little's Law Formula</h3>
+<pre class="hljs"><code><div>L = λ × W
+
+Where:
+λ (lambda) = Throughput (requests/second)
+L = Concurrency (number of simultaneous requests)
+W = Average response time (seconds)
+</div></code></pre>
+<h3 id="system-parameters">System Parameters</h3>
+<p><strong>Measured Values from Warmup:</strong></p>
+<ul>
+<li>Total messages: 32k</li>
+<li>Total runtime: ~34 seconds (warmup)</li>
+<li>average latency 34ms</li>
+<li>Threads: 32 concurrent</li>
+</ul>
+<h3 id="performance-predictions">Performance Predictions</h3>
+<p><strong>Ideal Throughput</strong></p>
+<pre class="hljs"><code><div># for warmup phase
+λ = 32 concurrent threads/ 34 ms
+λ ≈ 1k messages/second
+
+# for main phase
+
+λ = 64 concurrent threads/ 34 ms
+λ ≈ 1.9k messages/second
+
+</div></code></pre>
+<h2 id="test-results">Test Results</h2>
+<h3 id="part1">Part1</h3>
+<p><img src="part1.png" alt="alt text"></p>
+<h3 id="part2">Part2</h3>
+<p><img src="part2.png" alt="alt text"></p>
+<pre class="hljs"><code><div>========================================
+STATISTICAL ANALYSIS
+========================================
+Total Messages: 500000
+Mean Response Time: 34.02 ms
+Median Response Time: 32.00 ms
+95th Percentile: 50.00 ms
+99th Percentile: 68.00 ms
+Min Response Time: 1 ms
+Max Response Time: 281 ms
+
+Message Type Distribution:
+  LEAVE: 24923 (5.0%)
+  JOIN: 24857 (5.0%)
+  TEXT: 450220 (90.0%)
+
+Message Count Per Room:
+  Room 1: 40560 messages
+  Room 2: 36560 messages
+  Room 3: 7312 messages
+  Room 4: 9312 messages
+  Room 5: 17624 messages
+  Room 6: 30248 messages
+  Room 7: 7312 messages
+  Room 8: 8312 messages
+  Room 9: 7312 messages
+  Room 10: 22936 messages
+  Room 11: 38560 messages
+  Room 12: 28936 messages
+  Room 13: 3000 messages
+  Room 14: 22936 messages
+  Room 15: 73152 messages
+  Room 16: 22936 messages
+  Room 17: 66808 messages
+  Room 18: 23936 messages
+  Room 19: 22936 messages
+  Room 20: 9312 messages
+
+Throughput Per Room:
+  Room 1: 136.28 messages/second
+  Room 2: 138.56 messages/second
+  Room 3: 29.09 messages/second
+  Room 4: 33.87 messages/second
+  Room 5: 59.95 messages/second
+  Room 6: 104.90 messages/second
+  Room 7: 29.36 messages/second
+  Room 8: 30.62 messages/second
+  Room 9: 30.43 messages/second
+  Room 10: 79.19 messages/second
+  Room 11: 128.97 messages/second
+  Room 12: 100.21 messages/second
+  Room 13: 87.79 messages/second
+  Room 14: 76.65 messages/second
+  Room 15: 278.75 messages/second
+  Room 16: 77.35 messages/second
+  Room 17: 226.77 messages/second
+  Room 18: 80.30 messages/second
+  Room 19: 77.59 messages/second
+  Room 20: 32.94 messages/second
+========================================
+</div></code></pre>
+<p><img src="throughput_chart.png" alt="alt text"></p>
+<h3 id="ec2">EC2</h3>
+<p><img src="ec2.png" alt="alt text"></p>
+<p><img src="image.png" alt="alt text"></p>
+
+</body>
+</html>

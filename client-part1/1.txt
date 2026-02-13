@@ -1,0 +1,96 @@
+10:02:08.339 [main] INFO  cs6650.assignment1.Main - ========================================
+10:02:08.340 [main] INFO  cs6650.assignment1.Main - ChatFlow Client - Part 1
+10:02:08.340 [main] INFO  cs6650.assignment1.Main - ========================================
+10:02:08.340 [main] INFO  cs6650.assignment1.Main - Server URL: ws://44.255.56.37:8081
+10:02:08.341 [main] INFO  cs6650.assignment1.Main - Total messages to send: 500000
+10:02:08.341 [main] INFO  cs6650.assignment1.Main - Warmup threads: 32
+10:02:08.341 [main] INFO  cs6650.assignment1.Main - Warmup messages per thread: 1000
+10:02:08.341 [main] INFO  cs6650.assignment1.Main - ========================================
+10:02:08.341 [main] INFO  cs6650.assignment1.Main - Waiting for initial message generation...
+10:02:08.341 [MessageGenerator] INFO  c.a.client.MessageGenerator - Message generator started
+10:02:08.356 [MessageGenerator] INFO  c.a.client.MessageGenerator - Generated 50000 messages
+10:02:08.379 [MessageGenerator] INFO  c.a.client.MessageGenerator - Generated 100000 messages
+10:02:08.385 [MessageGenerator] INFO  c.a.client.MessageGenerator - Generated 150000 messages
+10:02:08.406 [MessageGenerator] INFO  c.a.client.MessageGenerator - Generated 200000 messages
+10:02:08.418 [MessageGenerator] INFO  c.a.client.MessageGenerator - Generated 250000 messages
+10:02:08.421 [MessageGenerator] INFO  c.a.client.MessageGenerator - Generated 300000 messages
+10:02:08.425 [MessageGenerator] INFO  c.a.client.MessageGenerator - Generated 350000 messages
+10:02:08.451 [MessageGenerator] INFO  c.a.client.MessageGenerator - Generated 400000 messages
+10:02:08.455 [MessageGenerator] INFO  c.a.client.MessageGenerator - Generated 450000 messages
+10:02:08.474 [MessageGenerator] INFO  c.a.client.MessageGenerator - Generated 500000 messages
+10:02:08.475 [MessageGenerator] INFO  c.a.client.MessageGenerator - Message generation completed. Total: 500000 messages
+10:02:18.346 [main] INFO  cs6650.assignment1.Main - Starting Warmup Phase...
+10:02:18.656 [WebSocketConnectReadThread-53] DEBUG c.a.client.ChatWebSocketClient - WebSocket connection opened
+10:02:18.657 [pool-1-thread-26] DEBUG c.assignment1.client.MessageSender - Thread pool-1-thread-26 connected to room 7
+10:02:18.663 [WebSocketConnectReadThread-58] DEBUG c.a.client.ChatWebSocketClient - WebSocket connection opened
+10:02:18.663 [pool-1-thread-18] DEBUG c.assignment1.client.MessageSender - Thread pool-1-thread-18 connected to room 9
+10:02:18.665 [WebSocketConnectReadThread-55] DEBUG c.a.client.ChatWebSocketClient - WebSocket connection opened
+10:02:18.665 [pool-1-thread-29] DEBUG c.assignment1.client.MessageSender - Thread pool-1-thread-29 connected to room 20
+10:02:18.665 [WebSocketConnectReadThread-78] DEBUG c.a.client.ChatWebSocketClient - WebSocket connection opened
+10:02:18.665 [pool-1-thread-24] DEBUG c.assignment1.client.MessageSender - Thread pool-1-thread-24 connected to room 13
+10:02:18.665 [WebSocketConnectReadThread-50] DEBUG c.a.client.ChatWebSocketClient - WebSocket connection opened
+10:02:18.665 [WebSocketConnectReadThread-74] DEBUG c.a.client.ChatWebSocketClient - WebSocket connection opened
+10:02:18.665 [pool-1-thread-25] DEBUG c.assignment1.client.MessageSender - Thread pool-1-thread-25 connected to room 19
+10:02:18.665 [pool-1-thread-16] DEBUG c.assignment1.client.MessageSender - Thread pool-1-thread-16 connected to room 13
+10:02:18.680 [WebSocketConnectReadThread-57] DEBUG c.a.client.ChatWebSocketClient - WebSocket connection opened
+10:02:18.681 [pool-1-thread-10] DEBUG c.assignment1.client.MessageSender - Thread pool-1-thread-10 connected to room 19
+10:02:18.681 [WebSocketConnectReadThread-60] DEBUG c.a.client.ChatWebSocketClient - WebSocket connection opened
+10:02:18.681 [pool-1-thread-6] DEBUG c.assignment1.client.MessageSender - Thread pool-1-thread-6 connected to room 2
+10:02:18.681 [WebSocketConnectReadThread-69] DEBUG c.a.client.ChatWebSocketClient - WebSocket connection opened
+10:02:18.681 [WebSocketConnectReadThread-49] DEBUG c.a.client.ChatWebSocketClient - WebSocket connection opened
+10:02:18.681 [pool-1-thread-3] DEBUG c.assignment1.client.MessageSender - Thread pool-1-thread-3 connected to room 1
+10:02:18.682 [WebSocketConnectReadThread-48] DEBUG c.a.client.ChatWebSocketClient - WebSocket connection opened
+10:02:18.681 [WebSocketConnectReadThread-61] DEBUG c.a.client.ChatWebSocketClient - WebSocket connection opened
+10:02:18.682 [pool-1-thread-32] DEBUG c.assignment1.client.MessageSender - Thread pool-1-thread-32 connected to room 2
+10:02:18.682 [pool-1-thread-22] DEBUG c.assignment1.client.MessageSender - Thread pool-1-thread-22 connected to room 5
+10:02:18.681 [pool-1-thread-31] DEBUG c.assignment1.client.MessageSender - Thread pool-1-thread-31 connected to room 19
+10:02:18.682 [WebSocketConnectReadThread-70] DEBUG c.a.client.ChatWebSocketClient - WebSocket connection opened
+10:02:18.682 [pool-1-thread-27] DEBUG c.assignment1.client.MessageSender - Thread pool-1-thread-27 connected to room 17
+10:02:18.682 [WebSocketConnectReadThread-62] DEBUG c.a.client.ChatWebSocketClient - WebSocket connection opened
+10:02:18.682 [pool-1-thread-2] DEBUG c.assignment1.client.MessageSender - Thread pool-1-thread-2 connected to room 14
+10:02:18.682 [WebSocketConnectReadThread-66] DEBUG c.a.client.ChatWebSocketClient - WebSocket connection opened
+10:02:18.682 [WebSocketConnectReadThread-68] DEBUG c.a.client.ChatWebSocketClient - WebSocket connection opened
+10:02:18.682 [pool-1-thread-11] DEBUG c.assignment1.client.MessageSender - Thread pool-1-thread-11 connected to room 17
+10:02:18.683 [pool-1-thread-12] DEBUG c.assignment1.client.MessageSender - Thread pool-1-thread-12 connected to room 20
+10:02:18.683 [WebSocketConnectReadThread-76] DEBUG c.a.client.ChatWebSocketClient - WebSocket connection opened
+10:02:18.683 [pool-1-thread-14] DEBUG c.assignment1.client.MessageSender - Thread pool-1-thread-14 connected to room 13
+10:02:18.683 [WebSocketConnectReadThread-63] DEBUG c.a.client.ChatWebSocketClient - WebSocket connection opened
+10:02:18.683 [pool-1-thread-20] DEBUG c.assignment1.client.MessageSender - Thread pool-1-thread-20 connected to room 12
+10:02:18.683 [WebSocketConnectReadThread-47] DEBUG c.a.client.ChatWebSocketClient - WebSocket connection opened
+10:02:18.683 [pool-1-thread-8] DEBUG c.assignment1.client.MessageSender - Thread pool-1-thread-8 connected to room 9
+10:02:18.683 [WebSocketConnectReadThread-51] DEBUG c.a.client.ChatWebSocketClient - WebSocket connection opened
+10:02:18.684 [WebSocketConnectReadThread-71] DEBUG c.a.client.ChatWebSocketClient - WebSocket connection opened
+10:02:18.684 [pool-1-thread-21] DEBUG c.assignment1.client.MessageSender - Thread pool-1-thread-21 connected to room 11
+10:02:18.684 [WebSocketConnectReadThread-73] DEBUG c.a.client.ChatWebSocketClient - WebSocket connection opened
+10:02:18.684 [pool-1-thread-17] DEBUG c.assignment1.client.MessageSender - Thread pool-1-thread-17 connected to room 11
+10:02:18.684 [pool-1-thread-19] DEBUG c.assignment1.client.MessageSender - Thread pool-1-thread-19 connected to room 14
+10:02:18.684 [WebSocketConnectReadThread-54] DEBUG c.a.client.ChatWebSocketClient - WebSocket connection opened
+10:02:18.684 [pool-1-thread-23] DEBUG c.assignment1.client.MessageSender - Thread pool-1-thread-23 connected to room 11
+10:02:18.684 [WebSocketConnectReadThread-72] DEBUG c.a.client.ChatWebSocketClient - WebSocket connection opened
+10:02:18.684 [pool-1-thread-15] DEBUG c.assignment1.client.MessageSender - Thread pool-1-thread-15 connected to room 7
+10:02:18.684 [WebSocketConnectReadThread-67] DEBUG c.a.client.ChatWebSocketClient - WebSocket connection opened
+10:02:18.685 [WebSocketConnectReadThread-56] DEBUG c.a.client.ChatWebSocketClient - WebSocket connection opened
+10:02:18.685 [pool-1-thread-13] DEBUG c.assignment1.client.MessageSender - Thread pool-1-thread-13 connected to room 1
+10:02:18.685 [pool-1-thread-30] DEBUG c.assignment1.client.MessageSender - Thread pool-1-thread-30 connected to room 11
+10:02:18.685 [WebSocketConnectReadThread-64] DEBUG c.a.client.ChatWebSocketClient - WebSocket connection opened
+10:02:18.685 [pool-1-thread-5] DEBUG c.assignment1.client.MessageSender - Thread pool-1-thread-5 connected to room 10
+10:02:18.686 [WebSocketConnectReadThread-59] DEBUG c.a.client.ChatWebSocketClient - WebSocket connection opened
+10:02:18.686 [WebSocketConnectReadThread-75] DEBUG c.a.client.ChatWebSocketClient - WebSocket connection opened
+10:02:18.686 [pool-1-thread-9] DEBUG c.assignment1.client.MessageSender - Thread pool-1-thread-9 connected to room 18
+10:02:18.686 [WebSocketConnectReadThread-52] DEBUG c.a.client.ChatWebSocketClient - WebSocket connection opened
+10:02:18.686 [pool-1-thread-7] DEBUG c.assignment1.client.MessageSender - Thread pool-1-thread-7 connected to room 3
+10:02:18.686 [pool-1-thread-1] DEBUG c.assignment1.client.MessageSender - Thread pool-1-thread-1 connected to room 9
+10:02:18.686 [WebSocketConnectReadThread-65] DEBUG c.a.client.ChatWebSocketClient - WebSocket connection opened
+10:02:18.686 [pool-1-thread-4] DEBUG c.assignment1.client.MessageSender - Thread pool-1-thread-4 connected to room 8
+10:02:18.686 [WebSocketConnectReadThread-77] DEBUG c.a.client.ChatWebSocketClient - WebSocket connection opened
+10:02:18.686 [pool-1-thread-28] DEBUG c.assignment1.client.MessageSender - Thread pool-1-thread-28 connected to room 2
+10:02:48.188 [WebSocketConnectReadThread-55] DEBUG c.a.client.ChatWebSocketClient - WebSocket connection closed: 1000 - 
+10:02:48.189 [pool-1-thread-29] DEBUG c.assignment1.client.MessageSender - Thread pool-1-thread-29 closed connection
+10:02:48.401 [WebSocketConnectReadThread-59] DEBUG c.a.client.ChatWebSocketClient - WebSocket connection closed: 1000 - 
+10:02:48.401 [pool-1-thread-7] DEBUG c.assignment1.client.MessageSender - Thread pool-1-thread-7 closed connection
+10:02:49.203 [WebSocketConnectReadThread-49] DEBUG c.a.client.ChatWebSocketClient - WebSocket connection closed: 1000 - 
+10:02:49.203 [pool-1-thread-31] DEBUG c.assignment1.client.MessageSender - Thread pool-1-thread-31 closed connection
+10:02:49.676 [WebSocketConnectReadThread-48] DEBUG c.a.client.ChatWebSocketClient - WebSocket connection closed: 1000 - 
+10:02:49.676 [pool-1-thread-32] DEBUG c.assignment1.client.MessageSender - Thread pool-1-thread-32 closed connection
+10:02:49.794 [WebSocketConnectReadThread-57] DEBUG c.a.client.ChatWebSocketClient - WebSocket connection closed: 1000 - 
+10:02:49.794 [pool-1-thread-10] DEBUG c.assignment1.client.MessageSender - Thread pool-1-thread-10 closed connection

@@ -98,6 +98,7 @@ public class MessageGenerator implements Runnable {
         String username = "user" + userId;
         String message = PREDEFINED_MESSAGES[random.nextInt(PREDEFINED_MESSAGES.length)];
         Instant timestamp = Instant.now();
+        int roomId = random.nextInt(20) + 1; // Random room ID from 1 to 20
         
         // 90% TEXT, 5% JOIN, 5% LEAVE
         ChatMessage.MessageType messageType;
@@ -112,6 +113,6 @@ public class MessageGenerator implements Runnable {
             message = username + " left the chat";
         }
         
-        return new ChatMessage(userId, username, message, timestamp, messageType);
+        return new ChatMessage(userId, username, message, timestamp, messageType, roomId);
     }
 }
