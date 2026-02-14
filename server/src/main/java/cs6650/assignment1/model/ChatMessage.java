@@ -1,31 +1,26 @@
 package cs6650.assignment1.model;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import jakarta.validation.constraints.*;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.time.Instant;
 
 public class ChatMessage {
     
-    @NotNull(message = "userId is required")
-    @Min(value = 1, message = "userId must be between 1 and 100000")
-    @Max(value = 100000, message = "userId must be between 1 and 100000")
+    @JsonProperty("userId")
     private Integer userId;
     
-    @NotBlank(message = "username is required")
-    @Size(min = 3, max = 20, message = "username must be 3-20 characters")
-    @Pattern(regexp = "^[a-zA-Z0-9]+$", message = "username must be alphanumeric")
+    @JsonProperty("username")
     private String username;
     
-    @NotBlank(message = "message is required")
-    @Size(min = 1, max = 500, message = "message must be 1-500 characters")
+    @JsonProperty("message")
     private String message;
     
-    @NotNull(message = "timestamp is required")
+    @JsonProperty("timestamp")
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", timezone = "UTC")
     private Instant timestamp;
     
-    @NotNull(message = "messageType is required")
+    @JsonProperty("messageType")
     private MessageType messageType;
     
     public enum MessageType {

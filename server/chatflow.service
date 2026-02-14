@@ -1,0 +1,16 @@
+[Unit]
+Description=ChatFlow WebSocket Server
+After=network.target
+
+[Service]
+Type=simple
+User=ec2-user
+WorkingDirectory=/home/ec2-user
+ExecStart=/usr/bin/java -jar /home/ec2-user/WebSocketServer-1.0-SNAPSHOT.jar
+Restart=on-failure
+RestartSec=10
+StandardOutput=append:/home/ec2-user/chatflow.log
+StandardError=append:/home/ec2-user/chatflow.log
+
+[Install]
+WantedBy=multi-user.target
