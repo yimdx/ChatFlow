@@ -21,8 +21,10 @@ public class Main {
     private static final int WARMUP_TOTAL = WARMUP_THREADS * WARMUP_MESSAGES_PER_THREAD;
     private static final int MAIN_PHASE_MESSAGES = TOTAL_MESSAGES - WARMUP_TOTAL;
     
-    // Server URL - CHANGE THIS TO YOUR SERVER URL
-    private static final String SERVER_URL = "ws://16.147.50.158:8081";
+    // Server URL - configurable via SERVER_URL env var or SERVER_URL system property
+    private static final String SERVER_URL = System.getenv("SERVER_URL") != null
+            ? System.getenv("SERVER_URL")
+            : System.getProperty("SERVER_URL", "ws://16.147.50.158:8081");
     
     // Metrics
     private static final AtomicInteger successCount = new AtomicInteger(0);

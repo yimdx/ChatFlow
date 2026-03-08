@@ -1,43 +1,24 @@
-package cs6650.assignment1.service;
+package cs6650.assignment1.queue;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.rabbitmq.client.Channel;
 import com.rabbitmq.client.MessageProperties;
-import cs6650.assignment1.config.RabbitMQChannelPool;
-import cs6650.assignment1.config.RabbitMQSetup;
 import cs6650.assignment1.model.QueueMessage;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Service;
 
 import java.io.IOException;
-import java.net.InetAddress;
-import java.net.UnknownHostException;
 
-@Service
-public class MessagePublisherService {
+public class MessagePublisher {
     
-    private static final Logger logger = LoggerFactory.getLogger(MessagePublisherService.class);
+    private static final Logger logger = LoggerFactory.getLogger(MessagePublisher.class);
     
-    @Autowired
-    private RabbitMQChannelPool channelPool;
+    private final RabbitMQChannelPool channelPool;
+    private final ObjectMapper objectMapper;
     
-    @Autowired
-    private ObjectMapper objectMapper;
-    
-    @Value("${server.id:server-1}")
-    private String serverId;
-    
-    private String serverHostName;
-    
-    public MessagePublisherService() {
-        try {
-            this.serverHostName = InetAddress.getLocalHost().getHostName();
-        } catch (UnknownHostException e) {
-            this.serverHostName = "unknown";
-        }
+    public MessagePublisher(RabbitMQChannelPool channelPool, ObjectMapper objectMapper) {
+        this.channelPool = channelPool;
+        this.objectMapper = objectMapper;
     }
     
     public void publishMessage(QueueMessage message) throws Exception {
@@ -77,13 +58,5 @@ public class MessagePublisherService {
                 channelPool.returnChannel(channel);
             }
         }
-    }
-    
-    public String getServerId() {
-        return serverId;
-    }
-    
-    public String getServerHostName() {
-        return serverHostName;
     }
 }

@@ -1,20 +1,14 @@
-package cs6650.assignment1.config;
+package cs6650.assignment1.queue;
 
 import com.rabbitmq.client.BuiltinExchangeType;
 import com.rabbitmq.client.Channel;
-import jakarta.annotation.PostConstruct;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Component;
 
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.concurrent.TimeoutException;
 
-@Component
 public class RabbitMQSetup {
     
     private static final Logger logger = LoggerFactory.getLogger(RabbitMQSetup.class);
@@ -22,14 +16,15 @@ public class RabbitMQSetup {
     public static final String EXCHANGE_NAME = "chat.exchange";
     public static final String ROUTING_KEY_PREFIX = "room.";
     
-    @Autowired
-    private RabbitMQChannelPool channelPool;
+    private final RabbitMQChannelPool channelPool;
+    private final int roomCount;
     
-    @Value("${chat.room.count:20}")
-    private int roomCount;
+    public RabbitMQSetup(RabbitMQChannelPool channelPool, int roomCount) {
+        this.channelPool = channelPool;
+        this.roomCount = roomCount;
+    }
     
-    @PostConstruct
-    public void setupExchangeAndQueues() {
+    public void setupExchangeAndQueues() throws InterruptedException, IOException {
         logger.info("Setting up RabbitMQ exchange and queues...");
         
         Channel channel = null;
@@ -61,9 +56,6 @@ public class RabbitMQSetup {
             
             logger.info("RabbitMQ setup completed successfully");
             
-        } catch (IOException | TimeoutException | InterruptedException e) {
-            logger.error("Failed to setup RabbitMQ", e);
-            throw new RuntimeException("Failed to setup RabbitMQ", e);
         } finally {
             if (channel != null) {
                 channelPool.returnChannel(channel);

@@ -5,9 +5,9 @@
 - AWS Account
 - Key pair for EC2 access
 - Security groups configured for:
-  - WebSocket servers: Port 8080
-  - Consumer: Port 8081
-  - RabbitMQ: Ports 5672, 15672
+  - WebSocket servers: Port 8080 (health check HTTP) and Port 8081 (WebSocket)
+  - Consumer: Port 8080 (health/metrics HTTP)
+  - RabbitMQ: Ports 5672 (AMQP), 15672 (Management Console)
   - ALB: Ports 80, 443
 
 ## Instance Types
@@ -69,9 +69,12 @@ scp -i your-key.pem deploy-server.sh ubuntu@<server-ec2-ip>:~/
 # Run server
 chmod +x deploy-server.sh
 ./deploy-server.sh <rabbitmq-private-ip> server-1 8080
+# Health check server starts on :8080, WebSocket on :8081
 
-# Verify
+# Verify health
 curl http://localhost:8080/health
+# Verify WebSocket port is listening
+ss -tlnp | grep 8081
 ```
 
 ## Step 4: Deploy Consumer Instance
@@ -106,11 +109,12 @@ curl http://localhost:8081/metrics
 2. Configuration:
    - Target type: Instances
    - Protocol: HTTP
-   - Port: 8080
+   - Port: **8081** (WebSocket port — this is where clients connect)
    - VPC: Select your VPC
    - Health check:
      - Protocol: HTTP
      - Path: `/health`
+     - **Port: Override → 8080** (health check HTTP server is on a separate port)
      - Interval: 30 seconds
      - Timeout: 5 seconds
      - Healthy threshold: 2
@@ -148,11 +152,11 @@ curl http://localhost:8081/metrics
 
 ```bash
 # From your local machine
-cd client-part1
+cd client-part2
 
-# Run test
+# Run test (ALB DNS routes WebSocket to :8081 on servers)
 java -jar target/ChatClient-1.0-SNAPSHOT.jar \
-  --server.url=ws://<alb-dns-name>/ws \
+  --server.url=ws://<alb-dns-name>/chat/5 \
   --num.threads=128 \
   --messages.per.thread=2000 \
   --room.count=20

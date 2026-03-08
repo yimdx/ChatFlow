@@ -1,44 +1,37 @@
-package cs6650.assignment1.config;
+package cs6650.assignment1.queue;
 
 import com.rabbitmq.client.Channel;
 import com.rabbitmq.client.Connection;
 import com.rabbitmq.client.ConnectionFactory;
-import jakarta.annotation.PostConstruct;
-import jakarta.annotation.PreDestroy;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Component;
 
 import java.io.IOException;
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.TimeoutException;
 
-@Component
 public class RabbitMQChannelPool {
     
     private static final Logger logger = LoggerFactory.getLogger(RabbitMQChannelPool.class);
     
-    @Value("${rabbitmq.host:localhost}")
-    private String host;
-    
-    @Value("${rabbitmq.port:5672}")
-    private int port;
-    
-    @Value("${rabbitmq.username:guest}")
-    private String username;
-    
-    @Value("${rabbitmq.password:guest}")
-    private String password;
-    
-    @Value("${rabbitmq.pool.size:20}")
-    private int poolSize;
+    private final String host;
+    private final int port;
+    private final String username;
+    private final String password;
+    private final int poolSize;
     
     private Connection connection;
     private BlockingQueue<Channel> channelPool;
     
-    @PostConstruct
+    public RabbitMQChannelPool(String host, int port, String username, String password, int poolSize) {
+        this.host = host;
+        this.port = port;
+        this.username = username;
+        this.password = password;
+        this.poolSize = poolSize;
+    }
+    
     public void init() throws IOException, TimeoutException {
         logger.info("Initializing RabbitMQ connection pool...");
         
@@ -88,7 +81,6 @@ public class RabbitMQChannelPool {
         }
     }
     
-    @PreDestroy
     public void cleanup() {
         logger.info("Cleaning up RabbitMQ connection pool...");
         

@@ -5,13 +5,13 @@ import com.rabbitmq.client.Channel;
 import com.rabbitmq.client.DeliverCallback;
 import cs6650.assignment1.config.RabbitMQChannelPool;
 import cs6650.assignment1.model.QueueMessage;
+import cs6650.assignment1.queue.BroadcastPublisher;
 import jakarta.annotation.PostConstruct;
 import jakarta.annotation.PreDestroy;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
@@ -31,9 +31,9 @@ public class MessageConsumerService {
     
     @Autowired
     private RoomManager roomManager;
-    
+
     @Autowired
-    private SimpMessagingTemplate messagingTemplate;
+    private BroadcastPublisher broadcastPublisher;
     
     @Autowired
     private ObjectMapper objectMapper;
@@ -179,12 +179,11 @@ public class MessageConsumerService {
     private void processMessage(String messageBody, String queueName) {
         try {
             QueueMessage message = objectMapper.readValue(messageBody, QueueMessage.class);
-            
-            logger.debug("Processing message {} from queue {} for room {}", 
+
+            logger.debug("Processing message {} from queue {} for room {}",
                         message.getMessageId(), queueName, message.getRoomId());
-            
-            // Broadcast message to all clients in the room
-            broadcastToRoom(message);
+
+            broadcastToServers(message);
             
         } catch (Exception e) {
             logger.error("Failed to process message from queue {}: {}", queueName, messageBody, e);
@@ -192,20 +191,26 @@ public class MessageConsumerService {
         }
     }
     
-    private void broadcastToRoom(QueueMessage message) {
-        String destination = "/topic/room." + message.getRoomId();
-        
+    private void broadcastToServers(QueueMessage message) {
         try {
-            // Broadcast to all subscribers of the room topic
-            messagingTemplate.convertAndSend(destination, message);
+            // Get a channel from the pool to publish the broadcast message
+            Channel channel = channelPool.borrowChannel();
             
-            logger.debug("Broadcasted message {} to room {} via {}", 
-                        message.getMessageId(), message.getRoomId(), destination);
+            try {
+                // Publish message to broadcast queue for servers to consume
+                broadcastPublisher.publishBroadcast(message, channel);
+                
+                logger.debug("Sent message {} to broadcast queue for room {}", 
+                            message.getMessageId(), message.getRoomId());
+                
+            } finally {
+                channelPool.returnChannel(channel);
+            }
             
         } catch (Exception e) {
-            logger.error("Failed to broadcast message {} to room {}", 
+            logger.error("Failed to broadcast message {} to servers for room {}",
                         message.getMessageId(), message.getRoomId(), e);
-            throw new RuntimeException("Failed to broadcast message", e);
+            throw new RuntimeException("Failed to broadcast message to servers", e);
         }
     }
 }

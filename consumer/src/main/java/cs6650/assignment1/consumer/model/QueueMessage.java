@@ -1,9 +1,8 @@
-package cs6650.assignment1.model;
+package cs6650.assignment1.consumer.model;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 import java.time.Instant;
-import java.util.UUID;
 
 public class QueueMessage {
     
@@ -21,35 +20,6 @@ public class QueueMessage {
     private String clientIp;
     
     public QueueMessage() {
-    }
-    
-    public QueueMessage(String messageId, String roomId, String userId, String username, 
-                       String message, Instant timestamp, String messageType, 
-                       String serverId, String clientIp) {
-        this.messageId = messageId;
-        this.roomId = roomId;
-        this.userId = userId;
-        this.username = username;
-        this.message = message;
-        this.timestamp = timestamp;
-        this.messageType = messageType;
-        this.serverId = serverId;
-        this.clientIp = clientIp;
-    }
-    
-    public static QueueMessage fromChatMessage(ChatMessage chatMessage, String roomId, 
-                                               String serverId, String clientIp) {
-        return new QueueMessage(
-            UUID.randomUUID().toString(),
-            roomId,
-            String.valueOf(chatMessage.getUserId()),
-            chatMessage.getUsername(),
-            chatMessage.getMessage(),
-            chatMessage.getTimestamp(),
-            chatMessage.getMessageType(),
-            serverId,
-            clientIp
-        );
     }
     
     // Getters and Setters
@@ -97,7 +67,7 @@ public class QueueMessage {
         return timestamp;
     }
     
-    public void setTimestamp(Instant timestamp) {
+    public void setTimestamp(String timestamp) {
         this.timestamp = timestamp;
     }
     

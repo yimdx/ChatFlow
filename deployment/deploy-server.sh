@@ -6,6 +6,7 @@
 if [ "$#" -lt 2 ]; then
     echo "Usage: $0 <rabbitmq-host> <server-id> [port]"
     echo "Example: $0 10.0.1.100 server-1 8080"
+    echo "  -> Health on :8080, WebSocket on :8081"
     exit 1
 fi
 
@@ -27,17 +28,22 @@ fi
 # Copy JAR to deployment directory
 cp ../server-v2/target/WebSocketServer-1.0-SNAPSHOT.jar ./
 
-# Run server
-nohup java -jar WebSocketServer-1.0-SNAPSHOT.jar \
-    --server.port=$PORT \
-    --server.id=$SERVER_ID \
-    --rabbitmq.host=$RABBITMQ_HOST \
-    --rabbitmq.port=5672 \
-    --rabbitmq.username=admin \
-    --rabbitmq.password=adminpassword \
+# Run server (server-v2 reads configuration from environment variables, not --args)
+nohup env \
+    HEALTH_PORT=$PORT \
+    WEBSOCKET_PORT=$((PORT + 1)) \
+    RABBITMQ_HOST=$RABBITMQ_HOST \
+    RABBITMQ_PORT=5672 \
+    RABBITMQ_USERNAME=admin \
+    RABBITMQ_PASSWORD=adminpassword \
+    SERVER_ID=$SERVER_ID \
+    RABBITMQ_POOL_SIZE=20 \
+    ROOM_COUNT=20 \
+    java -jar WebSocketServer-1.0-SNAPSHOT.jar \
     > server-$SERVER_ID.log 2>&1 &
 
 PID=$!
 echo "Server started with PID: $PID"
 echo "Log file: server-$SERVER_ID.log"
-echo "Health check: curl http://localhost:$PORT/health"
+echo "Health check:   curl http://localhost:$PORT/health"
+echo "WebSocket port: $((PORT + 1))"

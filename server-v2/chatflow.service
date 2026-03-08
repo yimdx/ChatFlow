@@ -1,0 +1,28 @@
+[Unit]
+Description=ChatFlow WebSocket Server
+After=network.target
+
+[Service]
+Type=simple
+User=ubuntu
+WorkingDirectory=/home/ubuntu
+
+# --- Configure these for each server instance ---
+Environment=RABBITMQ_HOST=REPLACE_WITH_RABBITMQ_PRIVATE_IP
+Environment=RABBITMQ_PORT=5672
+Environment=RABBITMQ_USERNAME=admin
+Environment=RABBITMQ_PASSWORD=adminpassword
+Environment=RABBITMQ_POOL_SIZE=20
+Environment=HEALTH_PORT=8080
+Environment=WEBSOCKET_PORT=8081
+Environment=SERVER_ID=server-1
+Environment=ROOM_COUNT=20
+
+ExecStart=/usr/bin/java -jar /home/ubuntu/WebSocketServer-1.0-SNAPSHOT.jar
+Restart=on-failure
+RestartSec=10
+StandardOutput=append:/home/ubuntu/chatflow.log
+StandardError=append:/home/ubuntu/chatflow.log
+
+[Install]
+WantedBy=multi-user.target
