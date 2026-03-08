@@ -35,6 +35,13 @@
             <version>2.15.2</version>
         </dependency>
 
+        <!-- RabbitMQ Client -->
+        <dependency>
+            <groupId>com.rabbitmq</groupId>
+            <artifactId>amqp-client</artifactId>
+            <version>5.20.0</version>
+        </dependency>
+
         <!-- SLF4J API -->
         <dependency>
             <groupId>org.slf4j</groupId>

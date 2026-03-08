@@ -46,7 +46,7 @@ public class QueueMessage {
             chatMessage.getUsername(),
             chatMessage.getMessage(),
             chatMessage.getTimestamp(),
-            chatMessage.getMessageType(),
+            chatMessage.getMessageType().name(),
             serverId,
             clientIp
         );

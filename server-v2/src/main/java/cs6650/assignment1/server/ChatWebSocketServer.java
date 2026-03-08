@@ -194,7 +194,7 @@ public class ChatWebSocketServer extends WebSocketServer {
                 queueMessage.getMessage(),
                 queueMessage.getTimestamp(),
                 Instant.now(), // Server broadcast timestamp
-                queueMessage.getMessageType(),
+                ChatMessage.MessageType.valueOf(queueMessage.getMessageType()),
                 "broadcast"
             );
             
