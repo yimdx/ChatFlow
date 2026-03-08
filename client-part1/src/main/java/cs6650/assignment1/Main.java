@@ -21,11 +21,6 @@ public class Main {
     private static final int WARMUP_TOTAL = WARMUP_THREADS * WARMUP_MESSAGES_PER_THREAD;
     private static final int MAIN_PHASE_MESSAGES = TOTAL_MESSAGES - WARMUP_TOTAL;
     
-    // Server URL - configurable via SERVER_URL env var or SERVER_URL system property
-    private static final String SERVER_URL = System.getenv("SERVER_URL") != null
-            ? System.getenv("SERVER_URL")
-            : System.getProperty("SERVER_URL", "ws://16.147.50.158:8081");
-    
     // Metrics
     private static final AtomicInteger successCount = new AtomicInteger(0);
     private static final AtomicInteger failureCount = new AtomicInteger(0);
@@ -33,10 +28,20 @@ public class Main {
     private static final AtomicInteger totalConnections = new AtomicInteger(0);
     
     public static void main(String[] args) {
+        // Parse server URL from command line or environment variable
+        String serverUrl;
+        if (args.length > 0) {
+            serverUrl = args[0];
+        } else if (System.getenv("SERVER_URL") != null) {
+            serverUrl = System.getenv("SERVER_URL");
+        } else {
+            serverUrl = "ws://localhost:8081";
+        }
+        
         logger.info("========================================");
         logger.info("ChatFlow Client - Part 1");
         logger.info("========================================");
-        logger.info("Server URL: {}", SERVER_URL);
+        logger.info("Server URL: {}", serverUrl);
         logger.info("Total messages to send: {}", TOTAL_MESSAGES);
         logger.info("Warmup threads: {}", WARMUP_THREADS);
         logger.info("Warmup messages per thread: {}", WARMUP_MESSAGES_PER_THREAD);
@@ -59,7 +64,7 @@ public class Main {
             // Phase 1: Warmup
             logger.info("Starting Warmup Phase...");
             long warmupStartTime = System.currentTimeMillis();
-            runWarmupPhase(messageQueue);
+            runWarmupPhase(messageQueue, serverUrl);
             long warmupEndTime = System.currentTimeMillis();
             long warmupDuration = warmupEndTime - warmupStartTime;
             
@@ -70,7 +75,7 @@ public class Main {
             // Phase 2: Main Phase
             logger.info("Starting Main Phase...");
             long mainStartTime = System.currentTimeMillis();
-            runMainPhase(messageQueue);
+            runMainPhase(messageQueue, serverUrl);
             long mainEndTime = System.currentTimeMillis();
             long mainDuration = mainEndTime - mainStartTime;
             
@@ -90,14 +95,14 @@ public class Main {
         }
     }
     
-    private static void runWarmupPhase(BlockingQueue<ChatMessage> messageQueue) throws InterruptedException {
+    private static void runWarmupPhase(BlockingQueue<ChatMessage> messageQueue, String serverUrl) throws InterruptedException {
         ExecutorService executor = Executors.newFixedThreadPool(WARMUP_THREADS);
         List<Future<?>> futures = new ArrayList<>();
         
         for (int i = 0; i < WARMUP_THREADS; i++) {
             totalConnections.incrementAndGet();
             MessageSender sender = new MessageSender(
-                messageQueue, SERVER_URL, successCount, failureCount, 
+                messageQueue, serverUrl, successCount, failureCount, 
                 reconnectionCount, WARMUP_MESSAGES_PER_THREAD
             );
             futures.add(executor.submit(sender));
@@ -116,7 +121,7 @@ public class Main {
         executor.awaitTermination(5, TimeUnit.MINUTES);
     }
     
-    private static void runMainPhase(BlockingQueue<ChatMessage> messageQueue) throws InterruptedException {
+    private static void runMainPhase(BlockingQueue<ChatMessage> messageQueue, String serverUrl) throws InterruptedException {
         // Optimize thread count for main phase
         int optimalThreads = 64;
         int messagesPerThread = MAIN_PHASE_MESSAGES / optimalThreads;
@@ -132,7 +137,7 @@ public class Main {
             totalConnections.incrementAndGet();
             int messagesToSend = messagesPerThread + (i == 0 ? remainderMessages : 0);
             MessageSender sender = new MessageSender(
-                messageQueue, SERVER_URL, successCount, failureCount, 
+                messageQueue, serverUrl, successCount, failureCount, 
                 reconnectionCount, messagesToSend
             );
             futures.add(executor.submit(sender));

@@ -65,7 +65,7 @@ scp WebSocketServer-1.0-SNAPSHOT.jar ec2-user@3.235.178.181
 
 ./deploy-server.sh 98.80.127.228 server-1
 
-./deploy-consumer.sh 98.80.127.228 20 8081
+./deploy-consumer.sh 98.80.127.228 3.235.178.181 20 8081
 
 
 ssh -i your-key.pem ubuntu@<server-ec2-ip>

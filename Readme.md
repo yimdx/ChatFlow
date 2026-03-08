@@ -85,21 +85,6 @@ mvn clean compile exec:java -Dexec.mainClass="cs6650.assignment1.Main"
 
 ## 2. Client Usage
 
-### Update Server URL
-
-Before running clients, update the `SERVER_URL` in:
-- `client-part1/src/main/java/cs6650/assignment1/Main.java`
-- `client-part2/src/main/java/cs6650/assignment1/Main.java`
-
-```java
-// Replace with your EC2 public IP or localhost
-private static final String SERVER_URL = "ws://YOUR_SERVER_IP:8081";
-
-// Example:
-// EC2: private static final String SERVER_URL = "ws://34.222.36.162:8081";
-// Local: private static final String SERVER_URL = "ws://localhost:8081";
-```
-
 ### Client Part 1 - Basic Load Testing
 
 Sends 500,000 messages using 32 threads with warmup phase.
@@ -107,7 +92,24 @@ Sends 500,000 messages using 32 threads with warmup phase.
 ```bash
 cd client-part1
 mvn clean package -DskipTests
+
+# Using command-line argument (recommended)
+java -jar target/client-part1-1.0-SNAPSHOT.jar ws://YOUR_SERVER_IP:8081
+
+# Or using environment variable
+SERVER_URL=ws://YOUR_SERVER_IP:8081 java -jar target/client-part1-1.0-SNAPSHOT.jar
+
+# Default (localhost)
 java -jar target/client-part1-1.0-SNAPSHOT.jar
+```
+
+**Examples:**
+```bash
+# EC2 server
+java -jar target/client-part1-1.0-SNAPSHOT.jar ws://34.222.36.162:8081
+
+# Local server
+java -jar target/client-part1-1.0-SNAPSHOT.jar ws://localhost:8081
 ```
 
 **Output:**
@@ -124,7 +126,24 @@ Sends 500,000 messages and generates detailed performance metrics.
 ```bash
 cd client-part2
 mvn clean package -DskipTests
+
+# Using command-line argument (recommended)
+java -jar target/client-part2-1.0-SNAPSHOT.jar ws://YOUR_SERVER_IP:8081
+
+# Or using environment variable
+SERVER_URL=ws://YOUR_SERVER_IP:8081 java -jar target/client-part2-1.0-SNAPSHOT.jar
+
+# Default (localhost)
 java -jar target/client-part2-1.0-SNAPSHOT.jar
+```
+
+**Examples:**
+```bash
+# EC2 server
+java -jar target/client-part2-1.0-SNAPSHOT.jar ws://34.222.36.162:8081
+
+# Local server  
+java -jar target/client-part2-1.0-SNAPSHOT.jar ws://localhost:8081
 ```
 
 **Output Files** (in `client-part2/results/`):
@@ -160,4 +179,19 @@ sudo netstat -tulpn | grep 8081
 
 # Kill existing processes
 sudo kill -9 <PID>
+```
+
+
+
+
+```
+co
+98.92.165.129
+
+mq
+100.54.94.218
+
+s1
+3.238.247.90
+
 ```
