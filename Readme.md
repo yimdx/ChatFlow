@@ -140,7 +140,7 @@ java -jar target/client-part2-1.0-SNAPSHOT.jar
 **Examples:**
 ```bash
 # EC2 server
-java -jar target/client-part2-1.0-SNAPSHOT.jar ws://34.222.36.162:8081
+java -jar target/client-part2-1.0-SNAPSHOT.jar ws://3chatflow-lb1-2104168008.us-west-2.elb.amazonaws.com:8081
 
 # Local server  
 java -jar target/client-part2-1.0-SNAPSHOT.jar ws://localhost:8081
