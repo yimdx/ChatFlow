@@ -3,7 +3,7 @@ package cs6650.assignment1.consumer;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.rabbitmq.client.Channel;
 import com.rabbitmq.client.DeliverCallback;
-import cs6650.assignment1.consumer.model.QueueMessage;
+import cs6650.assignment1.model.QueueMessage;
 import cs6650.assignment1.consumer.queue.RabbitMQConnection;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -95,7 +95,7 @@ public class MessageConsumerThread implements Runnable {
                 Thread.sleep(1000);
             }
             
-        } catch (IOException | TimeoutException | InterruptedException e) {
+        } catch (IOException | InterruptedException e) {
             logger.error("Consumer {} encountered error: {}", consumerId, e.getMessage(), e);
         } finally {
             cleanup();

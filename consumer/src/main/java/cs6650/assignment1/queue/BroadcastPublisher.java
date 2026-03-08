@@ -6,7 +6,6 @@ import com.rabbitmq.client.Channel;
 import cs6650.assignment1.model.QueueMessage;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.stereotype.Component;
 
 import java.io.IOException;
 
@@ -15,7 +14,6 @@ import java.io.IOException;
  * Every server instance has its own exclusive queue bound to this exchange,
  * so ALL servers receive every broadcast message and deliver it to their clients.
  */
-@Component
 public class BroadcastPublisher {
     
     private static final Logger logger = LoggerFactory.getLogger(BroadcastPublisher.class);

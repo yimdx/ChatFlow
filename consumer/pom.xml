@@ -15,8 +15,6 @@
     </properties>
 
     <dependencies>
-        <!-- Spring Boot Starter -->
-    <dependencies>
         <!-- RabbitMQ Client -->
         <dependency>
             <groupId>com.rabbitmq</groupId>
