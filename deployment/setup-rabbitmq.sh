@@ -1,7 +1,7 @@
 #!/bin/bash
 
-# RabbitMQ Setup Script for Ubuntu EC2
-echo "Installing RabbitMQ on Ubuntu EC2..."
+# RabbitMQ Setup Script for Ubuntu 24.04 EC2
+echo "Installing RabbitMQ on Ubuntu 24.04 EC2..."
 
 # Update packages
 sudo apt-get update -y
@@ -14,10 +14,10 @@ curl -1sLf 'https://keys.openpgp.org/vks/v1/by-fingerprint/0A9AF2115F4687BD29803
 curl -1sLf 'https://keyserver.ubuntu.com/pks/lookup?op=get&search=0xf77f1eda57ebb1cc' | sudo gpg --dearmor -o /usr/share/keyrings/net.launchpad.ppa.rabbitmq.erlang.gpg
 curl -1sLf 'https://packagecloud.io/rabbitmq/rabbitmq-server/gpgkey' | sudo gpg --dearmor -o /usr/share/keyrings/io.packagecloud.rabbitmq.gpg
 
-# Add RabbitMQ and Erlang repositories (Ubuntu 22.04 / jammy)
+# Add RabbitMQ and Erlang repositories (Ubuntu 24.04 / noble)
 sudo tee /etc/apt/sources.list.d/rabbitmq.list <<EOF
-deb [arch=amd64 signed-by=/usr/share/keyrings/net.launchpad.ppa.rabbitmq.erlang.gpg] http://ppa.launchpad.net/rabbitmq/rabbitmq-erlang/ubuntu jammy main
-deb [arch=amd64 signed-by=/usr/share/keyrings/io.packagecloud.rabbitmq.gpg] https://packagecloud.io/rabbitmq/rabbitmq-server/ubuntu jammy main
+deb [arch=amd64 signed-by=/usr/share/keyrings/net.launchpad.ppa.rabbitmq.erlang.gpg] http://ppa.launchpad.net/rabbitmq/rabbitmq-erlang/ubuntu noble main
+deb [arch=amd64 signed-by=/usr/share/keyrings/io.packagecloud.rabbitmq.gpg] https://packagecloud.io/rabbitmq/rabbitmq-server/ubuntu noble main
 EOF
 
 # Update package lists
