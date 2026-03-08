@@ -4,10 +4,10 @@
 echo "Installing RabbitMQ on Ubuntu EC2..."
 
 # Update packages
-sudo yum update -y
+sudo apt-get update -y
 
 # Install dependencies
-sudo yum install -y curl gnupg apt-transport-https
+sudo apt-get install -y curl gnupg apt-transport-https
 
 # Add RabbitMQ signing keys (CloudSmith - official current repo)
 curl -1sLf 'https://keys.openpgp.org/vks/v1/by-fingerprint/0A9AF2115F4687BD29803A206B73A36E6026DFCA' | sudo gpg --dearmor -o /usr/share/keyrings/com.rabbitmq.team.gpg
@@ -21,17 +21,17 @@ deb [arch=amd64 signed-by=/usr/share/keyrings/io.packagecloud.rabbitmq.gpg] http
 EOF
 
 # Update package lists
-sudo yum update -y
+sudo apt-get update -y
 
 # Install Erlang (pinned to a version compatible with RabbitMQ 3.12+)
-sudo yum install -y erlang-base \
+sudo apt-get install -y erlang-base \
                         erlang-asn1 erlang-crypto erlang-eldap erlang-ftp erlang-inets \
                         erlang-mnesia erlang-os-mon erlang-parsetools erlang-public-key \
                         erlang-runtime-tools erlang-snmp erlang-ssl \
                         erlang-syntax-tools erlang-tftp erlang-tools erlang-xmerl
 
 # Install RabbitMQ
-sudo yum install -y rabbitmq-server
+sudo apt-get install -y rabbitmq-server
 
 # Start RabbitMQ
 sudo systemctl start rabbitmq-server
