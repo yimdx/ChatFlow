@@ -6,7 +6,7 @@
 if [ "$#" -lt 2 ]; then
     echo "Usage: $0 <rabbitmq-host> <server-id> [port]"
     echo "Example: $0 10.0.1.100 server-1 8080"
-    echo "  -> Health on :8080, WebSocket on :8081"
+    echo "  -> Health on :8080, WebSocket on :8081, Broadcast on :8082"
     exit 1
 fi
 
@@ -32,6 +32,7 @@ cp ../server-v2/target/WebSocketServer-1.0-SNAPSHOT.jar ./
 nohup env \
     HEALTH_PORT=$PORT \
     WEBSOCKET_PORT=$((PORT + 1)) \
+    BROADCAST_PORT=$((PORT + 2)) \
     RABBITMQ_HOST=$RABBITMQ_HOST \
     RABBITMQ_PORT=5672 \
     RABBITMQ_USERNAME=admin \
@@ -45,5 +46,6 @@ nohup env \
 PID=$!
 echo "Server started with PID: $PID"
 echo "Log file: server-$SERVER_ID.log"
-echo "Health check:   curl http://localhost:$PORT/health"
-echo "WebSocket port: $((PORT + 1))"
+echo "Health check:    curl http://localhost:$PORT/health"
+echo "WebSocket port:  $((PORT + 1))"
+echo "Broadcast port:  $((PORT + 2))"
