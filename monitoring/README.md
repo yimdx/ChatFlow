@@ -86,21 +86,29 @@ OUTPUT_FILE=queue_metrics.csv \
 - ⚠️ High unacked message ratio
 
 ### monitor_servers.sh
-Monitors server health endpoints (pure bash).
+Monitors system metrics (CPU, memory, network, disk I/O). **Run this ON each server instance**.
 
 **Usage:**
 ```bash
-./monitor_servers.sh server1:8080 server2:8080 server3:8080
+# Run on server instance
+./monitor_servers.sh
 
 # Or with environment variables:
-INTERVAL=10 OUTPUT_FILE=server_health.csv \
-./monitor_servers.sh server1:8080 server2:8080
+INTERVAL=5 \
+OUTPUT_FILE=system_metrics.csv \
+SERVER_ID=server-1 \
+./monitor_servers.sh
 ```
 
-**Checks:**
-- HTTP /health endpoint
-- Response times
-- Server availability
+**Tracks:**
+- CPU usage (%)
+- Memory usage (MB and %)
+- Network I/O (RX/TX KB/s)
+- Disk I/O (Read/Write KB/s - Linux only)
+
+**Alerts:**
+- ⚠️ CPU > 80%
+- ⚠️ Memory > 85%
 
 ### analyze_metrics.sh
 Generates statistics and plots (pure bash with optional gnuplot).
@@ -136,25 +144,41 @@ java -jar client-part2/target/client-part2-1.0-SNAPSHOT.jar ws://server:8081
 
 ### Load Balanced (2 Servers)
 ```bash
-# Terminal 1: Monitor
-RABBITMQ_HOST=your-mq-host \
-SERVER_URLS="server1:8080 server2:8080" \
-./run_monitoring.sh
+# Terminal 1: Monitor RabbitMQ (from local machine)
+RABBITMQ_HOST=your-mq-host ./run_monitoring.sh
 
-# Terminal 2: Test
-java -jar client-part2/target/client-part2-1.0-SNAPSHOT.jar ws://lb-dns:8081
-```
+# Terminal 2: On each server, monitor system metrics
+ssh server1
+cd monitoring
+./monitor_servers.sh &
 
-### AWS Deployment
-```bash
-# Monitor RabbitMQ on EC2
+ssh server2
+cd monitoring
+./monitor_servers.sh &
+Terminal 1: Monitor RabbitMQ (from local machine)
 RABBITMQ_HOST=3.238.247.90 \
 RABBITMQ_USER=admin \
 RABBITMQ_PASS=adminpassword \
 OUTPUT_DIR=aws_test_results \
 ./run_monitoring.sh
 
-# In another terminal, run client test
+# Terminal 2: SSH to each EC2 server and monitor system metrics
+ssh ec2-server1
+cd /path/to/monitoring
+SERVER_ID=server-1 ./monitor_servers.sh > server1_metrics.log 2>&1 &
+
+ssh ec2-server2
+cd /path/to/monitoring
+SERVER_ID=server-2 ./monitor_servers.sh > server2_metrics.log 2>&1 &
+
+# Terminal 3: R2
+RABBITMQ_HOST=3.238.247.90 \
+RABBITMQ_USER=admin \
+RABBITMQ_PASS=adminpassword \
+OUTPUT_DIR=aws_test_results \
+./run_monitoring.sh
+
+# Inystem_metrics_TIMESTAMP.csv` - System metrics (CPU, memory, network, disk)
 java -jar client-part2/target/client-part2-1.0-SNAPSHOT.jar \
     ws://chatflow-1572582138.us-east-1.elb.amazonaws.com:8081
 ```

@@ -11,9 +11,9 @@ RABBITMQ_PORT="${RABBITMQ_PORT:-15672}"
 RABBITMQ_USER="${RABBITMQ_USER:-admin}"
 RABBITMQ_PASS="${RABBITMQ_PASS:-adminpassword}"
 
-SERVER_URLS="${SERVER_URLS:-}"
 INTERVAL="${INTERVAL:-5}"
 OUTPUT_DIR="${OUTPUT_DIR:-monitoring_results}"
+MONITOR_SYSTEM="${MONITOR_SYSTEM:-false}"  # Set to "true" if running on server
 
 # Colors
 RED='\033[0;31m'
@@ -56,7 +56,7 @@ echo "Interval: ${INTERVAL}s"
 echo ""
 
 QUEUE_OUTPUT="$OUTPUT_DIR/queue_metrics_${TIMESTAMP}.csv"
-SERVER_OUTPUT="$OUTPUT_DIR/server_health_${TIMESTAMP}.csv"
+SYSTEM_OUTPUT="$OUTPUT_DIR/system_metrics_${TIMESTAMP}.csv"
 
 # Get script directory
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
@@ -72,30 +72,30 @@ OUTPUT_FILE="$QUEUE_OUTPUT" \
 "$SCRIPT_DIR/monitor_rabbitmq.sh" &
 RABBITMQ_PID=$!
 
-# Start server monitoring if URLs provided
-if [ -n "$SERVER_URLS" ]; then
-    echo "Starting server health monitor..."
+# Start system monitoring if enabled
+SYSTEM_PID=""
+if [ "$MONITOR_SYSTEM" = "true" ]; then
+    echo "Starting system metrics monitor..."
     INTERVAL="$INTERVAL" \
-    OUTPUT_FILE="$SERVER_OUTPUT" \
-    "$SCRIPT_DIR/monitor_servers.sh" $SERVER_URLS &
-    SERVER_PID=$!
+    OUTPUT_FILE="$SYSTEM_OUTPUT" \
+    "$SCRIPT_DIR/monitor_servers.sh" &
+    SYSTEM_PID=$!
 else
-    echo "Skipping server monitoring (no SERVER_URLS provided)"
-    SERVER_PID=""
+    echo "Note: Run 'monitor_servers.sh' ON each server instance for system metrics"
 fi
 
 echo -e "\n${GREEN}Monitoring active!${NC}"
 echo "Press Ctrl+C to stop and generate report"
 echo ""
-echo "RabbitMQ PID: $RABBITMQ_PID"
-[ -n "$SERVER_PID" ] && echo "Server monitor PID: $SERVER_PID"
+echo "RabbitMQ monitor PID: $RABBITMQ_PID"
+[ -n "$SYSTEM_PID" ] && echo "System monitor PID: $SYSTEM_PID"
 echo ""
 
 # Handle cleanup
 cleanup() {
     echo -e "\n\n${YELLOW}Stopping monitors...${NC}"
     kill $RABBITMQ_PID 2>/dev/null || true
-    [ -n "$SERVER_PID" ] && kill $SERVER_PID 2>/dev/null || true
+    [ -n "$SYSTEM_PID" ] && kill $SYSTEM_PID 2>/dev/null || true
     
     # Wait a moment for processes to clean up
     sleep 1
@@ -107,8 +107,8 @@ cleanup() {
         
         echo -e "\n${GREEN}✓ Analysis complete!${NC}"
         echo "Results saved to: $OUTPUT_DIR/"
-        echo "  - Metrics: $QUEUE_OUTPUT"
-        [ -n "$SERVER_PID" ] && [ -f "$SERVER_OUTPUT" ] && echo "  - Server health: $SERVER_OUTPUT"
+        echo "  - Queue metrics: $QUEUE_OUTPUT"
+        [ -n "$SYSTEM_PID" ] && [ -f "$SYSTEM_OUTPUT" ] && echo "  - System metrics: $SYSTEM_OUTPUT"
     else
         echo "No metrics file found"
     fi
