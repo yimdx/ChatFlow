@@ -323,4 +323,5 @@ Include in your report:
                            └─────────────────┘
 ```
 
-No application modifications needed - pure external observation!
+
+

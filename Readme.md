@@ -195,3 +195,36 @@ s1
 3.238.247.90
 
 ```
+
+# deploy
+
+```bash
+
+sudo yum update -y
+sudo yum install -y git java-17-amazon-corretto maven screen
+git clone https://github.com/yimdx/ChatFlow.git
+cd ./ChatFlow/deployment
+./build-all.sh
+./deploy-server.sh 54.202.119.135 server-2
+
+
+sudo yum update -y
+sudo yum install -y git java-17-amazon-corretto maven screen
+git clone https://github.com/yimdx/ChatFlow.git
+cd ./ChatFlow/deployment
+./build-all.sh
+./deploy-server.sh 54.202.119.135 server-3
+
+
+sudo yum update -y
+sudo yum install -y git java-17-amazon-corretto maven screen
+git clone https://github.com/yimdx/ChatFlow.git
+cd ./ChatFlow/deployment
+./build-all.sh
+./deploy-server.sh 54.202.119.135 server-4
+
+
+
+./deploy-consumer.sh 54.202.119.135 http://16.146.112.197:8082,http://35.89.81.20:8082,http://52.12.82.43:8082,http://52.37.51.215:8082 80
+```
+

@@ -1,67 +1,21 @@
 # CS6650 Assignment 2: Message Distribution and Queue Management
 
-**Student Name:** [Your Name]  
+**Student Name:** Xuefeng Li 
 **Date:** March 8, 2026  
 **Repository:** https://github.com/yimdx/ChatFlow
 
 ---
+## 0. Github
+Create new folders:
+
+- /server-v2 - Updated server with queue integration
+- /consumer - Consumer application
+- /deployment - ALB configuration, scripts
+- /monitoring - Monitoring scripts and tools
 
 ## 1. System Architecture
 
-### 1.1 Overall Architecture
-
-Our chat system implements a distributed architecture with message queuing and load balancing:
-
-```
-┌─────────────┐
-│   Clients   │ (500K+ messages, multiple threads)
-└──────┬──────┘
-       │ WebSocket (ws://host:8081)
-       ▼
-┌─────────────────────────────────┐
-│  Application Load Balancer      │ (AWS ALB)
-│  - Sticky Sessions Enabled      │
-│  - Health Checks: /health:8080  │
-└────────┬────────────────────────┘
-         │ Distributes to
-    ┌────┴─────┬─────────┬──────────┐
-    ▼          ▼         ▼          ▼
-┌────────┐ ┌────────┐ ┌────────┐ ┌────────┐
-│Server 1│ │Server 2│ │Server 3│ │Server 4│
-│Port:   │ │Port:   │ │Port:   │ │Port:   │
-│ 8080   │ │ 8080   │ │ 8080   │ │ 8080   │ Health
-│ 8081   │ │ 8081   │ │ 8081   │ │ 8081   │ WebSocket
-│ 8082   │ │ 8082   │ │ 8082   │ │ 8082   │ Broadcast
-└───┬────┘ └───┬────┘ └───┬────┘ └───┬────┘
-    │          │          │          │
-    └──────────┴─────┬────┴──────────┘
-                     │ Publish to Queue
-                     ▼
-              ┌─────────────┐
-              │  RabbitMQ   │
-              │ chat.exchange│ (Topic Exchange)
-              │   room.1-20  │ (20 Room Queues)
-              └──────┬───────┘
-                     │ Consume
-                     ▼
-              ┌─────────────┐
-              │  Consumer   │
-              │ 20 Threads  │
-              │ Fair Dispatch│
-              └──────┬───────┘
-                     │ HTTP POST Broadcast
-                     ▼
-        ┌────────────┴────────────┐
-        │  http://server:8082     │
-        │  /broadcast endpoint    │
-        └─────────────────────────┘
-                     │
-        ┌────────────┴────────────┐
-        │  Broadcast to room users │
-        └──────────────────────────┘
-```
-
-### 1.2 Message Flow Sequence
+### 1.1 Message Flow Sequence
 
 **Step-by-Step Message Delivery:**
 
@@ -92,7 +46,7 @@ Our chat system implements a distributed architecture with message queuing and l
 **Sequence Diagram:**
 
 ```
-Client    ALB    Server-1  RabbitMQ  Consumer  Server-2
+Client    ALB    Server-1,.. RabbitMQ  Consumer  Servers
   │        │        │         │         │         │
   ├─(WS)──>│        │         │         │         │ 1. Send message
   │        ├───────>│         │         │         │ 2. Route to server
@@ -105,22 +59,7 @@ Client    ALB    Server-1  RabbitMQ  Consumer  Server-2
   Other_Client  ◄───┼─────────┼─────────┼─────────┤ 7. Receive in same room
 ```
 
-### 1.3 Queue Topology Design
-
-**Exchange Configuration:**
-- **Name:** `chat.exchange`
-- **Type:** Topic Exchange
-- **Durable:** Yes
-- **Auto-delete:** No
-
-**Queue Configuration:**
-- **Queues:** 20 queues (`room.1` through `room.20`)
-- **Binding:** Each queue bound with routing key `room.{id}`
-- **Properties:**
-  - Durable: Yes
-  - Exclusive: No
-  - Auto-delete: No
-  - Arguments: None (default limits)
+### 1.2 Routing Design
 
 **Routing Pattern:**
 ```
@@ -128,15 +67,7 @@ Message with routing key "room.5" → Routed to → room.5 queue
 Message with routing key "room.12" → Routed to → room.12 queue
 ```
 
-**Design Decision: Why HTTP Broadcast Instead of Fanout Exchange?**
-
-Initially considered using RabbitMQ fanout exchange for server-to-server broadcasting, but identified a critical issue: **channel pool contention**. 
-
-**Problem with Fanout Approach:**
-- Consumer would need to publish back to RabbitMQ fanout exchange
-- Same channel pool used for both consuming AND publishing
-- Under high load, consumers blocked waiting for publish channels
-- Significant performance bottleneck and increased latency
+**Design Decision: How to Broadcast**
 
 **HTTP Broadcast Solution:**
 - Consumer makes direct HTTP POST requests to all servers
@@ -145,7 +76,7 @@ Initially considered using RabbitMQ fanout exchange for server-to-server broadca
 - Simple, reliable, and performant
 - HTTP client timeout controls ensure non-blocking behavior
 
-### 1.4 Consumer Threading Model
+### 1.3 Consumer Threading Model
 
 **Thread Pool Architecture:**
 
@@ -154,10 +85,8 @@ Consumer Application
 ├── Main Thread (Coordination)
 ├── Consumer Thread Pool (20 threads)
 │   ├── Thread 1  → Handles room.1
-│   ├── Thread 2  → Handles room.2
 │   ├── ...
 │   └── Thread 20 → Handles room.20
-└── Metrics Reporter Thread (5s interval)
 ```
 
 **Key Design Elements:**
@@ -182,97 +111,13 @@ Consumer Application
    - Prefetch count: 1 per consumer (QoS setting)
    - Acknowledgment: Manual after successful broadcast
 
-### 1.5 Load Balancing Configuration
-
-**AWS Application Load Balancer Setup:**
-
-**Target Group Settings:**
-- Protocol: HTTP
-- Port: 8081 (WebSocket traffic)
-- Health Check:
-  - Path: `/health`
-  - Protocol: HTTP
-  - Port: 8080
-  - Interval: 30 seconds
-  - Timeout: 5 seconds
-  - Healthy threshold: 2 consecutive successes
-  - Unhealthy threshold: 3 consecutive failures
-
-**Load Balancer Configuration:**
-- Sticky Sessions: **Enabled** (Required for WebSocket)
-  - Cookie name: `AWSALB`
-  - Duration: 86400 seconds (24 hours)
-- Idle Timeout: 60 seconds
-- Connection Draining: 300 seconds
-- WebSocket Support: Enabled (HTTP/1.1 upgrade)
-
-**Distribution Algorithm:**
-- Round-robin for new connections
-- Sticky session maintains connection to same server
-- Health checks ensure only healthy targets receive traffic
-
-### 1.6 Failure Handling Strategies
-
-**1. Server Failure:**
-- **Detection:** ALB health checks fail after 3 consecutive failures (15 seconds)
-- **Response:** ALB removes server from target group
-- **Impact:** New connections routed to healthy servers
-- **Recovery:** Server auto-rejoins when health checks pass
-
-**2. RabbitMQ Connection Failure:**
-- **Detection:** Connection loss exception
-- **Response:** Channel pool handles reconnection
-- **Retry Logic:** Exponential backoff (1s, 2s, 4s, 8s)
-- **Fallback:** Consumer logs error and continues with other rooms
-
-**3. Consumer Failure:**
-- **Detection:** Thread exception or process crash
-- **Response:** Message not ACKed, returns to queue
-- **Recovery:** Restart consumer process manually or via supervisor
-- **Data Safety:** No message loss due to manual ACK
-
-**4. HTTP Broadcast Timeout:**
-- **Detection:** HTTP client timeout (3 seconds)
-- **Response:** Log failure, continue to next server
-- **Retry:** No retry (at-least-once delivery acceptable)
-- **Monitoring:** Track failure rate for alerting
-
-**5. WebSocket Connection Loss:**
-- **Detection:** Connection closed event
-- **Response:** Remove from room participant list
-- **Cleanup:** Session removed from RoomManager
-- **Client:** Client must reconnect and rejoin room
 
 ---
 
 ## 2. Implementation Details
 
-### 2.1 Technology Stack
 
-**Server (server-v2):**
-- Java-WebSocket 1.5.3 (WebSocket server)
-- RabbitMQ Java Client 5.16.0 (Message queue)
-- Jackson 2.15.0 (JSON serialization)
-- HttpServer (com.sun.net.httpserver) for broadcast endpoint
-- SLF4J + Logback (Logging)
-
-**Consumer:**
-- RabbitMQ Java Client 5.16.0
-- Java HTTP Client (java.net.http)
-- Jackson 2.15.0
-- Multi-threaded architecture (ExecutorService)
-
-**Client:**
-- Java-WebSocket 1.5.3 (WebSocket client)
-- Multi-threaded load generation
-- Statistics tracking and reporting
-
-**Infrastructure:**
-- AWS EC2 instances
-- AWS Application Load Balancer
-- RabbitMQ (Docker on EC2)
-
-### 2.2 Key Components
+### 2.1 Key Components
 
 **Server Components:**
 
@@ -320,33 +165,31 @@ Consumer Application
    - Timeout configuration
    - Error handling and logging
 
-### 2.3 Configuration Parameters
+### 2.2 Failure Handling Strategies
 
-**Environment Variables:**
+**1. Server Failure:**
+- **Detection:** ALB health checks fail after 3 consecutive failures (15 seconds)
+- **Response:** ALB removes server from target group
+- **Recovery:** Server auto-rejoins when health checks pass
 
-**Server:**
-```bash
-HEALTH_PORT=8080          # Health check endpoint
-WEBSOCKET_PORT=8081       # WebSocket connections
-BROADCAST_PORT=8082       # HTTP broadcast receiver
-RABBITMQ_HOST=localhost   # RabbitMQ server
-RABBITMQ_PORT=5672        # AMQP port
-SERVER_ID=server-1        # Unique server identifier
-```
+**2. RabbitMQ Connection Failure:**
+- **Detection:** Connection loss exception
+- **Retry Logic:** Exponential backoff (1s, 2s, 4s, 8s)
 
-**Consumer:**
-```bash
-RABBITMQ_HOST=localhost   # RabbitMQ server
-RABBITMQ_PORT=5672        # AMQP port
-CONSUMER_THREAD_COUNT=20  # Number of consumer threads
-SERVER_URLS=http://server1:8082,http://server2:8082  # Target servers
-```
+**3. Consumer Failure:**
+- **Detection:** Thread exception or process crash
+- **Response:** Message not ACKed, returns to queue
+- **Recovery:** Restart consumer process manually or via supervisor
 
-**RabbitMQ:**
-```bash
-RABBITMQ_DEFAULT_USER=admin
-RABBITMQ_DEFAULT_PASS=adminpassword
-```
+**4. HTTP Broadcast Timeout:**
+- **Detection:** HTTP client timeout (3 seconds)
+- **Retry:** No retry (at-least-once delivery acceptable)
+
+**5. WebSocket Connection Loss:**
+- **Detection:** Connection closed event
+- **Cleanup:** Session removed from RoomManager
+- **Client:** Client must reconnect and rejoin room
+
 
 ---
 
@@ -354,18 +197,11 @@ RABBITMQ_DEFAULT_PASS=adminpassword
 
 ### 3.1 Test Environment
 
-**AWS Instance Configuration:**
-- **Instance Type:** t3.medium
-- **vCPUs:** 2 per instance
-- **Memory:** 4 GB per instance
-- **Network:** Enhanced networking enabled
-- **Region:** us-east-1
-
 **Test Configuration:**
 - **Total Messages:** 500,000
 - **Number of Users:** 1,000
 - **Rooms:** 20
-- **Client Threads:** 256 (optimal found through testing)
+- **Client Threads:** 64 (optimal found through testing)
 - **Consumer Threads:** 20
 
 ### 3.2 Single Instance Performance
@@ -382,343 +218,266 @@ RABBITMQ_DEFAULT_PASS=adminpassword
 ============================================================
 Test Summary - Single Instance
 ============================================================
-Total Messages Sent:        500,000
-Total Runtime:              45.2 seconds
-Average Throughput:         11,062 messages/second
-Peak Throughput:            13,450 messages/second
-Connection Failures:        0
-Message Failures:           0
-Success Rate:               100%
-============================================================
+
+14:18:55.931 [main] INFO  cs6650.assignment1.Main - ========================================
+14:18:55.931 [main] INFO  cs6650.assignment1.Main - BASIC PERFORMANCE RESULTS
+14:18:55.931 [main] INFO  cs6650.assignment1.Main - ========================================
+14:18:55.931 [main] INFO  cs6650.assignment1.Main - 1. Successful messages sent: 367414
+14:18:55.931 [main] INFO  cs6650.assignment1.Main - 2. Failed messages: 55747
+14:18:55.931 [main] INFO  cs6650.assignment1.Main - 3. Total runtime: 1177197 ms (1177.197 seconds)
+14:18:55.932 [main] INFO  cs6650.assignment1.Main -    - Warmup phase: 73499 ms
+14:18:55.932 [main] INFO  cs6650.assignment1.Main -    - Main phase: 1099620 ms
+14:18:55.932 [main] INFO  cs6650.assignment1.Main - 4. Overall throughput: 424.73774567893054 messages/second
+14:18:55.932 [main] INFO  cs6650.assignment1.Main -    - Warmup throughput: 435.38007319827483 messages/second
+14:18:55.932 [main] INFO  cs6650.assignment1.Main -    - Main phase throughput: 425.60157145195615 messages/second
+14:18:55.933 [main] INFO  cs6650.assignment1.Main - 5. Connection statistics:
+14:18:55.933 [main] INFO  cs6650.assignment1.Main -    - Total persistent connections: 96
+14:18:55.933 [main] INFO  cs6650.assignment1.Main -    - Reconnections: 0
+14:18:55.933 [main] INFO  cs6650.assignment1.Main - ========================================
+14:18:55.933 [main] INFO  cs6650.assignment1.Main - 
+Performing statistical analysis...
+14:18:55.947 [main] INFO  c.a.util.PerformanceAnalyzer - Analyzing metrics from: results/metrics_20260308_135918.csv
+14:18:56.280 [main] INFO  c.a.util.PerformanceAnalyzer - Analysis completed
+
+========================================
+STATISTICAL ANALYSIS
+========================================
+Total Messages: 499306
+Mean Response Time: 112.05 ms
+Median Response Time: 33.00 ms
+95th Percentile: 417.00 ms
+99th Percentile: 707.00 ms
+Min Response Time: 0 ms
+Max Response Time: 1008 ms
+
+Message Type Distribution:
+  JOIN: 25099 (5.0%)
+  LEAVE: 24866 (5.0%)
+  TEXT: 449341 (90.0%)
+
+Message Count Per Room:
+  Room 1: 15602 messages
+  Room 2: 8310 messages
+  Room 3: 38529 messages
+  Room 4: 16602 messages
+  Room 5: 8292 messages
+  Room 6: 36478 messages
+  Room 7: 8310 messages
+  Room 8: 2000 messages
+  Room 9: 44842 messages
+  Room 10: 14620 messages
+  Room 11: 18602 messages
+  Room 12: 52116 messages
+  Room 13: 47785 messages
+  Room 14: 43801 messages
+  Room 15: 23894 messages
+  Room 16: 23911 messages
+  Room 17: 38532 messages
+  Room 18: 23876 messages
+  Room 19: 32204 messages
+  Room 20: 1000 messages
+
+Throughput Per Room:
+  Room 1: 13.31 messages/second
+  Room 2: 8.92 messages/second
+  Room 3: 32.91 messages/second
+  Room 4: 14.18 messages/second
+  Room 5: 7.08 messages/second
+  Room 6: 33.18 messages/second
+  Room 7: 8.69 messages/second
+  Room 8: 27.76 messages/second
+  Room 9: 38.23 messages/second
+  Room 10: 16.67 messages/second
+  Room 11: 15.86 messages/second
+  Room 12: 44.44 messages/second
+  Room 13: 40.75 messages/second
+  Room 14: 39.84 messages/second
+  Room 15: 20.38 messages/second
+  Room 16: 20.39 messages/second
+  Room 17: 32.86 messages/second
+  Room 18: 20.36 messages/second
+  Room 19: 27.48 messages/second
+  Room 20: 16.86 messages/second
+========================================
 ```
 
 **RabbitMQ Queue Metrics:**
 
-| Metric | Value |
-|--------|-------|
-| Peak Queue Depth | 856 messages |
-| Average Queue Depth | 342 messages |
-| Max Consumer Lag | 76ms |
-| Average Publish Rate | 11,100 msg/s |
-| Average Consume Rate | 11,150 msg/s |
-| Queue Profile | ✓ Stable plateau |
+![alt text](image-2.png)
 
 **System Resource Usage:**
 
-| Resource | Usage |
-|----------|-------|
-| CPU (Server) | 62% average, 78% peak |
-| Memory (Server) | 1.2 GB / 4 GB (30%) |
-| CPU (Consumer) | 45% average |
-| Network RX | 2.3 MB/s |
-| Network TX | 2.5 MB/s |
+![alt text](image-1.png)
 
-**Key Observations:**
-- ✓ Queue depth remained below 1000 target
-- ✓ Consumer kept up with publisher rate
-- ✓ No message loss or failures
-- ✓ Stable resource utilization
-- ✓ Good baseline performance established
 
-### 3.3 Load Balanced Performance (2 Instances)
 
-**Test Setup:**
-- 2 server instances behind ALB
-- Same RabbitMQ and consumer instances
-- Sticky sessions enabled
-- Client connects via ALB DNS
-
-**Results:**
-
-```
-============================================================
-Test Summary - 2 Instances (Load Balanced)
-============================================================
-Total Messages Sent:        500,000
-Total Runtime:              25.8 seconds
-Average Throughput:         19,380 messages/second
-Peak Throughput:            22,100 messages/second
-Connection Failures:        0
-Message Failures:           0
-Success Rate:               100%
-============================================================
-
-Performance Improvement: 75.2% faster than single instance
-Throughput Increase: 1.75x
-```
-
-**ALB Distribution Metrics:**
-
-| Metric | Server 1 | Server 2 |
-|--------|----------|----------|
-| Active Connections | 128 | 128 |
-| Messages Processed | 250,100 | 249,900 |
-| Distribution | 50.02% | 49.98% |
-| Health Check Status | Healthy | Healthy |
-| Average Response Time | 12ms | 13ms |
-
-**Queue Metrics Comparison:**
-
-| Metric | Single | 2 Instances | Improvement |
-|--------|--------|-------------|-------------|
-| Peak Queue Depth | 856 | 487 | 43% reduction |
-| Avg Queue Depth | 342 | 156 | 54% reduction |
-| Consumer Lag | 76ms | 42ms | 45% reduction |
-| Consume Rate | 11,150/s | 19,500/s | 75% increase |
-
-**Key Observations:**
-- ✓ Nearly perfect distribution (50/50 split)
-- ✓ Significant throughput improvement
-- ✓ Reduced queue depth and lag
-- ✓ Both instances remained healthy
-- ✓ Linear scalability achieved
-
-### 3.4 Load Balanced Performance (4 Instances)
+### 3.3 Load Balanced Performance (4 Instances)
 
 **Test Setup:**
 - 4 server instances behind ALB
 - Same RabbitMQ and consumer instances
-- Extended test with 1,000,000 messages (stress test)
+- Extended test with 500,000 messages (stress test)
 
-**Results (500K messages):**
-
-```
-============================================================
-Test Summary - 4 Instances (Load Balanced)
-============================================================
-Total Messages Sent:        500,000
-Total Runtime:              15.3 seconds
-Average Throughput:         32,680 messages/second
-Peak Throughput:            36,200 messages/second
-Connection Failures:        0
-Message Failures:           0
-Success Rate:               100%
-============================================================
-
-Performance vs Single: 2.95x faster
-Performance vs 2 Instances: 1.69x faster
-```
-
-**ALB Distribution (4 Instances):**
-
-| Server | Connections | Messages | Distribution |
-|--------|-------------|----------|--------------|
-| Server 1 | 64 | 125,300 | 25.06% |
-| Server 2 | 64 | 124,850 | 24.97% |
-| Server 3 | 64 | 125,100 | 25.02% |
-| Server 4 | 64 | 124,750 | 24.95% |
-
-**Stress Test (1M messages):**
 
 ```
-Total Messages:             1,000,000
-Total Runtime:              30.1 seconds
-Average Throughput:         33,223 messages/second
-Peak Queue Depth:           645
-Success Rate:               100%
+15:29:16.466 [main] INFO  cs6650.assignment1.Main - ========================================
+15:29:16.466 [main] INFO  cs6650.assignment1.Main - BASIC PERFORMANCE RESULTS
+15:29:16.466 [main] INFO  cs6650.assignment1.Main - ========================================
+15:29:16.466 [main] INFO  cs6650.assignment1.Main - 1. Successful messages sent: 223189
+15:29:16.467 [main] INFO  cs6650.assignment1.Main - 2. Failed messages: 36507
+15:29:16.467 [main] INFO  cs6650.assignment1.Main - 3. Total runtime: 502430 ms (502.43 seconds)
+15:29:16.468 [main] INFO  cs6650.assignment1.Main -    - Warmup phase: 60270 ms
+15:29:16.468 [main] INFO  cs6650.assignment1.Main -    - Main phase: 438069 ms
+15:29:16.468 [main] INFO  cs6650.assignment1.Main - 4. Overall throughput: 995.1635053639313 messages/second
+15:29:16.468 [main] INFO  cs6650.assignment1.Main -    - Warmup throughput: 530.9440849510536 messages/second
+15:29:16.468 [main] INFO  cs6650.assignment1.Main -    - Main phase throughput: 1068.3248529341267 messages/second
+15:29:16.468 [main] INFO  cs6650.assignment1.Main - 5. Connection statistics:
+15:29:16.468 [main] INFO  cs6650.assignment1.Main -    - Total persistent connections: 96
+15:29:16.468 [main] INFO  cs6650.assignment1.Main -    - Reconnections: 0
+15:29:16.468 [main] INFO  cs6650.assignment1.Main - ========================================
+15:29:16.468 [main] INFO  cs6650.assignment1.Main - 
+Performing statistical analysis...
+15:29:16.487 [main] INFO  c.a.util.PerformanceAnalyzer - Analyzing metrics from: results/metrics_20260308_152054.csv
+15:29:16.761 [main] INFO  c.a.util.PerformanceAnalyzer - Analysis completed
+
+========================================
+STATISTICAL ANALYSIS
+========================================
+Total Messages: 375242
+Mean Response Time: 29.08 ms
+Median Response Time: 28.00 ms
+95th Percentile: 70.00 ms
+99th Percentile: 131.00 ms
+Min Response Time: 0 ms
+Max Response Time: 1003 ms
+
+Message Type Distribution:
+  JOIN: 18520 (4.9%)
+  LEAVE: 18743 (5.0%)
+  TEXT: 337979 (90.1%)
+
+Message Count Per Room:
+  Room 1: 23888 messages
+  Room 2: 9297 messages
+  Room 3: 8297 messages
+  Room 4: 21887 messages
+  Room 5: 30184 messages
+  Room 6: 15592 messages
+  Room 7: 14592 messages
+  Room 8: 29183 messages
+  Room 9: 14591 messages
+  Room 10: 7297 messages
+  Room 11: 4000 messages
+  Room 12: 43776 messages
+  Room 13: 2000 messages
+  Room 14: 45776 messages
+  Room 15: 22920 messages
+  Room 16: 23888 messages
+  Room 17: 9296 messages
+  Room 18: 23889 messages
+  Room 19: 16592 messages
+  Room 20: 8297 messages
+
+Throughput Per Room:
+  Room 1: 47.97 messages/second
+  Room 2: 18.71 messages/second
+  Room 3: 16.68 messages/second
+  Room 4: 50.01 messages/second
+  Room 5: 60.63 messages/second
+  Room 6: 31.43 messages/second
+  Room 7: 33.32 messages/second
+  Room 8: 66.64 messages/second
+  Room 9: 33.32 messages/second
+  Room 10: 16.69 messages/second
+  Room 11: 132.53 messages/second
+  Room 12: 99.96 messages/second
+  Room 13: 62.51 messages/second
+  Room 14: 91.92 messages/second
+  Room 15: 46.08 messages/second
+  Room 16: 48.10 messages/second
+  Room 17: 18.78 messages/second
+  Room 18: 48.07 messages/second
+  Room 19: 33.33 messages/second
+  Room 20: 16.67 messages/second
+========================================
 ```
 
-**Scalability Analysis:**
+![alt text](image-3.png)
 
-| Configuration | Throughput (msg/s) | Scaling Efficiency |
-|---------------|--------------------|--------------------|
-| 1 Instance | 11,062 | Baseline (1.0x) |
-| 2 Instances | 19,380 | 1.75x (87.5%) |
-| 4 Instances | 32,680 | 2.95x (73.8%) |
+![alt text](image-4.png)
 
-**Key Observations:**
-- ✓ Sub-linear scaling (expected due to queue bottleneck)
-- ✓ Perfect load distribution across 4 instances
-- ✓ System stable even at 1M messages
-- ✓ Queue depth remained well below target
-- ✓ Consumer handled increased load effectively
-
-**Bottleneck Analysis:**
-- Primary bottleneck: Single consumer instance
-- Consumer CPU reached 85% at peak load
-- Recommendation: Scale consumers horizontally
-- RabbitMQ performance remained excellent
-
+![alt text](image-5.png)
 ---
 
-## 4. Monitoring and Analysis
+## 4. Configuration Files
 
-### 4.1 Monitoring Tools Used
+### 4.1 Configuration Parameters
 
-**1. RabbitMQ Management Console**
-- Web interface: http://rabbitmq-host:15672
-- Real-time queue depth monitoring
-- Message rate graphs
-- Connection and channel statistics
+**Environment Variables:**
 
-**2. Custom Monitoring Scripts**
-- `monitor_rabbitmq.sh` - Queue metrics collector
-- `monitor_servers.sh` - System metrics (CPU, memory, I/O)
-- `analyze_metrics.sh` - Statistical analysis and visualization
-- Pure bash implementation (no Python dependencies)
-
-**3. AWS CloudWatch**
-- ALB metrics (request count, target health)
-- EC2 instance metrics
-- Network throughput
-
-### 4.2 Queue Profile Analysis
-
-**Good Profile Example (Achieved):**
-
-```
-Queue Depth
-1000 │           
-     │     ╭─────────────────╮
- 800 │    ╱                   ╲
-     │   ╱                     ╲
- 600 │  ╱                       ╲
-     │ ╱                         ╲
- 400 ├╯                           ╲
-     │                             ╲
- 200 │                              ╲___
-     │                                  
-   0 └────────────────────────────────────►
-     0s    10s    20s    30s    40s   Time
-     
-Status: ✓ STABLE PLATEAU PATTERN
-- Rapid initial fill during client ramp-up
-- Stable plateau during steady state
-- Smooth draining at end
-- Consumers kept pace with producers
+**Server:**
+```bash
+HEALTH_PORT=8080          # Health check endpoint
+WEBSOCKET_PORT=8081       # WebSocket connections
+BROADCAST_PORT=8082       # HTTP broadcast receiver
+RABBITMQ_HOST=            # RabbitMQ server
+RABBITMQ_PORT=5672        # AMQP port
+SERVER_ID=server-1        # Unique server identifier
 ```
 
-**Key Characteristics:**
-- Maximum depth: 856 (single), 487 (2 inst), 645 (4 inst stress)
-- All below 1000 target ✓
-- Consumer lag < 100ms ✓
-- No sawtooth oscillations
-- Predictable behavior
+**Consumer:**
+```bash
+RABBITMQ_HOST=           # RabbitMQ server
+RABBITMQ_PORT=5672        # AMQP port
+CONSUMER_THREAD_COUNT=20  # Number of consumer threads
+SERVER_URLS=http://server1:8082,http://server2:8082  # Target servers
+```
 
-### 4.3 Performance Optimization
+**RabbitMQ:**
+```bash
+RABBITMQ_DEFAULT_USER=admin
+RABBITMQ_DEFAULT_PASS=adminpassword
+```
 
-**Optimizations Applied:**
+**AWS Application Load Balancer Setup:**
 
-1. **Channel Pooling**
-   - Pre-created pool of 20 RabbitMQ channels
-   - Eliminated connection overhead
-   - Thread-safe borrowing/returning
+**Target Group Settings:**
+- Protocol: HTTP
+- Port: 8081 (WebSocket traffic)
+- Health Check:
+  - Path: `/health`
+  - Protocol: HTTP
+  - Port: 8080
+  - Interval: 30 seconds
+  - Timeout: 5 seconds
+  - Healthy threshold: 2 consecutive successes
+  - Unhealthy threshold: 3 consecutive failures
 
-2. **HTTP Broadcast Architecture**
-   - Replaced fanout exchange to eliminate contention
-   - Direct HTTP POST to all servers
-   - Non-blocking with timeouts
+**Load Balancer Configuration:**
+- Sticky Sessions: **Enabled** 
+  - Duration: 1 hours
+- Idle Timeout: 60 seconds
+- Connection Draining: 300 seconds
+- WebSocket Support: Enabled (HTTP/1.1 upgrade)
 
-3. **Thread Tuning**
-   - Client: Tested 64, 128, 256, 512 threads → Optimal: 256
-   - Consumer: 20 threads (1 per room) → Perfect match
+**Exchange Configuration:**
+- **Name:** `chat.exchange`
+- **Type:** Topic Exchange
+- **Durable:** Yes
+- **Auto-delete:** No
 
-4. **Manual Acknowledgment**
-   - Ensures at-least-once delivery
-   - No message loss on consumer failure
-   - ACK only after successful broadcast
+**Queue Configuration:**
+- **Queues:** 20 queues (`room.1` through `room.20`)
+- **Binding:** Each queue bound with routing key `room.{id}`
+- **Properties:**
+  - Durable: Yes
+  - Exclusive: No
+  - Auto-delete: No
+  - Arguments: None (default limits)
 
-5. **Connection Management**
-   - Single RabbitMQ connection per process
-   - Multiple channels per connection
-   - Proper cleanup on shutdown
 
----
 
-## 5. Conclusions and Lessons Learned
-
-### 5.1 Key Achievements
-
-✅ **Functional Requirements:**
-- Successfully implemented message queue integration
-- Multi-threaded consumer with fair distribution
-- Load balancing with ALB
-- System handles 500K+ messages efficiently
-
-✅ **Performance Targets:**
-- Queue depth < 1000 consistently achieved
-- Consumer lag < 100ms achieved
-- No message loss under load
-- Stable queue profiles maintained
-
-✅ **Scalability:**
-- Linear scalability up to 2 instances (87.5% efficiency)
-- Sub-linear but acceptable at 4 instances (73.8% efficiency)
-- Identified bottlenecks for future optimization
-
-### 5.2 Design Decisions
-
-**1. HTTP Broadcast vs. Fanout Exchange**
-- **Decision:** Use HTTP POST for server-to-server broadcast
-- **Rationale:** Eliminates channel pool contention in consumer
-- **Result:** Significantly improved performance and simplicity
-
-**2. Topic Exchange vs. Fanout**
-- **Decision:** Topic exchange with room-based routing
-- **Rationale:** Allows room-specific queues for parallelization
-- **Result:** Enables multi-threaded consumer with clear responsibility
-
-**3. Manual Acknowledgment**
-- **Decision:** Manual ACK after successful broadcast
-- **Rationale:** Ensures message delivery reliability
-- **Result:** No message loss, at-least-once semantics
-
-### 5.3 Challenges and Solutions
-
-**Challenge 1: Channel Pool Contention**
-- **Problem:** Consumer publishing to fanout caused blocking
-- **Solution:** Switch to HTTP broadcast pattern
-- **Impact:** Major performance improvement
-
-**Challenge 2: Load Balancer Configuration**
-- **Problem:** WebSocket connections dropped without sticky sessions
-- **Solution:** Enable ALB sticky sessions with AWSALB cookie
-- **Impact:** Stable WebSocket connections maintained
-
-**Challenge 3: Consumer Scalability**
-- **Problem:** Single consumer instance became bottleneck at 4 servers
-- **Solution:** Identified for future work (horizontal consumer scaling)
-- **Impact:** Understanding of system limits
-
-### 5.4 Future Improvements
-
-1. **Horizontal Consumer Scaling**
-   - Multiple consumer instances
-   - Partition rooms across consumers
-   - Use RabbitMQ consumer groups
-
-2. **Connection Pooling for HTTP Broadcasts**
-   - Reuse HTTP connections
-   - Keep-alive for reduced overhead
-
-3. **Metrics Dashboard**
-   - Real-time visualization
-   - Grafana + Prometheus integration
-   - Alerting for anomalies
-
-4. **Circuit Breaker Pattern**
-   - Handle server failures gracefully
-   - Automatic retry with exponential backoff
-
-5. **Message Batching**
-   - Batch multiple messages per broadcast
-   - Reduce HTTP request overhead
-
-### 5.5 Lessons Learned
-
-1. **Architecture Matters:** Early design decision (HTTP vs fanout) had major performance impact
-
-2. **Monitoring is Critical:** Without proper monitoring, bottleneck identification would have been impossible
-
-3. **Load Testing Reveals Truth:** Single server tests don't expose all issues; load balancing testing essential
-
-4. **Thread Count Tuning:** Optimal thread count found through experimentation (256 for client, 20 for consumer)
-
-5. **Simplicity Wins:** HTTP broadcast simpler and more performant than complex RabbitMQ fanout architecture
-
----
-
-## 6. Repository Structure
+### 4.2 Repository Structure
 
 ```
 ChatFlow/
@@ -752,58 +511,3 @@ ChatFlow/
 ├── SUBMISSION_REPORT.md   # This document
 └── README.md              # Project overview
 ```
-
----
-
-## Appendix: Configuration Files
-
-### A. RabbitMQ Docker Configuration
-
-```bash
-docker run -d \
-  --name rabbitmq \
-  -p 5672:5672 \
-  -p 15672:15672 \
-  -e RABBITMQ_DEFAULT_USER=admin \
-  -e RABBITMQ_DEFAULT_PASS=adminpassword \
-  rabbitmq:3-management
-```
-
-### B. Server Deployment Command
-
-```bash
-java -jar server-v2.jar \
-  -Xms512m -Xmx2g \
-  -DHEALTH_PORT=8080 \
-  -DWEBSOCKET_PORT=8081 \
-  -DBROADCAST_PORT=8082 \
-  -DRABBITMQ_HOST=rabbitmq-host \
-  -DSERVER_ID=server-1
-```
-
-### C. Consumer Deployment Command
-
-```bash
-java -jar consumer.jar \
-  -Xms256m -Xmx1g \
-  -DRABBITMQ_HOST=rabbitmq-host \
-  -DCONSUMER_THREAD_COUNT=20 \
-  -DSERVER_URLS=http://server1:8082,http://server2:8082
-```
-
-### D. Client Test Command
-
-```bash
-java -jar client-part2.jar \
-  ws://load-balancer-dns:8081 \
-  --threads 256 \
-  --messages 500000 \
-  --users 1000 \
-  --rooms 20
-```
-
----
-
-**End of Report**
-
-*This report demonstrates successful implementation of Assignment 2 requirements including queue integration, consumer implementation, load balancing, and performance testing. All targets achieved with stable queue profiles and excellent throughput.*

@@ -119,7 +119,8 @@ public class MessageConsumerThread implements Runnable {
     
     private void processMessage(QueueMessage message) {
         try {
-            logger.info("Processing message {} for room {} from user {}.", 
+            // Changed from info to debug - logging every message kills performance
+            logger.debug("Processing message {} for room {} from user {}.", 
                        message.getMessageId(), message.getRoomId(), message.getUsername());
             
             // Broadcast to all servers via HTTP POST
@@ -142,7 +143,7 @@ public class MessageConsumerThread implements Runnable {
             return;
         }
         
-        // PARALLEL broadcast to all servers (non-blocking)
+        // PARALLEL broadcast to all servers (non-blocking, using common ForkJoinPool)
         List<java.util.concurrent.CompletableFuture<Integer>> futures = new java.util.ArrayList<>();
         
         for (String serverUrl : serverUrls) {
@@ -178,13 +179,20 @@ public class MessageConsumerThread implements Runnable {
             java.util.concurrent.CompletableFuture.allOf(futures.toArray(new java.util.concurrent.CompletableFuture[0]))
                 .get(3, java.util.concurrent.TimeUnit.SECONDS); // Overall timeout
             
-            int successCount = futures.stream().mapToInt(f -> {
-                try { return f.get(); } catch (Exception e) { return 0; }
-            }).sum();
-            int failCount = futures.size() - successCount;
+            // Only log failures, not every successful broadcast
+            int failCount = 0;
+            for (java.util.concurrent.CompletableFuture<Integer> f : futures) {
+                try {
+                    if (f.get() == 0) failCount++;
+                } catch (Exception e) {
+                    failCount++;
+                }
+            }
             
-            logger.info("Broadcast complete for message {}: {} successful, {} failed", 
-                       message.getMessageId(), successCount, failCount);
+            if (failCount > 0) {
+                logger.warn("Broadcast for message {} had {} failures out of {}", 
+                           message.getMessageId(), failCount, futures.size());
+            }
         } catch (Exception e) {
             logger.error("Timeout waiting for broadcasts to complete", e);
         }
