@@ -61,7 +61,8 @@ public class MessageConsumerThread implements Runnable {
             channel = rabbitMQConnection.createChannel();
             
             // Set prefetch count for fair distribution
-            channel.basicQos(10);
+            // Increased from 10 to 50 for better throughput
+            channel.basicQos(50);
             
             // Start consuming from each assigned room queue
             for (String roomId : roomIds) {
@@ -141,37 +142,52 @@ public class MessageConsumerThread implements Runnable {
             return;
         }
         
-        int successCount = 0;
-        int failCount = 0;
+        // PARALLEL broadcast to all servers (non-blocking)
+        List<java.util.concurrent.CompletableFuture<Integer>> futures = new java.util.ArrayList<>();
         
         for (String serverUrl : serverUrls) {
-            try {
-                HttpRequest request = HttpRequest.newBuilder()
-                    .uri(URI.create(serverUrl + "/broadcast"))
-                    .header("Content-Type", "application/json")
-                    .POST(HttpRequest.BodyPublishers.ofString(messageJson))
-                    .timeout(Duration.ofSeconds(3))
-                    .build();
-                
-                // Send synchronously to ensure message delivery before ACK
-                HttpResponse<String> response = httpClient.send(request, HttpResponse.BodyHandlers.ofString());
-                
-                if (response.statusCode() == 200) {
-                    successCount++;
-                    logger.debug("Successfully broadcast to server {}", serverUrl);
-                } else {
-                    failCount++;
-                    logger.warn("Server {} returned status {}", serverUrl, response.statusCode());
-                }
+            java.util.concurrent.CompletableFuture<Integer> future = java.util.concurrent.CompletableFuture.supplyAsync(() -> {
+                try {
+                    HttpRequest request = HttpRequest.newBuilder()
+                        .uri(URI.create(serverUrl + "/broadcast"))
+                        .header("Content-Type", "application/json")
+                        .POST(HttpRequest.BodyPublishers.ofString(messageJson))
+                        .timeout(Duration.ofSeconds(2)) // Reduced from 3s to 2s
+                        .build();
                     
-            } catch (Exception e) {
-                failCount++;
-                logger.error("Error broadcasting to server {}: {}", serverUrl, e.getMessage());
-            }
+                    HttpResponse<String> response = httpClient.send(request, HttpResponse.BodyHandlers.ofString());
+                    
+                    if (response.statusCode() == 200) {
+                        logger.debug("Successfully broadcast to server {}", serverUrl);
+                        return 1; // success
+                    } else {
+                        logger.warn("Server {} returned status {}", serverUrl, response.statusCode());
+                        return 0; // fail
+                    }
+                        
+                } catch (Exception e) {
+                    logger.error("Error broadcasting to server {}: {}", serverUrl, e.getMessage());
+                    return 0; // fail
+                }
+            });
+            futures.add(future);
         }
         
-        logger.info("Broadcast complete for message {}: {} successful, {} failed", 
-                   message.getMessageId(), successCount, failCount);
+        // Wait for all broadcasts to complete (parallel execution)
+        try {
+            java.util.concurrent.CompletableFuture.allOf(futures.toArray(new java.util.concurrent.CompletableFuture[0]))
+                .get(3, java.util.concurrent.TimeUnit.SECONDS); // Overall timeout
+            
+            int successCount = futures.stream().mapToInt(f -> {
+                try { return f.get(); } catch (Exception e) { return 0; }
+            }).sum();
+            int failCount = futures.size() - successCount;
+            
+            logger.info("Broadcast complete for message {}: {} successful, {} failed", 
+                       message.getMessageId(), successCount, failCount);
+        } catch (Exception e) {
+            logger.error("Timeout waiting for broadcasts to complete", e);
+        }
     }
     
     public void stop() {
