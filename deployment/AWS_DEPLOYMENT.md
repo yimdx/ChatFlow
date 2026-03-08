@@ -36,7 +36,7 @@ chmod +x setup-rabbitmq.sh
 sudo systemctl status rabbitmq-server
 
 # Access management console
-# Open http://<rabbitmq-ec2-public-ip>:15672
+# Open http://<rabbitmq-ec2-public-ip>:a
 # Login with admin/adminpassword
 ```
 
@@ -56,6 +56,18 @@ For each server instance:
 ```bash
 # Launch EC2 instance (Ubuntu 22.04)
 # Install Java 17
+
+# co 3.236.26.204
+# mq 98.80.127.228
+# s1 3.235.178.181
+
+scp WebSocketServer-1.0-SNAPSHOT.jar ec2-user@3.235.178.181
+
+./deploy-server.sh 98.80.127.228 server-1
+
+./deploy-consumer.sh 98.80.127.228 20 8081
+
+
 ssh -i your-key.pem ubuntu@<server-ec2-ip>
 sudo apt-get update
 sudo apt-get install -y openjdk-17-jre-headless
