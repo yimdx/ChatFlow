@@ -7,6 +7,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -24,6 +25,9 @@ public class Main {
     private static final int CONSUMER_THREAD_COUNT = getEnvInt("CONSUMER_THREAD_COUNT", 20);
     private static final int ROOM_COUNT = getEnvInt("ROOM_COUNT", 20);
     
+    // Server URLs for HTTP broadcasting (comma-separated)
+    private static final String SERVER_URLS = getEnv("SERVER_URLS", "http://localhost:8082");
+    
     public static void main(String[] args) {
         logger.info("========================================");
         logger.info("ChatFlow Message Consumer");
@@ -31,6 +35,7 @@ public class Main {
         logger.info("RabbitMQ: {}:{}", RABBITMQ_HOST, RABBITMQ_PORT);
         logger.info("Consumer threads: {}", CONSUMER_THREAD_COUNT);
         logger.info("Room count: {}", ROOM_COUNT);
+        logger.info("Broadcasting to servers: {}", SERVER_URLS);
         logger.info("========================================");
         
         RabbitMQConnection rabbitMQConnection = null;
@@ -51,6 +56,12 @@ public class Main {
             ObjectMapper objectMapper = new ObjectMapper();
             objectMapper.registerModule(new JavaTimeModule());
             
+            // Parse server URLs
+            List<String> serverUrls = Arrays.asList(SERVER_URLS.split(","));
+            for (int i = 0; i < serverUrls.size(); i++) {
+                serverUrls.set(i, serverUrls.get(i).trim());
+            }
+            
             // Create room manager
             RoomManager roomManager = new RoomManager();
             
@@ -69,7 +80,8 @@ public class Main {
                         assignedRooms,
                         rabbitMQConnection,
                         roomManager,
-                        objectMapper
+                        objectMapper,
+                        serverUrls
                     );
                     consumers.add(consumer);
                     executorService.submit(consumer);

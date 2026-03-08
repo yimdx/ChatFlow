@@ -2,7 +2,8 @@ package cs6650.assignment1;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
-import cs6650.assignment1.queue.BroadcastConsumer;
+import com.sun.net.httpserver.HttpServer;
+import cs6650.assignment1.model.QueueMessage;
 import cs6650.assignment1.queue.MessagePublisher;
 import cs6650.assignment1.queue.RabbitMQChannelPool;
 import cs6650.assignment1.queue.RabbitMQSetup;
@@ -12,6 +13,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.net.InetAddress;
+import java.net.InetSocketAddress;
+import java.nio.charset.StandardCharsets;
 
 public class Main {
     
@@ -27,6 +30,7 @@ public class Main {
     private static final int RABBITMQ_POOL_SIZE = getEnvInt("RABBITMQ_POOL_SIZE", 20);
     private static final int ROOM_COUNT = getEnvInt("ROOM_COUNT", 20);
     private static final String SERVER_ID = getEnv("SERVER_ID", "server-1");
+    private static final int BROADCAST_PORT = getEnvInt("BROADCAST_PORT", 8082);
     
     public static void main(String[] args) {
         logger.info("========================================");
@@ -41,6 +45,7 @@ public class Main {
         RabbitMQChannelPool channelPool = null;
         HealthCheckServer healthServer = null;
         ChatWebSocketServer wsServer = null;
+        HttpServer broadcastServer = null;
         
         try {
             // Initialize RabbitMQ connection pool
@@ -75,24 +80,54 @@ public class Main {
             wsServer = new ChatWebSocketServer(WEBSOCKET_PORT, messagePublisher, SERVER_ID);
             wsServer.start();
             
-            // Start broadcast consumer to receive messages from consumer and broadcast to clients
-            logger.info("Starting broadcast consumer...");
-            BroadcastConsumer broadcastConsumer = new BroadcastConsumer(channelPool, wsServer, objectMapper, SERVER_ID);
-            Thread broadcastThread = new Thread(broadcastConsumer, "BroadcastConsumer");
-            broadcastThread.start();
+            // Start HTTP broadcast server to receive messages from consumer
+            logger.info("Starting HTTP broadcast server on port {}...", BROADCAST_PORT);
+            broadcastServer = HttpServer.create(new InetSocketAddress(BROADCAST_PORT), 0);
+            final ChatWebSocketServer finalWsServerForBroadcast = wsServer;
+            
+            broadcastServer.createContext("/broadcast", exchange -> {
+                if ("POST".equals(exchange.getRequestMethod())) {
+                    try {
+                        String body = new String(exchange.getRequestBody().readAllBytes(), StandardCharsets.UTF_8);
+                        QueueMessage message = objectMapper.readValue(body, QueueMessage.class);
+                        
+                        // Broadcast to all WebSocket clients in this room
+                        finalWsServerForBroadcast.broadcastToRoom(message);
+                        
+                        // Send 200 OK response
+                        String response = "{\"status\":\"ok\"}";
+                        exchange.getResponseHeaders().set("Content-Type", "application/json");
+                        exchange.sendResponseHeaders(200, response.length());
+                        exchange.getResponseBody().write(response.getBytes(StandardCharsets.UTF_8));
+                        exchange.getResponseBody().close();
+                        
+                    } catch (Exception e) {
+                        logger.error("Error processing broadcast request", e);
+                        exchange.sendResponseHeaders(500, 0);
+                        exchange.getResponseBody().close();
+                    }
+                } else {
+                    exchange.sendResponseHeaders(405, 0);
+                    exchange.getResponseBody().close();
+                }
+            });
+            
+            broadcastServer.setExecutor(null);
+            broadcastServer.start();
+            logger.info("HTTP broadcast server started on port {}", BROADCAST_PORT);
             
             // Create final references for shutdown hook
             final RabbitMQChannelPool finalChannelPool = channelPool;
             final HealthCheckServer finalHealthServer = healthServer;
             final ChatWebSocketServer finalWsServer = wsServer;
-            final BroadcastConsumer finalBroadcastConsumer = broadcastConsumer;
+            final HttpServer finalBroadcastServer = broadcastServer;
             
             // Add shutdown hook for graceful shutdown
             Runtime.getRuntime().addShutdownHook(new Thread(() -> {
                 logger.info("Shutting down servers...");
                 try {
-                    if (finalBroadcastConsumer != null) {
-                        finalBroadcastConsumer.stop();
+                    if (finalBroadcastServer != null) {
+                        finalBroadcastServer.stop(0);
                     }
                     if (finalWsServer != null) {
                         finalWsServer.stop(1000);
@@ -115,6 +150,7 @@ public class Main {
             logger.info("WebSocket endpoint: ws://localhost:{}/chat/{{roomId}}", WEBSOCKET_PORT);
             logger.info("Valid room IDs: 1-20");
             logger.info("Press Ctrl+C to stop");
+            logger.info("Internal Broadcast HTTP endpoint: http://localhost:{}/broadcast", BROADCAST_PORT);
             logger.info("========================================");
             
         } catch (Exception e) {

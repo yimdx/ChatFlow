@@ -9,7 +9,12 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
+import java.net.URI;
+import java.net.http.HttpClient;
+import java.net.http.HttpRequest;
+import java.net.http.HttpResponse;
 import java.nio.charset.StandardCharsets;
+import java.time.Duration;
 import java.util.List;
 import java.util.Set;
 import java.util.concurrent.TimeoutException;
@@ -27,18 +32,25 @@ public class MessageConsumerThread implements Runnable {
     private final RabbitMQConnection rabbitMQConnection;
     private final RoomManager roomManager;
     private final ObjectMapper objectMapper;
+    private final List<String> serverUrls;
+    private final HttpClient httpClient;
     private volatile boolean running = true;
     private Channel channel;
     
     public MessageConsumerThread(int consumerId, List<String> roomIds, 
                                 RabbitMQConnection rabbitMQConnection, 
                                 RoomManager roomManager, 
-                                ObjectMapper objectMapper) {
+                                ObjectMapper objectMapper,
+                                List<String> serverUrls) {
         this.consumerId = consumerId;
         this.roomIds = roomIds;
         this.rabbitMQConnection = rabbitMQConnection;
         this.roomManager = roomManager;
         this.objectMapper = objectMapper;
+        this.serverUrls = serverUrls;
+        this.httpClient = HttpClient.newBuilder()
+            .connectTimeout(Duration.ofSeconds(5))
+            .build();
     }
     
     @Override
@@ -106,53 +118,11 @@ public class MessageConsumerThread implements Runnable {
     
     private void processMessage(QueueMessage message) {
         try {
-            // 1. Look up all WebSocket sessions in the room
-            Set<String> sessionIds = roomManager.getSessionsInRoom(message.getRoomId());
+            logger.info("Processing message {} for room {} from user {}.", 
+                       message.getMessageId(), message.getRoomId(), message.getUsername());
             
-            if (sessionIds.isEmpty()) {
-                logger.debug("No active sessions in room {}. Message {} will be stored for later delivery.",
-                           message.getRoomId(), message.getMessageId());
-                return;
-            }
-            
-            logger.info("Processing message {} for room {} from user {}. Broadcasting to {} sessions.", 
-                       message.getMessageId(), message.getRoomId(), message.getUsername(), sessionIds.size());
-            
-            // 2. Broadcast the message to all connected clients in the room
-            // In a full Spring WebSocket implementation with SimpMessagingTemplate:
-            // String destination = "/topic/room." + message.getRoomId();
-            // messagingTemplate.convertAndSend(destination, message);
-            
-            // For the current implementation, we track the broadcast attempt
-            int successfulBroadcasts = 0;
-            int failedBroadcasts = 0;
-            
-            for (String sessionId : sessionIds) {
-                try {
-                    // 3. Handle any delivery failures
-                    // In a real WebSocket implementation, you would:
-                    // - Get the WebSocketSession from sessionId
-                    // - Send the message via session.sendMessage()
-                    // - Handle closed connections gracefully
-                    
-                    RoomManager.UserInfo userInfo = roomManager.getUserInfo(sessionId);
-                    if (userInfo != null) {
-                        logger.debug("Would broadcast to user {} (session: {}) in room {}", 
-                                   userInfo.username, sessionId, message.getRoomId());
-                        successfulBroadcasts++;
-                    } else {
-                        logger.warn("Session {} not found in active users. May have disconnected.", sessionId);
-                        failedBroadcasts++;
-                    }
-                } catch (Exception e) {
-                    logger.error("Failed to broadcast message {} to session {} in room {}", 
-                               message.getMessageId(), sessionId, message.getRoomId(), e);
-                    failedBroadcasts++;
-                }
-            }
-            
-            logger.info("Broadcast complete for message {}: {} successful, {} failed", 
-                       message.getMessageId(), successfulBroadcasts, failedBroadcasts);
+            // Broadcast to all servers via HTTP POST
+            broadcastToServers(message);
             
         } catch (Exception e) {
             logger.error("Error processing message {} for room {}", 
@@ -160,6 +130,48 @@ public class MessageConsumerThread implements Runnable {
             // Rethrow to trigger message requeue via basicNack
             throw new RuntimeException("Message processing failed", e);
         }
+    }
+    
+    private void broadcastToServers(QueueMessage message) {
+        String messageJson;
+        try {
+            messageJson = objectMapper.writeValueAsString(message);
+        } catch (Exception e) {
+            logger.error("Error serializing message", e);
+            return;
+        }
+        
+        int successCount = 0;
+        int failCount = 0;
+        
+        for (String serverUrl : serverUrls) {
+            try {
+                HttpRequest request = HttpRequest.newBuilder()
+                    .uri(URI.create(serverUrl + "/broadcast"))
+                    .header("Content-Type", "application/json")
+                    .POST(HttpRequest.BodyPublishers.ofString(messageJson))
+                    .timeout(Duration.ofSeconds(3))
+                    .build();
+                
+                // Send synchronously to ensure message delivery before ACK
+                HttpResponse<String> response = httpClient.send(request, HttpResponse.BodyHandlers.ofString());
+                
+                if (response.statusCode() == 200) {
+                    successCount++;
+                    logger.debug("Successfully broadcast to server {}", serverUrl);
+                } else {
+                    failCount++;
+                    logger.warn("Server {} returned status {}", serverUrl, response.statusCode());
+                }
+                    
+            } catch (Exception e) {
+                failCount++;
+                logger.error("Error broadcasting to server {}: {}", serverUrl, e.getMessage());
+            }
+        }
+        
+        logger.info("Broadcast complete for message {}: {} successful, {} failed", 
+                   message.getMessageId(), successCount, failCount);
     }
     
     public void stop() {
