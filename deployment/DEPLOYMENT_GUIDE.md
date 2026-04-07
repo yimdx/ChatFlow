@@ -1,283 +1,190 @@
-# Deployment Guide - HTTP Broadcast Architecture
+# AWS Deployment Guide (Full Stack)
 
-## Architecture Overview
+This guide deploys all required ChatFlow components on AWS EC2:
+- RabbitMQ
+- PostgreSQL
+- server-v2
+- consumer-v3
+- client-part2
 
-```
-Client → WebSocket Server → RabbitMQ (room queues)
-                                ↓
-                           Consumer
-                                ↓
-                      HTTP POST /broadcast
-                                ↓
-              All WebSocket Servers (broadcast to clients)
-```
+## 1. Topology
 
-## Deployment Steps
+Recommended 5 EC2 instances:
+- `rabbitmq-host`
+- `postgres-host`
+- `server-host`
+- `consumer-host`
+- `client-host`
 
-### 1. Build All Components
+## 2. Security Group Ports
+
+Open only required ports.
+
+RabbitMQ host:
+- `5672` from server/consumer
+- `15672` from your admin IP only
+
+PostgreSQL host:
+- `5432` from server/consumer
+
+Server host:
+- `8080` health (optional admin access)
+- `8081` WebSocket (client traffic)
+- `8082` broadcast endpoint (from consumer only)
+- `8083` metrics API (from client/admin)
+
+## 3. Build Artifacts Locally
 
 ```bash
 cd deployment
 ./build-all.sh
 ```
 
-This builds:
+Expected artifacts:
 - `server-v2/target/WebSocketServer-1.0-SNAPSHOT.jar`
-- `consumer/target/MessageConsumer-1.0-SNAPSHOT.jar`
+- `consumer-v3/target/MessageConsumerV3-1.0-SNAPSHOT.jar`
+- `client-part2/target/*.jar`
 
-### 2. Setup RabbitMQ
+## 3.1 Configure Once (Recommended)
+
+All deployment scripts support `--config` now.
+
+Create your config files from templates:
 
 ```bash
+cd deployment/config
+cp aws.env.example aws.env
+cp server.env.example server.env
+cp consumer.env.example consumer.env
+cp client.env.example client.env
+cp postgres.env.example postgres.env
+```
+
+Then edit each `*.env` file with your EC2 private IPs, credentials, and ports.
+
+## 4. Setup RabbitMQ Host
+
+```bash
+scp -i <key.pem> setup-rabbitmq.sh <ec2-user>@<rabbitmq-host>:~/chatflow-deploy/
+ssh -i <key.pem> <ec2-user>@<rabbitmq-host>
+cd ~/chatflow-deploy
+chmod +x setup-rabbitmq.sh
 ./setup-rabbitmq.sh
 ```
 
-Or manually with Docker:
+Default credentials created by script:
+- user: `admin`
+- password: `adminpassword`
+
+## 5. Setup PostgreSQL Host
+
 ```bash
-docker run -d --name rabbitmq \
-  -p 5672:5672 \
-  -p 15672:15672 \
-  -e RABBITMQ_DEFAULT_USER=admin \
-  -e RABBITMQ_DEFAULT_PASS=adminpassword \
-  rabbitmq:3-management
+scp -i <key.pem> setup-postgres.sh <ec2-user>@<postgres-host>:~/chatflow-deploy/
+ssh -i <key.pem> <ec2-user>@<postgres-host>
+cd ~/chatflow-deploy
+chmod +x setup-postgres.sh
+./setup-postgres.sh --config ./config/postgres.env
 ```
 
-### 3. Deploy Servers
+## 6. Deploy server-v2 Host
 
-**Single Server:**
+Upload jar and script:
+
 ```bash
-./deploy-server.sh <rabbitmq-host> server-1 8080
+scp -i <key.pem> ../server-v2/target/WebSocketServer-1.0-SNAPSHOT.jar <ec2-user>@<server-host>:~/chatflow-deploy/
+scp -i <key.pem> deploy-server.sh <ec2-user>@<server-host>:~/chatflow-deploy/
 ```
 
-**Multiple Servers:**
+Run:
+
 ```bash
-# Server 1 on host1
-./deploy-server.sh 10.0.1.100 server-1 8080
-# Ports: Health=8080, WebSocket=8081, Broadcast=8082
-
-# Server 2 on host2
-./deploy-server.sh 10.0.1.100 server-2 8090
-# Ports: Health=8090, WebSocket=8091, Broadcast=8092
-
-# Server 3 on host3
-./deploy-server.sh 10.0.1.100 server-3 8100
-# Ports: Health=8100, WebSocket=8101, Broadcast=8102
+ssh -i <key.pem> <ec2-user>@<server-host>
+cd ~/chatflow-deploy
+chmod +x deploy-server.sh
+./deploy-server.sh --config ./config/server.env
 ```
 
-### 4. Deploy Consumer
+Ports used:
+- health: `8080`
+- websocket: `8081`
+- broadcast: `8082`
+- metrics: `8083`
 
-**IMPORTANT**: Consumer needs to know ALL server broadcast endpoints!
+## 7. Deploy consumer-v3 Host
 
-**Single Server:**
+Upload jar and script:
+
 ```bash
-./deploy-consumer.sh 10.0.1.100 'http://localhost:8082' 20
+scp -i <key.pem> ../consumer-v3/target/MessageConsumerV3-1.0-SNAPSHOT.jar <ec2-user>@<consumer-host>:~/chatflow-deploy/
+scp -i <key.pem> deploy-consumer-v3.sh <ec2-user>@<consumer-host>:~/chatflow-deploy/
 ```
 
-**Multiple Servers:**
+Run:
+
 ```bash
-./deploy-consumer.sh 10.0.1.100 \
-  'http://server1-host:8082,http://server2-host:8092,http://server3-host:8102' \
-  20
+ssh -i <key.pem> <ec2-user>@<consumer-host>
+cd ~/chatflow-deploy
+chmod +x deploy-consumer-v3.sh
+./deploy-consumer-v3.sh --config ./config/consumer.env
 ```
 
-**Parameters:**
-- Arg 1: RabbitMQ host
-- Arg 2: Comma-separated server broadcast URLs (in quotes)
-- Arg 3: Consumer thread count (default: 20)
+## 8. Deploy and Run client-part2
 
-## Port Configuration
+Upload jar and script:
 
-Each server uses 3 ports (base + offsets):
-- **Base Port**: Health check HTTP endpoint
-- **Base + 1**: WebSocket endpoint for clients
-- **Base + 2**: Broadcast HTTP endpoint (for consumer)
-
-Example with base port 8080:
-- `8080` - Health check: `curl http://server:8080/health`
-- `8081` - WebSocket: `ws://server:8081/chat/{roomId}`
-- `8082` - Broadcast: `http://server:8082/broadcast` (consumer only)
-
-## AWS EC2 Deployment Example
-
-### Scenario: 3 Servers + 1 Consumer
-
-**Servers:**
 ```bash
-# EC2 Instance 1 (3.235.178.181)
-ssh ec2-user@3.235.178.181
+CLIENT_JAR=$(find ../client-part2/target -maxdepth 1 -type f -name "*.jar" ! -name "original-*" | sort | tail -n 1)
+scp -i <key.pem> "$CLIENT_JAR" <ec2-user>@<client-host>:~/chatflow-deploy/client-part2-runner.jar
+scp -i <key.pem> deploy-client-part2.sh <ec2-user>@<client-host>:~/chatflow-deploy/
+```
+
+Run benchmark:
+
+```bash
+ssh -i <key.pem> <ec2-user>@<client-host>
+cd ~/chatflow-deploy
+chmod +x deploy-client-part2.sh
+./deploy-client-part2.sh --config ./config/client.env
+```
+
+The client logs metrics API JSON after test completion into `client-part2.log`.
+
+## 9. One-Command Orchestrator (Optional)
+
+You can also run `aws-deploy-all.sh` from local machine.
+
+Required env vars:
+- `SSH_KEY_PATH`
+- `EC2_USER`
+- `RABBITMQ_HOST`
+- `POSTGRES_HOST`
+- `SERVER_HOST`
+- `CONSUMER_HOST`
+- `CLIENT_HOST`
+
+Example:
+
+```bash
 cd deployment
-./deploy-server.sh 10.0.1.100 server-1 8080
-
-# EC2 Instance 2 (3.235.178.182)
-ssh ec2-user@3.235.178.182
-cd deployment
-./deploy-server.sh 10.0.1.100 server-2 8080
-
-# EC2 Instance 3 (3.235.178.183)
-ssh ec2-user@3.235.178.183
-cd deployment
-./deploy-server.sh 10.0.1.100 server-3 8080
+chmod +x aws-deploy-all.sh
+./aws-deploy-all.sh --config ./config/aws.env
 ```
 
-**Consumer:**
+`aws.env` supports multiple hosts for scale tests:
+
+- `CONSUMER_HOSTS=ip1,ip2,ip3`
+- `CLIENT_HOSTS=ip4,ip5`
+
+## 10. Health Checks
+
 ```bash
-# EC2 Instance 4 (3.235.178.184)
-ssh ec2-user@3.235.178.184
-cd deployment
-./deploy-consumer.sh 10.0.1.100 \
-  'http://3.235.178.181:8082,http://3.235.178.182:8082,http://3.235.178.183:8082' \
-  20
+curl http://<server-host>:8080/health
+curl http://<server-host>:8083/health
+curl http://<server-host>:8083/metrics
 ```
 
-### With Private IPs (VPC)
+## 11. Notes
 
-If servers are in same VPC, use private IPs for better performance:
-```bash
-./deploy-consumer.sh 10.0.1.100 \
-  'http://10.0.1.10:8082,http://10.0.1.11:8082,http://10.0.1.12:8082' \
-  20
-```
-
-## Environment Variables
-
-### Server Environment Variables:
-```bash
-HEALTH_PORT=8080              # Health check port
-WEBSOCKET_PORT=8081           # WebSocket port for clients
-BROADCAST_PORT=8082           # HTTP broadcast endpoint (NEW)
-RABBITMQ_HOST=localhost
-RABBITMQ_PORT=5672
-RABBITMQ_USERNAME=admin
-RABBITMQ_PASSWORD=adminpassword
-SERVER_ID=server-1
-RABBITMQ_POOL_SIZE=20
-ROOM_COUNT=20
-```
-
-### Consumer Environment Variables:
-```bash
-RABBITMQ_HOST=localhost
-RABBITMQ_PORT=5672
-RABBITMQ_USERNAME=admin
-RABBITMQ_PASSWORD=adminpassword
-CONSUMER_THREAD_COUNT=20
-ROOM_COUNT=20
-SERVER_URLS=http://server1:8082,http://server2:8082  # NEW - Critical!
-```
-
-## Testing
-
-### 1. Health Checks
-```bash
-# Check each server
-curl http://server1:8080/health
-curl http://server2:8090/health
-curl http://server3:8100/health
-```
-
-### 2. WebSocket Connection
-```bash
-# Install wscat if needed
-npm install -g wscat
-
-# Connect to room 1 on server 1
-wscat -c ws://server1:8081/chat/1
-```
-
-### 3. Send Message
-```json
-{"userId":"user1","username":"Alice","message":"Hello from server1!"}
-```
-
-### 4. Check Logs
-```bash
-# Server logs
-tail -f deployment/server-server-1.log
-
-# Consumer logs
-tail -f deployment/consumer.log
-```
-
-## Scaling
-
-### Adding More Servers
-
-1. Deploy new server:
-```bash
-./deploy-server.sh 10.0.1.100 server-4 8110
-```
-
-2. **Update consumer** with new server URL:
-```bash
-# Stop consumer
-pkill -f MessageConsumer-1.0-SNAPSHOT.jar
-
-# Redeploy with updated SERVER_URLS
-./deploy-consumer.sh 10.0.1.100 \
-  'http://server1:8082,http://server2:8092,http://server3:8102,http://server4:8112' \
-  20
-```
-
-### Adding More Consumers
-
-You can run multiple consumer instances, each will process different messages:
-```bash
-# Consumer instance 1 (10 threads)
-./deploy-consumer.sh 10.0.1.100 'http://server1:8082,http://server2:8092' 10
-
-# Consumer instance 2 (10 threads)
-./deploy-consumer.sh 10.0.1.100 'http://server1:8082,http://server2:8092' 10
-```
-
-## Troubleshooting
-
-### Consumer can't reach servers
-- Check server broadcast port (8082) is accessible
-- Verify SERVER_URLS uses correct hostnames/IPs
-- Check firewalls allow port 8082
-
-### Messages not broadcasting
-- Check consumer logs: `tail -f consumer.log`
-- Verify consumer has correct SERVER_URLS
-- Test broadcast endpoint: `curl -X POST http://server:8082/broadcast -d '{}'`
-
-### High latency
-- Use private IPs in VPC instead of public IPs
-- Increase consumer thread count
-- Add more consumer instances
-
-## Monitoring
-
-### Check Consumer Stats
-Consumer logs statistics every 30 seconds:
-```
-Messages processed: 1234
-Active rooms: 15
-Active users: 50
-```
-
-### Check RabbitMQ
-```bash
-# Web UI
-http://rabbitmq-host:15672
-# Username: admin, Password: adminpassword
-
-# Check queue depths
-curl -u admin:adminpassword http://rabbitmq-host:15672/api/queues
-```
-
-## Security Notes
-
-1. **Broadcast endpoint** should only be accessible to consumer
-   - Use security groups/firewalls to restrict port 8082
-   - Don't expose broadcast port publicly
-
-2. **Change default credentials** in production:
-   ```bash
-   RABBITMQ_USERNAME=your_user
-   RABBITMQ_PASSWORD=strong_password
-   ```
-
-3. **Use TLS** for production:
-   - RabbitMQ with TLS (port 5671)
-   - WebSocket with WSS
-   - HTTPS for broadcast endpoint
+- Use private IPs for intra-VPC communication.
+- Restrict `8082` broadcast endpoint to consumer host only.
+- Rotate default credentials before production use.

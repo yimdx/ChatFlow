@@ -13,7 +13,7 @@ public class QueueMessage {
     private String username;
     private String message;
     
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", timezone = "UTC")
+    @JsonFormat(shape = JsonFormat.Shape.STRING)
     private Instant timestamp;
     
     private String messageType;
@@ -40,7 +40,7 @@ public class QueueMessage {
     public static QueueMessage fromChatMessage(ChatMessage chatMessage, String roomId, 
                                                String serverId, String clientIp) {
         return new QueueMessage(
-            UUID.randomUUID().toString(),
+            chatMessage.getMessageId() != null ? chatMessage.getMessageId() : UUID.randomUUID().toString(),
             roomId,
             String.valueOf(chatMessage.getUserId()),
             chatMessage.getUsername(),

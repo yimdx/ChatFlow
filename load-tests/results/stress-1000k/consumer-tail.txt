@@ -1,0 +1,300 @@
+22:23:11.568 [Thread-623228] DEBUG cs6650.assignment1.consumerv3.queue.ServerBroadcastClient -- Broadcasted single message e355ff28-a766-4542-9bd0-5e940a434276 to http://172.31.34.45:8082/broadcast
+22:23:11.568 [Thread-623229] DEBUG cs6650.assignment1.consumerv3.queue.ServerBroadcastClient -- Broadcasted single message 17f0f44a-154b-4a0c-bc88-bb0a778f7e60 to http://172.31.34.45:8082/broadcast
+22:23:11.568 [Thread-623230] DEBUG cs6650.assignment1.consumerv3.queue.ServerBroadcastClient -- Broadcasted single message b163883d-8079-4d5c-b345-56eddb4475a1 to http://172.31.34.45:8082/broadcast
+22:23:11.568 [Thread-623231] DEBUG cs6650.assignment1.consumerv3.queue.ServerBroadcastClient -- Broadcasted single message fd124ea8-106f-482d-86f3-452daf6ac738 to http://172.31.34.45:8082/broadcast
+22:23:11.568 [Thread-623232] DEBUG cs6650.assignment1.consumerv3.queue.ServerBroadcastClient -- Broadcasted single message a45f3d76-5552-482e-bb26-c6da526d12ce to http://172.31.34.45:8082/broadcast
+22:23:11.568 [Thread-623233] DEBUG cs6650.assignment1.consumerv3.queue.ServerBroadcastClient -- Broadcasted single message 46f73a99-4ded-4a3a-b246-201a2ba5fd22 to http://172.31.34.45:8082/broadcast
+22:23:11.568 [Thread-623234] DEBUG cs6650.assignment1.consumerv3.queue.ServerBroadcastClient -- Broadcasted single message 710ba5da-bd39-41c7-9786-0641231ab67c to http://172.31.34.45:8082/broadcast
+22:23:11.568 [Thread-623235] DEBUG cs6650.assignment1.consumerv3.queue.ServerBroadcastClient -- Broadcasted single message 9a36114c-59f5-4ef4-9d3d-a9e1006dd68e to http://172.31.34.45:8082/broadcast
+22:23:11.568 [Thread-623236] DEBUG cs6650.assignment1.consumerv3.queue.ServerBroadcastClient -- Broadcasted single message 06ca5542-4369-46ff-b1f6-ad8a8f7c54d4 to http://172.31.34.45:8082/broadcast
+22:23:11.568 [Thread-623237] DEBUG cs6650.assignment1.consumerv3.queue.ServerBroadcastClient -- Broadcasted single message a04fba6d-546e-4619-8785-7512dc1ab83f to http://172.31.34.45:8082/broadcast
+22:23:11.569 [Thread-623238] DEBUG cs6650.assignment1.consumerv3.queue.ServerBroadcastClient -- Broadcasted single message 9c85a636-c483-444c-ba33-f2a8c4449d69 to http://172.31.34.45:8082/broadcast
+22:23:11.569 [Thread-623239] DEBUG cs6650.assignment1.consumerv3.queue.ServerBroadcastClient -- Broadcasted single message e87e761c-b970-47e4-a1fa-df653ab4662c to http://172.31.34.45:8082/broadcast
+22:23:11.569 [Thread-623240] DEBUG cs6650.assignment1.consumerv3.queue.ServerBroadcastClient -- Broadcasted single message 8843c465-a998-4c27-b208-c83369e3c82a to http://172.31.34.45:8082/broadcast
+22:23:11.569 [Thread-623241] DEBUG cs6650.assignment1.consumerv3.queue.ServerBroadcastClient -- Broadcasted single message d4a68d58-20f3-44fc-9e3d-578e42e7da84 to http://172.31.34.45:8082/broadcast
+22:23:11.569 [Thread-623242] DEBUG cs6650.assignment1.consumerv3.queue.ServerBroadcastClient -- Broadcasted single message f1ae1401-8223-405b-b79b-4d1eada3c266 to http://172.31.34.45:8082/broadcast
+22:23:11.569 [Thread-623243] DEBUG cs6650.assignment1.consumerv3.queue.ServerBroadcastClient -- Broadcasted single message 07bba385-f3a0-45c9-8656-6e6e772b1862 to http://172.31.34.45:8082/broadcast
+22:23:11.569 [Thread-623244] DEBUG cs6650.assignment1.consumerv3.queue.ServerBroadcastClient -- Broadcasted single message b85ae5ff-0dfe-46a2-ba94-e2972bc94139 to http://172.31.34.45:8082/broadcast
+22:23:11.569 [Thread-623245] DEBUG cs6650.assignment1.consumerv3.queue.ServerBroadcastClient -- Broadcasted single message afe615ca-43b1-4f87-90a3-73084fc6ec75 to http://172.31.34.45:8082/broadcast
+22:23:11.569 [Thread-623246] DEBUG cs6650.assignment1.consumerv3.queue.ServerBroadcastClient -- Broadcasted single message a16676a7-0ca3-4897-8059-480f361e0415 to http://172.31.34.45:8082/broadcast
+22:23:11.570 [Thread-623247] DEBUG cs6650.assignment1.consumerv3.queue.ServerBroadcastClient -- Broadcasted single message 14d9f018-3287-4de3-b10a-68ce2fff078c to http://172.31.34.45:8082/broadcast
+22:23:11.570 [Thread-623249] DEBUG cs6650.assignment1.consumerv3.queue.ServerBroadcastClient -- Broadcasted single message bb931d9c-1429-4da0-bbe2-40440e2c8ec4 to http://172.31.34.45:8082/broadcast
+22:23:11.570 [Thread-623250] DEBUG cs6650.assignment1.consumerv3.queue.ServerBroadcastClient -- Broadcasted single message 46e14ee9-f0cc-4575-af11-63278f268826 to http://172.31.34.45:8082/broadcast
+22:23:11.570 [Thread-623251] DEBUG cs6650.assignment1.consumerv3.queue.ServerBroadcastClient -- Broadcasted single message 622ed68d-a5a3-4f36-ada1-e086cc4cb7d8 to http://172.31.34.45:8082/broadcast
+22:23:11.570 [Thread-623252] DEBUG cs6650.assignment1.consumerv3.queue.ServerBroadcastClient -- Broadcasted single message 7a6b8103-49b2-48f1-88f9-11cc4410bd5f to http://172.31.34.45:8082/broadcast
+22:23:11.570 [Thread-623253] DEBUG cs6650.assignment1.consumerv3.queue.ServerBroadcastClient -- Broadcasted single message 724d9572-4786-45df-a032-1a86f8906c0c to http://172.31.34.45:8082/broadcast
+22:23:11.570 [Thread-623254] DEBUG cs6650.assignment1.consumerv3.queue.ServerBroadcastClient -- Broadcasted single message 3944b188-833d-43dc-8686-f84db4185609 to http://172.31.34.45:8082/broadcast
+22:23:11.570 [Thread-623255] DEBUG cs6650.assignment1.consumerv3.queue.ServerBroadcastClient -- Broadcasted single message ed55ff27-873e-4796-a898-7b27ec07cb9e to http://172.31.34.45:8082/broadcast
+22:23:11.570 [Thread-623256] DEBUG cs6650.assignment1.consumerv3.queue.ServerBroadcastClient -- Broadcasted single message 8ee666f2-2bcd-4493-9d9c-f98c1fdda6e4 to http://172.31.34.45:8082/broadcast
+22:23:11.571 [Thread-623257] DEBUG cs6650.assignment1.consumerv3.queue.ServerBroadcastClient -- Broadcasted single message 75c2e1b6-6808-4735-ac83-ce2975d6fc44 to http://172.31.34.45:8082/broadcast
+22:23:11.571 [Thread-623258] DEBUG cs6650.assignment1.consumerv3.queue.ServerBroadcastClient -- Broadcasted single message cdd4957e-426b-49dd-8e02-864e40ea15fe to http://172.31.34.45:8082/broadcast
+22:23:11.571 [Thread-623259] DEBUG cs6650.assignment1.consumerv3.queue.ServerBroadcastClient -- Broadcasted single message ec7e2df1-5573-4370-857b-cce439846b01 to http://172.31.34.45:8082/broadcast
+22:23:11.571 [Thread-623260] DEBUG cs6650.assignment1.consumerv3.queue.ServerBroadcastClient -- Broadcasted single message d58b722e-199b-48b4-a3f3-bcf7989e32a0 to http://172.31.34.45:8082/broadcast
+22:23:11.571 [Thread-623261] DEBUG cs6650.assignment1.consumerv3.queue.ServerBroadcastClient -- Broadcasted single message e4391015-131c-4a90-ac77-a413ce706dcd to http://172.31.34.45:8082/broadcast
+22:23:11.571 [Thread-623262] DEBUG cs6650.assignment1.consumerv3.queue.ServerBroadcastClient -- Broadcasted single message 31ebd71a-2078-41fd-b1ea-5f2df1d00ef4 to http://172.31.34.45:8082/broadcast
+22:23:11.571 [Thread-623263] DEBUG cs6650.assignment1.consumerv3.queue.ServerBroadcastClient -- Broadcasted single message 777bace8-5c0e-4544-90bb-cf46e07925d7 to http://172.31.34.45:8082/broadcast
+22:23:11.571 [Thread-623265] DEBUG cs6650.assignment1.consumerv3.queue.ServerBroadcastClient -- Broadcasted single message 2b2fe086-ee21-4416-ac70-1e532b22421e to http://172.31.34.45:8082/broadcast
+22:23:11.571 [Thread-623266] DEBUG cs6650.assignment1.consumerv3.queue.ServerBroadcastClient -- Broadcasted single message 18a13ed0-d9e1-410e-8455-6c9b2d00d76e to http://172.31.34.45:8082/broadcast
+22:23:11.571 [Thread-623268] DEBUG cs6650.assignment1.consumerv3.queue.ServerBroadcastClient -- Broadcasted single message 21088a77-bcde-429a-b730-09b9f2739a53 to http://172.31.34.45:8082/broadcast
+22:23:11.571 [Thread-623267] DEBUG cs6650.assignment1.consumerv3.queue.ServerBroadcastClient -- Broadcasted single message 350734ca-c667-4d4b-8b19-81d5e034b06d to http://172.31.34.45:8082/broadcast
+22:23:11.571 [Thread-623269] DEBUG cs6650.assignment1.consumerv3.queue.ServerBroadcastClient -- Broadcasted single message 35751456-ee54-441c-ab13-8acb3d6a04a5 to http://172.31.34.45:8082/broadcast
+22:23:11.572 [Thread-623272] DEBUG cs6650.assignment1.consumerv3.queue.ServerBroadcastClient -- Broadcasted single message edcefc91-d799-41a8-94fc-e80ba0aab92a to http://172.31.34.45:8082/broadcast
+22:23:11.572 [Thread-623271] DEBUG cs6650.assignment1.consumerv3.queue.ServerBroadcastClient -- Broadcasted single message 887d3c08-ad91-409c-b007-29aa8f78baea to http://172.31.34.45:8082/broadcast
+22:23:11.572 [Thread-623273] DEBUG cs6650.assignment1.consumerv3.queue.ServerBroadcastClient -- Broadcasted single message 3d53dde9-9d3a-448d-9e0a-c20829067719 to http://172.31.34.45:8082/broadcast
+22:23:11.572 [Thread-623275] DEBUG cs6650.assignment1.consumerv3.queue.ServerBroadcastClient -- Broadcasted single message f2191ef3-9122-4031-b7f5-f4408afed313 to http://172.31.34.45:8082/broadcast
+22:23:11.573 [Thread-623248] DEBUG cs6650.assignment1.consumerv3.queue.ServerBroadcastClient -- Broadcasted single message 87a80f66-681d-414b-8ad4-4f5e92bd84bb to http://172.31.34.45:8082/broadcast
+22:23:11.573 [Thread-623264] DEBUG cs6650.assignment1.consumerv3.queue.ServerBroadcastClient -- Broadcasted single message 36acaf46-4bf8-4adc-a17a-a449e24fbc60 to http://172.31.34.45:8082/broadcast
+22:23:11.573 [Thread-623270] DEBUG cs6650.assignment1.consumerv3.queue.ServerBroadcastClient -- Broadcasted single message 4259babc-5510-4a5c-abb6-8cf8c8bf9a4e to http://172.31.34.45:8082/broadcast
+22:23:11.574 [Thread-623274] DEBUG cs6650.assignment1.consumerv3.queue.ServerBroadcastClient -- Broadcasted single message bc0793f1-2297-47e7-af6d-1a1d286085e0 to http://172.31.34.45:8082/broadcast
+22:23:11.618 [Thread-623276] DEBUG cs6650.assignment1.consumerv3.queue.ServerBroadcastClient -- Broadcasted single message 4e7d6694-fa11-4619-a99c-5e972dc8f08a to http://172.31.34.45:8082/broadcast
+22:23:11.621 [Thread-623277] DEBUG cs6650.assignment1.consumerv3.queue.ServerBroadcastClient -- Broadcasted single message ea5d76dc-b004-4bc4-860d-217a3ac7fe4e to http://172.31.34.45:8082/broadcast
+22:23:11.622 [Thread-623278] DEBUG cs6650.assignment1.consumerv3.queue.ServerBroadcastClient -- Broadcasted single message 7332e8fe-3e6a-4f50-9963-233acec906dc to http://172.31.34.45:8082/broadcast
+22:23:11.622 [Thread-623279] DEBUG cs6650.assignment1.consumerv3.queue.ServerBroadcastClient -- Broadcasted single message 6cb13262-ac95-4f4d-aeb8-43fe1c18ddd4 to http://172.31.34.45:8082/broadcast
+22:23:11.622 [Thread-623280] DEBUG cs6650.assignment1.consumerv3.queue.ServerBroadcastClient -- Broadcasted single message 18044819-d97c-4faf-8fbb-eaef03dbf4bb to http://172.31.34.45:8082/broadcast
+22:23:11.622 [Thread-623282] DEBUG cs6650.assignment1.consumerv3.queue.ServerBroadcastClient -- Broadcasted single message 084095e1-8da4-4bd4-a30a-992c7c12b8ce to http://172.31.34.45:8082/broadcast
+22:23:11.622 [Thread-623283] DEBUG cs6650.assignment1.consumerv3.queue.ServerBroadcastClient -- Broadcasted single message f88a174c-053f-451f-8250-ff0c77609866 to http://172.31.34.45:8082/broadcast
+22:23:11.622 [Thread-623284] DEBUG cs6650.assignment1.consumerv3.queue.ServerBroadcastClient -- Broadcasted single message 67461624-983e-49c9-aea3-f06837c5ee5c to http://172.31.34.45:8082/broadcast
+22:23:11.623 [Thread-623285] DEBUG cs6650.assignment1.consumerv3.queue.ServerBroadcastClient -- Broadcasted single message 8b3976ed-0aa7-403d-b381-a88453a305fb to http://172.31.34.45:8082/broadcast
+22:23:11.623 [Thread-623286] DEBUG cs6650.assignment1.consumerv3.queue.ServerBroadcastClient -- Broadcasted single message 865e3eac-3dbf-49cc-b6a1-267bc3bd85fd to http://172.31.34.45:8082/broadcast
+22:23:11.623 [Thread-623287] DEBUG cs6650.assignment1.consumerv3.queue.ServerBroadcastClient -- Broadcasted single message e91c9a34-0404-4b89-959d-be99db9dc199 to http://172.31.34.45:8082/broadcast
+22:23:11.623 [Thread-623288] DEBUG cs6650.assignment1.consumerv3.queue.ServerBroadcastClient -- Broadcasted single message d32b15bd-608f-4b09-999b-64c93b1d52c1 to http://172.31.34.45:8082/broadcast
+22:23:11.623 [Thread-623289] DEBUG cs6650.assignment1.consumerv3.queue.ServerBroadcastClient -- Broadcasted single message a7dff08c-3462-4b19-b3ee-2b8561677c4f to http://172.31.34.45:8082/broadcast
+22:23:11.623 [Thread-623291] DEBUG cs6650.assignment1.consumerv3.queue.ServerBroadcastClient -- Broadcasted single message 214c188f-65f0-4a3d-8df2-056e066f9714 to http://172.31.34.45:8082/broadcast
+22:23:11.623 [Thread-623292] DEBUG cs6650.assignment1.consumerv3.queue.ServerBroadcastClient -- Broadcasted single message 86584521-ed40-46e4-843c-7da2a8b001fc to http://172.31.34.45:8082/broadcast
+22:23:11.623 [Thread-623293] DEBUG cs6650.assignment1.consumerv3.queue.ServerBroadcastClient -- Broadcasted single message 75232496-734b-4db9-b20e-43fc5e322083 to http://172.31.34.45:8082/broadcast
+22:23:11.623 [Thread-623294] DEBUG cs6650.assignment1.consumerv3.queue.ServerBroadcastClient -- Broadcasted single message bcfc6a45-0c36-4edc-b475-f43a549f93e3 to http://172.31.34.45:8082/broadcast
+22:23:11.624 [Thread-623295] DEBUG cs6650.assignment1.consumerv3.queue.ServerBroadcastClient -- Broadcasted single message 0932011a-838d-432f-ab2d-d594dc58a442 to http://172.31.34.45:8082/broadcast
+22:23:11.624 [Thread-623296] DEBUG cs6650.assignment1.consumerv3.queue.ServerBroadcastClient -- Broadcasted single message 77f894a6-0f38-4dc0-8873-87acd16b5844 to http://172.31.34.45:8082/broadcast
+22:23:11.624 [Thread-623297] DEBUG cs6650.assignment1.consumerv3.queue.ServerBroadcastClient -- Broadcasted single message f0136b4d-2e23-422b-bb2f-97d22d0cd46a to http://172.31.34.45:8082/broadcast
+22:23:11.624 [Thread-623298] DEBUG cs6650.assignment1.consumerv3.queue.ServerBroadcastClient -- Broadcasted single message d8c64f26-277b-4473-bf0a-55290b47410f to http://172.31.34.45:8082/broadcast
+22:23:11.624 [Thread-623299] DEBUG cs6650.assignment1.consumerv3.queue.ServerBroadcastClient -- Broadcasted single message 240e3e7c-6ff5-4a33-9fd9-0dc60f449bc2 to http://172.31.34.45:8082/broadcast
+22:23:11.624 [Thread-623300] DEBUG cs6650.assignment1.consumerv3.queue.ServerBroadcastClient -- Broadcasted single message b288920e-5f87-4efe-91ae-bda2e36dba91 to http://172.31.34.45:8082/broadcast
+22:23:11.624 [Thread-623301] DEBUG cs6650.assignment1.consumerv3.queue.ServerBroadcastClient -- Broadcasted single message 3b70b019-d733-4e09-a7c1-69f980b99ff1 to http://172.31.34.45:8082/broadcast
+22:23:11.624 [Thread-623303] DEBUG cs6650.assignment1.consumerv3.queue.ServerBroadcastClient -- Broadcasted single message c0de2627-c95f-4945-bebf-bac3a2a25c0f to http://172.31.34.45:8082/broadcast
+22:23:11.624 [Thread-623304] DEBUG cs6650.assignment1.consumerv3.queue.ServerBroadcastClient -- Broadcasted single message 6aaa095a-eeb8-40b8-96cc-a3cfd68aeda3 to http://172.31.34.45:8082/broadcast
+22:23:11.624 [Thread-623305] DEBUG cs6650.assignment1.consumerv3.queue.ServerBroadcastClient -- Broadcasted single message c148eee6-960d-4513-a598-eeca7ff9fca5 to http://172.31.34.45:8082/broadcast
+22:23:11.625 [Thread-623306] DEBUG cs6650.assignment1.consumerv3.queue.ServerBroadcastClient -- Broadcasted single message 6974a621-d367-4e63-b270-ca4637cac06e to http://172.31.34.45:8082/broadcast
+22:23:11.625 [Thread-623307] DEBUG cs6650.assignment1.consumerv3.queue.ServerBroadcastClient -- Broadcasted single message 337454f5-2b86-4bc2-aa38-c3e89e5461b6 to http://172.31.34.45:8082/broadcast
+22:23:11.625 [Thread-623308] DEBUG cs6650.assignment1.consumerv3.queue.ServerBroadcastClient -- Broadcasted single message f67417b7-2ca0-489a-9c29-2eb7b356e07f to http://172.31.34.45:8082/broadcast
+22:23:11.625 [Thread-623309] DEBUG cs6650.assignment1.consumerv3.queue.ServerBroadcastClient -- Broadcasted single message 63dfb03c-f6ec-4b9c-84bb-d17d28637772 to http://172.31.34.45:8082/broadcast
+22:23:11.625 [Thread-623310] DEBUG cs6650.assignment1.consumerv3.queue.ServerBroadcastClient -- Broadcasted single message ba24e172-78f4-4b3d-b830-91f3ceef3996 to http://172.31.34.45:8082/broadcast
+22:23:11.625 [Thread-623311] DEBUG cs6650.assignment1.consumerv3.queue.ServerBroadcastClient -- Broadcasted single message 20a96874-461c-4355-9281-4928f2b4b405 to http://172.31.34.45:8082/broadcast
+22:23:11.625 [Thread-623312] DEBUG cs6650.assignment1.consumerv3.queue.ServerBroadcastClient -- Broadcasted single message a6d47f7c-0aa8-4476-b65d-f6d2ded5edc1 to http://172.31.34.45:8082/broadcast
+22:23:11.625 [Thread-623313] DEBUG cs6650.assignment1.consumerv3.queue.ServerBroadcastClient -- Broadcasted single message 254c11f0-0fe7-4948-a5b5-421bb166d14e to http://172.31.34.45:8082/broadcast
+22:23:11.625 [Thread-623315] DEBUG cs6650.assignment1.consumerv3.queue.ServerBroadcastClient -- Broadcasted single message 13d3ff6b-792c-4e3e-8c2c-3b5f814c00fe to http://172.31.34.45:8082/broadcast
+22:23:11.626 [Thread-623316] DEBUG cs6650.assignment1.consumerv3.queue.ServerBroadcastClient -- Broadcasted single message d6f61017-36d0-4dea-a9be-d38c55ff06b4 to http://172.31.34.45:8082/broadcast
+22:23:11.626 [Thread-623317] DEBUG cs6650.assignment1.consumerv3.queue.ServerBroadcastClient -- Broadcasted single message 6937eec7-4a39-46a9-b18c-eb2533c0e8f6 to http://172.31.34.45:8082/broadcast
+22:23:11.626 [Thread-623318] DEBUG cs6650.assignment1.consumerv3.queue.ServerBroadcastClient -- Broadcasted single message 7b01d4b4-dfd9-4423-8238-eb29773efdf0 to http://172.31.34.45:8082/broadcast
+22:23:11.626 [Thread-623319] DEBUG cs6650.assignment1.consumerv3.queue.ServerBroadcastClient -- Broadcasted single message c20a8920-a0b3-451e-8545-2794b182abdf to http://172.31.34.45:8082/broadcast
+22:23:11.626 [Thread-623320] DEBUG cs6650.assignment1.consumerv3.queue.ServerBroadcastClient -- Broadcasted single message d915d58c-6350-43f6-a5cc-0b5dc7dd85e1 to http://172.31.34.45:8082/broadcast
+22:23:11.626 [Thread-623321] DEBUG cs6650.assignment1.consumerv3.queue.ServerBroadcastClient -- Broadcasted single message a0ee4594-a248-4a3c-aab1-e0cf58ec6981 to http://172.31.34.45:8082/broadcast
+22:23:11.626 [Thread-623323] DEBUG cs6650.assignment1.consumerv3.queue.ServerBroadcastClient -- Broadcasted single message 8e00dee3-7b95-42c3-896b-f76cd8c8e50d to http://172.31.34.45:8082/broadcast
+22:23:11.626 [Thread-623324] DEBUG cs6650.assignment1.consumerv3.queue.ServerBroadcastClient -- Broadcasted single message ed364e14-5eb8-421e-b5ff-140e7f98a53a to http://172.31.34.45:8082/broadcast
+22:23:11.627 [Thread-623281] DEBUG cs6650.assignment1.consumerv3.queue.ServerBroadcastClient -- Broadcasted single message 0901d23d-41d0-4ed6-840e-8d3eaf814edf to http://172.31.34.45:8082/broadcast
+22:23:11.627 [Thread-623325] DEBUG cs6650.assignment1.consumerv3.queue.ServerBroadcastClient -- Broadcasted single message 81479b1e-8a3f-49b5-a606-833bc02882dc to http://172.31.34.45:8082/broadcast
+22:23:11.627 [Thread-623290] DEBUG cs6650.assignment1.consumerv3.queue.ServerBroadcastClient -- Broadcasted single message 4044f058-ab41-44ce-9972-44b1e89d3910 to http://172.31.34.45:8082/broadcast
+22:23:11.628 [Thread-623302] DEBUG cs6650.assignment1.consumerv3.queue.ServerBroadcastClient -- Broadcasted single message 896635b0-2752-4faf-9a1a-67d6f8ddb97c to http://172.31.34.45:8082/broadcast
+22:23:11.629 [Thread-623314] DEBUG cs6650.assignment1.consumerv3.queue.ServerBroadcastClient -- Broadcasted single message 8c6935a0-c252-48f4-888b-b55656cdb214 to http://172.31.34.45:8082/broadcast
+22:23:11.629 [Thread-623322] DEBUG cs6650.assignment1.consumerv3.queue.ServerBroadcastClient -- Broadcasted single message 618824a7-7f1b-4861-9f0c-15db6630a49d to http://172.31.34.45:8082/broadcast
+22:23:11.666 [Thread-623326] DEBUG cs6650.assignment1.consumerv3.queue.ServerBroadcastClient -- Broadcasted single message 3cc76f63-d580-4b23-a139-928e09d732a5 to http://172.31.34.45:8082/broadcast
+22:23:11.667 [Thread-623328] DEBUG cs6650.assignment1.consumerv3.queue.ServerBroadcastClient -- Broadcasted single message 0e634fb0-21d7-41ed-87fb-54a2a0de6fe2 to http://172.31.34.45:8082/broadcast
+22:23:11.668 [Thread-623329] DEBUG cs6650.assignment1.consumerv3.queue.ServerBroadcastClient -- Broadcasted single message 05a08927-df1d-43d7-9fb8-420b1d93aebc to http://172.31.34.45:8082/broadcast
+22:23:11.670 [Thread-623327] DEBUG cs6650.assignment1.consumerv3.queue.ServerBroadcastClient -- Broadcasted single message 9c803dfb-07a2-49fd-b293-0b0908f55150 to http://172.31.34.45:8082/broadcast
+22:23:11.671 [Thread-623330] DEBUG cs6650.assignment1.consumerv3.queue.ServerBroadcastClient -- Broadcasted single message ffa5000a-6a0b-4979-afe6-189b0f7440a0 to http://172.31.34.45:8082/broadcast
+22:23:11.671 [Thread-623331] DEBUG cs6650.assignment1.consumerv3.queue.ServerBroadcastClient -- Broadcasted single message 32c50c48-d8ef-441e-8f96-8fc05d9daa7d to http://172.31.34.45:8082/broadcast
+22:23:11.671 [Thread-623332] DEBUG cs6650.assignment1.consumerv3.queue.ServerBroadcastClient -- Broadcasted single message d46acc05-6b2a-4f11-9947-9e56960bed38 to http://172.31.34.45:8082/broadcast
+22:23:11.671 [Thread-623333] DEBUG cs6650.assignment1.consumerv3.queue.ServerBroadcastClient -- Broadcasted single message 8487770d-f860-436e-9db0-c264ff318127 to http://172.31.34.45:8082/broadcast
+22:23:11.671 [Thread-623334] DEBUG cs6650.assignment1.consumerv3.queue.ServerBroadcastClient -- Broadcasted single message 924c5f6d-24fa-4dd4-a444-2f28d87d0bd2 to http://172.31.34.45:8082/broadcast
+22:23:11.672 [Thread-623335] DEBUG cs6650.assignment1.consumerv3.queue.ServerBroadcastClient -- Broadcasted single message 636992f7-4a48-4fac-a7d6-5e180a6ff544 to http://172.31.34.45:8082/broadcast
+22:23:11.672 [Thread-623336] DEBUG cs6650.assignment1.consumerv3.queue.ServerBroadcastClient -- Broadcasted single message 53428666-7adc-4c8a-8fbf-ee57b58f33f1 to http://172.31.34.45:8082/broadcast
+22:23:11.672 [Thread-623337] DEBUG cs6650.assignment1.consumerv3.queue.ServerBroadcastClient -- Broadcasted single message 09fcb995-5b43-457f-85fe-00f206505cd7 to http://172.31.34.45:8082/broadcast
+22:23:11.672 [Thread-623338] DEBUG cs6650.assignment1.consumerv3.queue.ServerBroadcastClient -- Broadcasted single message edbfb0f7-f67e-4fe7-acb5-3a2dfe28a7ef to http://172.31.34.45:8082/broadcast
+22:23:11.672 [Thread-623339] DEBUG cs6650.assignment1.consumerv3.queue.ServerBroadcastClient -- Broadcasted single message 970e7470-14d1-4af0-a75a-9607e3d081b2 to http://172.31.34.45:8082/broadcast
+22:23:11.672 [Thread-623341] DEBUG cs6650.assignment1.consumerv3.queue.ServerBroadcastClient -- Broadcasted single message fdcd3a38-0177-4565-9f85-81ffbb4605dc to http://172.31.34.45:8082/broadcast
+22:23:11.672 [Thread-623342] DEBUG cs6650.assignment1.consumerv3.queue.ServerBroadcastClient -- Broadcasted single message df8198d3-1e53-4f07-b31e-100fd89da13d to http://172.31.34.45:8082/broadcast
+22:23:11.672 [Thread-623343] DEBUG cs6650.assignment1.consumerv3.queue.ServerBroadcastClient -- Broadcasted single message 8de8718a-5790-483f-9367-91e1eafcdf2e to http://172.31.34.45:8082/broadcast
+22:23:11.672 [Thread-623344] DEBUG cs6650.assignment1.consumerv3.queue.ServerBroadcastClient -- Broadcasted single message d3705725-1085-46b5-b83d-de1b3ce773f1 to http://172.31.34.45:8082/broadcast
+22:23:11.672 [Thread-623345] DEBUG cs6650.assignment1.consumerv3.queue.ServerBroadcastClient -- Broadcasted single message 9643a915-ff14-4382-aada-e9c44fd2ccae to http://172.31.34.45:8082/broadcast
+22:23:11.673 [Thread-623346] DEBUG cs6650.assignment1.consumerv3.queue.ServerBroadcastClient -- Broadcasted single message 599da499-fa39-46df-ab1d-b85bcc9186b9 to http://172.31.34.45:8082/broadcast
+22:23:11.673 [Thread-623348] DEBUG cs6650.assignment1.consumerv3.queue.ServerBroadcastClient -- Broadcasted single message 00ac5713-91fa-4b15-bb9b-e3d604b12894 to http://172.31.34.45:8082/broadcast
+22:23:11.673 [Thread-623349] DEBUG cs6650.assignment1.consumerv3.queue.ServerBroadcastClient -- Broadcasted single message 2e4d3ed9-f5ca-4c71-8272-6fd9759d2b57 to http://172.31.34.45:8082/broadcast
+22:23:11.673 [Thread-623350] DEBUG cs6650.assignment1.consumerv3.queue.ServerBroadcastClient -- Broadcasted single message 664280e9-d78b-4223-bee0-a4932f5c13dc to http://172.31.34.45:8082/broadcast
+22:23:11.673 [Thread-623351] DEBUG cs6650.assignment1.consumerv3.queue.ServerBroadcastClient -- Broadcasted single message 2fa1f946-c334-4a66-b227-d05052b83bb6 to http://172.31.34.45:8082/broadcast
+22:23:11.673 [Thread-623355] DEBUG cs6650.assignment1.consumerv3.queue.ServerBroadcastClient -- Broadcasted single message 0d8b78db-f3ca-415d-a274-b7bb183db159 to http://172.31.34.45:8082/broadcast
+22:23:11.673 [Thread-623356] DEBUG cs6650.assignment1.consumerv3.queue.ServerBroadcastClient -- Broadcasted single message 69432d93-a3fb-4a53-b643-419a683b6174 to http://172.31.34.45:8082/broadcast
+22:23:11.673 [Thread-623354] DEBUG cs6650.assignment1.consumerv3.queue.ServerBroadcastClient -- Broadcasted single message e203a2df-2103-47b8-877f-e977814dd676 to http://172.31.34.45:8082/broadcast
+22:23:11.673 [Thread-623357] DEBUG cs6650.assignment1.consumerv3.queue.ServerBroadcastClient -- Broadcasted single message e2353560-ff83-47d0-a9d3-7a0e5a2c79df to http://172.31.34.45:8082/broadcast
+22:23:11.673 [Thread-623358] DEBUG cs6650.assignment1.consumerv3.queue.ServerBroadcastClient -- Broadcasted single message 2865553d-81a8-4ef2-8261-498066cfda05 to http://172.31.34.45:8082/broadcast
+22:23:11.674 [Thread-623359] DEBUG cs6650.assignment1.consumerv3.queue.ServerBroadcastClient -- Broadcasted single message 66d1ef85-af03-41b8-aee0-97aa4f4dcb2f to http://172.31.34.45:8082/broadcast
+22:23:11.674 [Thread-623360] DEBUG cs6650.assignment1.consumerv3.queue.ServerBroadcastClient -- Broadcasted single message 1f4d5400-d2c2-4d15-baca-5c0ef3d00b67 to http://172.31.34.45:8082/broadcast
+22:23:11.674 [Thread-623361] DEBUG cs6650.assignment1.consumerv3.queue.ServerBroadcastClient -- Broadcasted single message 3453f282-4f06-46b8-aef3-017594c53057 to http://172.31.34.45:8082/broadcast
+22:23:11.674 [Thread-623362] DEBUG cs6650.assignment1.consumerv3.queue.ServerBroadcastClient -- Broadcasted single message 8317f0c9-7e28-4da8-b738-397223ef98fd to http://172.31.34.45:8082/broadcast
+22:23:11.674 [Thread-623365] DEBUG cs6650.assignment1.consumerv3.queue.ServerBroadcastClient -- Broadcasted single message 272f99c2-1d7a-46c6-b394-62a893c66450 to http://172.31.34.45:8082/broadcast
+22:23:11.674 [Thread-623366] DEBUG cs6650.assignment1.consumerv3.queue.ServerBroadcastClient -- Broadcasted single message b4f4157e-83cd-4ff0-a153-b6a635d69651 to http://172.31.34.45:8082/broadcast
+22:23:11.674 [Thread-623367] DEBUG cs6650.assignment1.consumerv3.queue.ServerBroadcastClient -- Broadcasted single message 1ca36d28-bad5-40dd-860e-490b6781de84 to http://172.31.34.45:8082/broadcast
+22:23:11.675 [Thread-623368] DEBUG cs6650.assignment1.consumerv3.queue.ServerBroadcastClient -- Broadcasted single message 50426fe5-9ad0-4d0d-8cfb-36aaa44e70d3 to http://172.31.34.45:8082/broadcast
+22:23:11.675 [Thread-623370] DEBUG cs6650.assignment1.consumerv3.queue.ServerBroadcastClient -- Broadcasted single message bf1404b0-0be3-4cd7-8b97-aa7967771461 to http://172.31.34.45:8082/broadcast
+22:23:11.675 [Thread-623369] DEBUG cs6650.assignment1.consumerv3.queue.ServerBroadcastClient -- Broadcasted single message 35d1593d-c058-4333-9f26-1c264a5a2233 to http://172.31.34.45:8082/broadcast
+22:23:11.675 [Thread-623371] DEBUG cs6650.assignment1.consumerv3.queue.ServerBroadcastClient -- Broadcasted single message b588bf89-756f-40bf-94fb-d5c5bedf44d1 to http://172.31.34.45:8082/broadcast
+22:23:11.675 [Thread-623372] DEBUG cs6650.assignment1.consumerv3.queue.ServerBroadcastClient -- Broadcasted single message c7e3fc82-9a56-494d-bd2f-5e8eb79c3aaf to http://172.31.34.45:8082/broadcast
+22:23:11.675 [Thread-623374] DEBUG cs6650.assignment1.consumerv3.queue.ServerBroadcastClient -- Broadcasted single message 4b17c348-b2f6-424d-ad23-c11c6b829e53 to http://172.31.34.45:8082/broadcast
+22:23:11.675 [Thread-623373] DEBUG cs6650.assignment1.consumerv3.queue.ServerBroadcastClient -- Broadcasted single message 68294343-4ebe-4adb-9c26-0d7211eb5b63 to http://172.31.34.45:8082/broadcast
+22:23:11.675 [Thread-623375] DEBUG cs6650.assignment1.consumerv3.queue.ServerBroadcastClient -- Broadcasted single message 1626ec11-8469-4be1-83a1-74ac76ae9707 to http://172.31.34.45:8082/broadcast
+22:23:11.676 [Thread-623340] DEBUG cs6650.assignment1.consumerv3.queue.ServerBroadcastClient -- Broadcasted single message fa8826f4-9c15-435a-b1a7-a9cad1727e88 to http://172.31.34.45:8082/broadcast
+22:23:11.676 [Thread-623347] DEBUG cs6650.assignment1.consumerv3.queue.ServerBroadcastClient -- Broadcasted single message 08fac4e3-3e09-49ba-b816-5b5c6aa96da0 to http://172.31.34.45:8082/broadcast
+22:23:11.676 [Thread-623352] DEBUG cs6650.assignment1.consumerv3.queue.ServerBroadcastClient -- Broadcasted single message 925dc91b-de0a-4cc2-896c-af28b2c8f42a to http://172.31.34.45:8082/broadcast
+22:23:11.676 [Thread-623353] DEBUG cs6650.assignment1.consumerv3.queue.ServerBroadcastClient -- Broadcasted single message 6e73a276-7818-4728-b6cf-7945739c187f to http://172.31.34.45:8082/broadcast
+22:23:11.677 [Thread-623363] DEBUG cs6650.assignment1.consumerv3.queue.ServerBroadcastClient -- Broadcasted single message e2731520-8009-40f0-9f52-301bc92b9b6c to http://172.31.34.45:8082/broadcast
+22:23:11.677 [Thread-623364] DEBUG cs6650.assignment1.consumerv3.queue.ServerBroadcastClient -- Broadcasted single message dd4892f8-c040-44b8-a6ef-1d0b1d881191 to http://172.31.34.45:8082/broadcast
+22:23:11.718 [Thread-623376] DEBUG cs6650.assignment1.consumerv3.queue.ServerBroadcastClient -- Broadcasted single message 7e9f203c-99de-4d8b-a57f-7d7a0f1c7514 to http://172.31.34.45:8082/broadcast
+22:23:11.722 [Thread-623378] DEBUG cs6650.assignment1.consumerv3.queue.ServerBroadcastClient -- Broadcasted single message a5391806-05e8-4b61-880f-3d23e58a534b to http://172.31.34.45:8082/broadcast
+22:23:11.722 [Thread-623377] DEBUG cs6650.assignment1.consumerv3.queue.ServerBroadcastClient -- Broadcasted single message 20308e38-1a58-4cad-a067-448a2ff41d59 to http://172.31.34.45:8082/broadcast
+22:23:11.722 [Thread-623379] DEBUG cs6650.assignment1.consumerv3.queue.ServerBroadcastClient -- Broadcasted single message 9d32f508-5932-4157-b40a-a20f9e022ccc to http://172.31.34.45:8082/broadcast
+22:23:11.723 [Thread-623380] DEBUG cs6650.assignment1.consumerv3.queue.ServerBroadcastClient -- Broadcasted single message e46f4c25-c279-44d0-9ba8-2e919d139c51 to http://172.31.34.45:8082/broadcast
+22:23:11.723 [Thread-623381] DEBUG cs6650.assignment1.consumerv3.queue.ServerBroadcastClient -- Broadcasted single message 151b3436-8683-4c01-8bc5-e0a41224e00d to http://172.31.34.45:8082/broadcast
+22:23:11.723 [Thread-623382] DEBUG cs6650.assignment1.consumerv3.queue.ServerBroadcastClient -- Broadcasted single message 745f5852-91f5-4f42-9b1e-f8f5623bc3f8 to http://172.31.34.45:8082/broadcast
+22:23:11.723 [Thread-623383] DEBUG cs6650.assignment1.consumerv3.queue.ServerBroadcastClient -- Broadcasted single message 93784bf4-9990-48c9-bca6-b4bbf97d3a2a to http://172.31.34.45:8082/broadcast
+22:23:11.723 [Thread-623384] DEBUG cs6650.assignment1.consumerv3.queue.ServerBroadcastClient -- Broadcasted single message 430b76db-f404-4826-9b82-60dea88a2eb3 to http://172.31.34.45:8082/broadcast
+22:23:11.723 [Thread-623385] DEBUG cs6650.assignment1.consumerv3.queue.ServerBroadcastClient -- Broadcasted single message ec4266bb-3bff-49ff-b998-dc546044c2b6 to http://172.31.34.45:8082/broadcast
+22:23:11.723 [Thread-623388] DEBUG cs6650.assignment1.consumerv3.queue.ServerBroadcastClient -- Broadcasted single message 49c6dbe8-441b-4b41-8586-e2fae3c81ffb to http://172.31.34.45:8082/broadcast
+22:23:11.723 [Thread-623389] DEBUG cs6650.assignment1.consumerv3.queue.ServerBroadcastClient -- Broadcasted single message d435e201-e1a8-41bc-b56a-1a52d94044a0 to http://172.31.34.45:8082/broadcast
+22:23:11.723 [Thread-623391] DEBUG cs6650.assignment1.consumerv3.queue.ServerBroadcastClient -- Broadcasted single message f10c4532-bb75-4a8e-83cf-483e9b978ab9 to http://172.31.34.45:8082/broadcast
+22:23:11.723 [Thread-623392] DEBUG cs6650.assignment1.consumerv3.queue.ServerBroadcastClient -- Broadcasted single message 23dc49aa-33ff-4583-a57e-0ac5694eb539 to http://172.31.34.45:8082/broadcast
+22:23:11.724 [Thread-623393] DEBUG cs6650.assignment1.consumerv3.queue.ServerBroadcastClient -- Broadcasted single message 787e248b-4666-4b42-9ad6-14bdc9ce3698 to http://172.31.34.45:8082/broadcast
+22:23:11.724 [Thread-623394] DEBUG cs6650.assignment1.consumerv3.queue.ServerBroadcastClient -- Broadcasted single message c7dcaa94-3522-4115-8652-6090c65b6557 to http://172.31.34.45:8082/broadcast
+22:23:11.724 [Thread-623395] DEBUG cs6650.assignment1.consumerv3.queue.ServerBroadcastClient -- Broadcasted single message d3759464-77c9-458b-b0ba-ffab50ce5a5f to http://172.31.34.45:8082/broadcast
+22:23:11.724 [Thread-623396] DEBUG cs6650.assignment1.consumerv3.queue.ServerBroadcastClient -- Broadcasted single message 97a27d4b-b9ef-4170-94b4-a9eec8abddf2 to http://172.31.34.45:8082/broadcast
+22:23:11.724 [Thread-623398] DEBUG cs6650.assignment1.consumerv3.queue.ServerBroadcastClient -- Broadcasted single message 0103368f-8e76-4f3a-bd46-70157e84149e to http://172.31.34.45:8082/broadcast
+22:23:11.724 [Thread-623399] DEBUG cs6650.assignment1.consumerv3.queue.ServerBroadcastClient -- Broadcasted single message 92673fba-d0f7-4871-9f5b-a962150e0c09 to http://172.31.34.45:8082/broadcast
+22:23:11.724 [Thread-623400] DEBUG cs6650.assignment1.consumerv3.queue.ServerBroadcastClient -- Broadcasted single message 8b4fff35-35ab-464d-833c-0cf30f40115d to http://172.31.34.45:8082/broadcast
+22:23:11.724 [Thread-623401] DEBUG cs6650.assignment1.consumerv3.queue.ServerBroadcastClient -- Broadcasted single message c6aa8477-a942-4216-9b62-b71d41c5d1ab to http://172.31.34.45:8082/broadcast
+22:23:11.724 [Thread-623404] DEBUG cs6650.assignment1.consumerv3.queue.ServerBroadcastClient -- Broadcasted single message ee69a95c-1e10-48df-8bef-42df5b5572b2 to http://172.31.34.45:8082/broadcast
+22:23:11.725 [Thread-623405] DEBUG cs6650.assignment1.consumerv3.queue.ServerBroadcastClient -- Broadcasted single message d5137f71-4d71-4398-9b04-61a3849a47e1 to http://172.31.34.45:8082/broadcast
+22:23:11.725 [Thread-623406] DEBUG cs6650.assignment1.consumerv3.queue.ServerBroadcastClient -- Broadcasted single message 7459563b-e3a5-4203-865d-9f5ba59c84f7 to http://172.31.34.45:8082/broadcast
+22:23:11.725 [Thread-623407] DEBUG cs6650.assignment1.consumerv3.queue.ServerBroadcastClient -- Broadcasted single message 736f2d19-00f4-4be5-9d44-747eecce2e8d to http://172.31.34.45:8082/broadcast
+22:23:11.725 [Thread-623409] DEBUG cs6650.assignment1.consumerv3.queue.ServerBroadcastClient -- Broadcasted single message 1dc20b01-ecfd-44e2-8497-dde37a65c4b0 to http://172.31.34.45:8082/broadcast
+22:23:11.725 [Thread-623408] DEBUG cs6650.assignment1.consumerv3.queue.ServerBroadcastClient -- Broadcasted single message 5405f232-6cb7-4efb-8852-9a4dbff7347b to http://172.31.34.45:8082/broadcast
+22:23:11.725 [Thread-623410] DEBUG cs6650.assignment1.consumerv3.queue.ServerBroadcastClient -- Broadcasted single message 3251628b-4983-4bec-89e5-8cfa9b6a753e to http://172.31.34.45:8082/broadcast
+22:23:11.725 [Thread-623412] DEBUG cs6650.assignment1.consumerv3.queue.ServerBroadcastClient -- Broadcasted single message 5506625b-68f6-4215-9a15-4bcfc72424a1 to http://172.31.34.45:8082/broadcast
+22:23:11.725 [Thread-623413] DEBUG cs6650.assignment1.consumerv3.queue.ServerBroadcastClient -- Broadcasted single message 7742137d-14f5-4abb-888f-d9e2313dee6e to http://172.31.34.45:8082/broadcast
+22:23:11.725 [Thread-623414] DEBUG cs6650.assignment1.consumerv3.queue.ServerBroadcastClient -- Broadcasted single message 858ee50a-bbff-486a-9ac3-31eb1605e1ec to http://172.31.34.45:8082/broadcast
+22:23:11.725 [Thread-623415] DEBUG cs6650.assignment1.consumerv3.queue.ServerBroadcastClient -- Broadcasted single message 1bd85b3e-2273-4855-8cdb-5f568b0eaf19 to http://172.31.34.45:8082/broadcast
+22:23:11.726 [Thread-623416] DEBUG cs6650.assignment1.consumerv3.queue.ServerBroadcastClient -- Broadcasted single message 073c4f57-01c2-42ca-9313-a8c15ae26d40 to http://172.31.34.45:8082/broadcast
+22:23:11.726 [Thread-623417] DEBUG cs6650.assignment1.consumerv3.queue.ServerBroadcastClient -- Broadcasted single message 7173ee11-6ad1-414a-9a55-560087ba3d6f to http://172.31.34.45:8082/broadcast
+22:23:11.726 [Thread-623418] DEBUG cs6650.assignment1.consumerv3.queue.ServerBroadcastClient -- Broadcasted single message e01de274-8112-4f42-a746-6bbbfe6ec5bf to http://172.31.34.45:8082/broadcast
+22:23:11.726 [Thread-623420] DEBUG cs6650.assignment1.consumerv3.queue.ServerBroadcastClient -- Broadcasted single message 0a7504dc-e0f2-4bb4-888d-596e82c7e0fb to http://172.31.34.45:8082/broadcast
+22:23:11.726 [Thread-623419] DEBUG cs6650.assignment1.consumerv3.queue.ServerBroadcastClient -- Broadcasted single message a4023003-fb4f-41a1-b5c7-b6c8a4378ece to http://172.31.34.45:8082/broadcast
+22:23:11.726 [Thread-623421] DEBUG cs6650.assignment1.consumerv3.queue.ServerBroadcastClient -- Broadcasted single message 05ba85a3-686f-4420-b2fe-541970e1a35a to http://172.31.34.45:8082/broadcast
+22:23:11.726 [Thread-623422] DEBUG cs6650.assignment1.consumerv3.queue.ServerBroadcastClient -- Broadcasted single message 11e04a25-6307-47aa-9323-b96d98caae88 to http://172.31.34.45:8082/broadcast
+22:23:11.726 [Thread-623423] DEBUG cs6650.assignment1.consumerv3.queue.ServerBroadcastClient -- Broadcasted single message 739d3d39-c14c-49e2-b44d-fb6a3846b46a to http://172.31.34.45:8082/broadcast
+22:23:11.726 [Thread-623424] DEBUG cs6650.assignment1.consumerv3.queue.ServerBroadcastClient -- Broadcasted single message d9eb807c-e238-4087-b821-214e9b8a7b7c to http://172.31.34.45:8082/broadcast
+22:23:11.726 [Thread-623425] DEBUG cs6650.assignment1.consumerv3.queue.ServerBroadcastClient -- Broadcasted single message c7894545-301d-440b-8d35-57d3e0b39873 to http://172.31.34.45:8082/broadcast
+22:23:11.727 [Thread-623387] DEBUG cs6650.assignment1.consumerv3.queue.ServerBroadcastClient -- Broadcasted single message 5cd09d7b-0333-42d8-acd8-c3d4e6081fad to http://172.31.34.45:8082/broadcast
+22:23:11.727 [Thread-623386] DEBUG cs6650.assignment1.consumerv3.queue.ServerBroadcastClient -- Broadcasted single message f8b0a325-f323-4693-8ce4-fa1fe0016149 to http://172.31.34.45:8082/broadcast
+22:23:11.727 [Thread-623390] DEBUG cs6650.assignment1.consumerv3.queue.ServerBroadcastClient -- Broadcasted single message c2f2c0ce-428d-4eac-810b-0ff7a9b2357e to http://172.31.34.45:8082/broadcast
+22:23:11.728 [Thread-623397] DEBUG cs6650.assignment1.consumerv3.queue.ServerBroadcastClient -- Broadcasted single message d0d6a4e0-31ca-4ac3-9803-702f33782100 to http://172.31.34.45:8082/broadcast
+22:23:11.728 [Thread-623402] DEBUG cs6650.assignment1.consumerv3.queue.ServerBroadcastClient -- Broadcasted single message dbb90d00-68ca-4fd8-b0a5-7d66579701a0 to http://172.31.34.45:8082/broadcast
+22:23:11.728 [Thread-623403] DEBUG cs6650.assignment1.consumerv3.queue.ServerBroadcastClient -- Broadcasted single message 814adca6-c521-46d6-a770-e0435a6da834 to http://172.31.34.45:8082/broadcast
+22:23:11.728 [Thread-623411] DEBUG cs6650.assignment1.consumerv3.queue.ServerBroadcastClient -- Broadcasted single message 87e5bf57-320b-4b61-888a-ffe47a224414 to http://172.31.34.45:8082/broadcast
+22:23:11.754 [Thread-623426] DEBUG cs6650.assignment1.consumerv3.queue.ServerBroadcastClient -- Broadcasted single message 4583193e-9519-41c2-8610-0fc2e6fe497a to http://172.31.34.45:8082/broadcast
+22:23:11.754 [Thread-623427] DEBUG cs6650.assignment1.consumerv3.queue.ServerBroadcastClient -- Broadcasted single message e81f7668-7cc5-4b06-8855-269e6596d9df to http://172.31.34.45:8082/broadcast
+22:23:11.755 [Thread-623429] DEBUG cs6650.assignment1.consumerv3.queue.ServerBroadcastClient -- Broadcasted single message f7f5dff1-3121-4ac9-b046-af2c5fa58448 to http://172.31.34.45:8082/broadcast
+22:23:11.755 [Thread-623428] DEBUG cs6650.assignment1.consumerv3.queue.ServerBroadcastClient -- Broadcasted single message e3e3c50e-037e-4c87-9b62-02b6889cad61 to http://172.31.34.45:8082/broadcast
+22:23:11.755 [Thread-623430] DEBUG cs6650.assignment1.consumerv3.queue.ServerBroadcastClient -- Broadcasted single message ef3b8ae5-5a7f-4028-83ce-0c4f81bc864b to http://172.31.34.45:8082/broadcast
+22:23:11.755 [Thread-623431] DEBUG cs6650.assignment1.consumerv3.queue.ServerBroadcastClient -- Broadcasted single message 1e1af014-f5b6-4809-9361-18f132a2cd29 to http://172.31.34.45:8082/broadcast
+22:23:11.755 [Thread-623432] DEBUG cs6650.assignment1.consumerv3.queue.ServerBroadcastClient -- Broadcasted single message 5e04b835-7905-4346-ab01-58d0d8fc3d02 to http://172.31.34.45:8082/broadcast
+22:23:11.755 [Thread-623433] DEBUG cs6650.assignment1.consumerv3.queue.ServerBroadcastClient -- Broadcasted single message 518ba13b-8249-4fa3-9457-dd9bafe95afb to http://172.31.34.45:8082/broadcast
+22:23:11.755 [Thread-623434] DEBUG cs6650.assignment1.consumerv3.queue.ServerBroadcastClient -- Broadcasted single message 349304ad-8316-4f56-a3ec-84484f5cca45 to http://172.31.34.45:8082/broadcast
+22:23:11.755 [Thread-623436] DEBUG cs6650.assignment1.consumerv3.queue.ServerBroadcastClient -- Broadcasted single message 938e6458-75b0-4697-9bb9-9e292ced3426 to http://172.31.34.45:8082/broadcast
+22:23:11.755 [Thread-623437] DEBUG cs6650.assignment1.consumerv3.queue.ServerBroadcastClient -- Broadcasted single message d6d5cfad-9f02-4cd0-a4e2-5ceb80765ad4 to http://172.31.34.45:8082/broadcast
+22:23:11.756 [Thread-623435] DEBUG cs6650.assignment1.consumerv3.queue.ServerBroadcastClient -- Broadcasted single message 340256dc-7f0b-4f34-bbd1-045a5026dbfd to http://172.31.34.45:8082/broadcast
+22:23:28.797 [HikariPool-1 housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool -- HikariPool-1 - Before cleanup stats (total=5, active=0, idle=5, waiting=0)
+22:23:28.797 [HikariPool-1 housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool -- HikariPool-1 - After cleanup  stats (total=5, active=0, idle=5, waiting=0)
+22:23:28.797 [HikariPool-1 housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool -- HikariPool-1 - Fill pool skipped, pool has sufficient level or currently being filled.
+22:23:58.798 [HikariPool-1 housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool -- HikariPool-1 - Before cleanup stats (total=5, active=0, idle=5, waiting=0)
+22:23:58.798 [HikariPool-1 housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool -- HikariPool-1 - After cleanup  stats (total=5, active=0, idle=5, waiting=0)
+22:23:58.798 [HikariPool-1 housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool -- HikariPool-1 - Fill pool skipped, pool has sufficient level or currently being filled.
+22:24:28.798 [HikariPool-1 housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool -- HikariPool-1 - Before cleanup stats (total=5, active=0, idle=5, waiting=0)
+22:24:28.798 [HikariPool-1 housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool -- HikariPool-1 - After cleanup  stats (total=5, active=0, idle=5, waiting=0)
+22:24:28.798 [HikariPool-1 housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool -- HikariPool-1 - Fill pool skipped, pool has sufficient level or currently being filled.
+22:24:46.611 [HikariPool-1 connection closer] DEBUG com.zaxxer.hikari.pool.PoolBase -- HikariPool-1 - Closing connection org.postgresql.jdbc.PgConnection@2561c56c: (connection has passed maxLifetime)
+22:24:46.623 [HikariPool-1 connection adder] DEBUG com.zaxxer.hikari.pool.HikariPool -- HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@3f49869
+22:24:46.653 [HikariPool-1 connection adder] DEBUG com.zaxxer.hikari.pool.HikariPool -- HikariPool-1 - Connection not added, stats (total=5, active=0, idle=5, waiting=0)
+22:24:47.379 [HikariPool-1 connection closer] DEBUG com.zaxxer.hikari.pool.PoolBase -- HikariPool-1 - Closing connection org.postgresql.jdbc.PgConnection@2f99ae1c: (connection has passed maxLifetime)
+22:24:47.391 [HikariPool-1 connection adder] DEBUG com.zaxxer.hikari.pool.HikariPool -- HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@d337667
+22:24:47.421 [HikariPool-1 connection adder] DEBUG com.zaxxer.hikari.pool.HikariPool -- HikariPool-1 - Connection not added, stats (total=5, active=0, idle=5, waiting=0)
+22:24:48.165 [HikariPool-1 connection closer] DEBUG com.zaxxer.hikari.pool.PoolBase -- HikariPool-1 - Closing connection org.postgresql.jdbc.PgConnection@60635fa4: (connection has passed maxLifetime)
+22:24:48.176 [HikariPool-1 connection adder] DEBUG com.zaxxer.hikari.pool.HikariPool -- HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@90cf319
+22:24:48.206 [HikariPool-1 connection adder] DEBUG com.zaxxer.hikari.pool.HikariPool -- HikariPool-1 - Connection not added, stats (total=5, active=0, idle=5, waiting=0)
+22:24:50.187 [HikariPool-1 connection closer] DEBUG com.zaxxer.hikari.pool.PoolBase -- HikariPool-1 - Closing connection org.postgresql.jdbc.PgConnection@215e559f: (connection has passed maxLifetime)
+22:24:50.199 [HikariPool-1 connection adder] DEBUG com.zaxxer.hikari.pool.HikariPool -- HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@4c0e7c5c
+22:24:50.229 [HikariPool-1 connection adder] DEBUG com.zaxxer.hikari.pool.HikariPool -- HikariPool-1 - Connection not added, stats (total=5, active=0, idle=5, waiting=0)
+22:24:52.547 [HikariPool-1 connection closer] DEBUG com.zaxxer.hikari.pool.PoolBase -- HikariPool-1 - Closing connection org.postgresql.jdbc.PgConnection@268e4fa: (connection has passed maxLifetime)
+22:24:52.560 [HikariPool-1 connection adder] DEBUG com.zaxxer.hikari.pool.HikariPool -- HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@6b1e9264
+22:24:52.590 [HikariPool-1 connection adder] DEBUG com.zaxxer.hikari.pool.HikariPool -- HikariPool-1 - Connection not added, stats (total=5, active=0, idle=5, waiting=0)
+22:24:58.798 [HikariPool-1 housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool -- HikariPool-1 - Before cleanup stats (total=5, active=0, idle=5, waiting=0)
+22:24:58.798 [HikariPool-1 housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool -- HikariPool-1 - After cleanup  stats (total=5, active=0, idle=5, waiting=0)
+22:24:58.798 [HikariPool-1 housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool -- HikariPool-1 - Fill pool skipped, pool has sufficient level or currently being filled.
+22:25:28.799 [HikariPool-1 housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool -- HikariPool-1 - Before cleanup stats (total=5, active=0, idle=5, waiting=0)
+22:25:28.799 [HikariPool-1 housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool -- HikariPool-1 - After cleanup  stats (total=5, active=0, idle=5, waiting=0)
+22:25:28.799 [HikariPool-1 housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool -- HikariPool-1 - Fill pool skipped, pool has sufficient level or currently being filled.
+22:25:58.799 [HikariPool-1 housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool -- HikariPool-1 - Before cleanup stats (total=5, active=0, idle=5, waiting=0)
+22:25:58.799 [HikariPool-1 housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool -- HikariPool-1 - After cleanup  stats (total=5, active=0, idle=5, waiting=0)
+22:25:58.799 [HikariPool-1 housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool -- HikariPool-1 - Fill pool skipped, pool has sufficient level or currently being filled.
+22:26:28.799 [HikariPool-1 housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool -- HikariPool-1 - Before cleanup stats (total=5, active=0, idle=5, waiting=0)
+22:26:28.799 [HikariPool-1 housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool -- HikariPool-1 - After cleanup  stats (total=5, active=0, idle=5, waiting=0)
+22:26:28.799 [HikariPool-1 housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool -- HikariPool-1 - Fill pool skipped, pool has sufficient level or currently being filled.
+22:26:58.800 [HikariPool-1 housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool -- HikariPool-1 - Before cleanup stats (total=5, active=0, idle=5, waiting=0)
+22:26:58.800 [HikariPool-1 housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool -- HikariPool-1 - After cleanup  stats (total=5, active=0, idle=5, waiting=0)
+22:26:58.800 [HikariPool-1 housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool -- HikariPool-1 - Fill pool skipped, pool has sufficient level or currently being filled.
+22:27:28.800 [HikariPool-1 housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool -- HikariPool-1 - Before cleanup stats (total=5, active=0, idle=5, waiting=0)
+22:27:28.800 [HikariPool-1 housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool -- HikariPool-1 - After cleanup  stats (total=5, active=0, idle=5, waiting=0)
+22:27:28.800 [HikariPool-1 housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool -- HikariPool-1 - Fill pool skipped, pool has sufficient level or currently being filled.
+22:27:58.800 [HikariPool-1 housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool -- HikariPool-1 - Before cleanup stats (total=5, active=0, idle=5, waiting=0)
+22:27:58.800 [HikariPool-1 housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool -- HikariPool-1 - After cleanup  stats (total=5, active=0, idle=5, waiting=0)
+22:27:58.800 [HikariPool-1 housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool -- HikariPool-1 - Fill pool skipped, pool has sufficient level or currently being filled.
+22:28:28.801 [HikariPool-1 housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool -- HikariPool-1 - Before cleanup stats (total=5, active=0, idle=5, waiting=0)
+22:28:28.801 [HikariPool-1 housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool -- HikariPool-1 - After cleanup  stats (total=5, active=0, idle=5, waiting=0)
+22:28:28.801 [HikariPool-1 housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool -- HikariPool-1 - Fill pool skipped, pool has sufficient level or currently being filled.
+22:28:58.801 [HikariPool-1 housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool -- HikariPool-1 - Before cleanup stats (total=5, active=0, idle=5, waiting=0)
+22:28:58.801 [HikariPool-1 housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool -- HikariPool-1 - After cleanup  stats (total=5, active=0, idle=5, waiting=0)
+22:28:58.801 [HikariPool-1 housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool -- HikariPool-1 - Fill pool skipped, pool has sufficient level or currently being filled.
+22:29:28.801 [HikariPool-1 housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool -- HikariPool-1 - Before cleanup stats (total=5, active=0, idle=5, waiting=0)
+22:29:28.801 [HikariPool-1 housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool -- HikariPool-1 - After cleanup  stats (total=5, active=0, idle=5, waiting=0)
+22:29:28.801 [HikariPool-1 housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool -- HikariPool-1 - Fill pool skipped, pool has sufficient level or currently being filled.
+22:29:41.458 [HikariPool-1 connection closer] DEBUG com.zaxxer.hikari.pool.PoolBase -- HikariPool-1 - Closing connection org.postgresql.jdbc.PgConnection@3f49869: (connection has passed maxLifetime)
+22:29:41.469 [HikariPool-1 connection adder] DEBUG com.zaxxer.hikari.pool.HikariPool -- HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@d58393c
+22:29:41.500 [HikariPool-1 connection adder] DEBUG com.zaxxer.hikari.pool.HikariPool -- HikariPool-1 - Connection not added, stats (total=5, active=0, idle=5, waiting=0)
+22:29:44.094 [HikariPool-1 connection closer] DEBUG com.zaxxer.hikari.pool.PoolBase -- HikariPool-1 - Closing connection org.postgresql.jdbc.PgConnection@90cf319: (connection has passed maxLifetime)
+22:29:44.106 [HikariPool-1 connection adder] DEBUG com.zaxxer.hikari.pool.HikariPool -- HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@485ab6f3
+22:29:44.136 [HikariPool-1 connection adder] DEBUG com.zaxxer.hikari.pool.HikariPool -- HikariPool-1 - Connection not added, stats (total=5, active=0, idle=5, waiting=0)
+22:29:45.059 [HikariPool-1 connection closer] DEBUG com.zaxxer.hikari.pool.PoolBase -- HikariPool-1 - Closing connection org.postgresql.jdbc.PgConnection@d337667: (connection has passed maxLifetime)
+22:29:45.073 [HikariPool-1 connection adder] DEBUG com.zaxxer.hikari.pool.HikariPool -- HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@4dedbf86
+22:29:45.104 [HikariPool-1 connection adder] DEBUG com.zaxxer.hikari.pool.HikariPool -- HikariPool-1 - Connection not added, stats (total=5, active=0, idle=5, waiting=0)
+22:29:47.956 [HikariPool-1 connection closer] DEBUG com.zaxxer.hikari.pool.PoolBase -- HikariPool-1 - Closing connection org.postgresql.jdbc.PgConnection@6b1e9264: (connection has passed maxLifetime)
+22:29:47.968 [HikariPool-1 connection adder] DEBUG com.zaxxer.hikari.pool.HikariPool -- HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@7958db0f
+22:29:47.998 [HikariPool-1 connection adder] DEBUG com.zaxxer.hikari.pool.HikariPool -- HikariPool-1 - Connection not added, stats (total=5, active=0, idle=5, waiting=0)
+22:29:48.977 [HikariPool-1 connection closer] DEBUG com.zaxxer.hikari.pool.PoolBase -- HikariPool-1 - Closing connection org.postgresql.jdbc.PgConnection@4c0e7c5c: (connection has passed maxLifetime)
+22:29:48.994 [HikariPool-1 connection adder] DEBUG com.zaxxer.hikari.pool.HikariPool -- HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@35058cc1
+22:29:49.025 [HikariPool-1 connection adder] DEBUG com.zaxxer.hikari.pool.HikariPool -- HikariPool-1 - Connection not added, stats (total=5, active=0, idle=5, waiting=0)
+22:29:58.802 [HikariPool-1 housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool -- HikariPool-1 - Before cleanup stats (total=5, active=0, idle=5, waiting=0)
+22:29:58.802 [HikariPool-1 housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool -- HikariPool-1 - After cleanup  stats (total=5, active=0, idle=5, waiting=0)
+22:29:58.802 [HikariPool-1 housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool -- HikariPool-1 - Fill pool skipped, pool has sufficient level or currently being filled.
+22:30:28.802 [HikariPool-1 housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool -- HikariPool-1 - Before cleanup stats (total=5, active=0, idle=5, waiting=0)
+22:30:28.802 [HikariPool-1 housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool -- HikariPool-1 - After cleanup  stats (total=5, active=0, idle=5, waiting=0)
+22:30:28.802 [HikariPool-1 housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool -- HikariPool-1 - Fill pool skipped, pool has sufficient level or currently being filled.
+22:30:58.802 [HikariPool-1 housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool -- HikariPool-1 - Before cleanup stats (total=5, active=0, idle=5, waiting=0)
+22:30:58.803 [HikariPool-1 housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool -- HikariPool-1 - After cleanup  stats (total=5, active=0, idle=5, waiting=0)
+22:30:58.803 [HikariPool-1 housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool -- HikariPool-1 - Fill pool skipped, pool has sufficient level or currently being filled.
+22:31:28.803 [HikariPool-1 housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool -- HikariPool-1 - Before cleanup stats (total=5, active=0, idle=5, waiting=0)
+22:31:28.803 [HikariPool-1 housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool -- HikariPool-1 - After cleanup  stats (total=5, active=0, idle=5, waiting=0)
+22:31:28.803 [HikariPool-1 housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool -- HikariPool-1 - Fill pool skipped, pool has sufficient level or currently being filled.
+22:31:58.803 [HikariPool-1 housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool -- HikariPool-1 - Before cleanup stats (total=5, active=0, idle=5, waiting=0)
+22:31:58.803 [HikariPool-1 housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool -- HikariPool-1 - After cleanup  stats (total=5, active=0, idle=5, waiting=0)
+22:31:58.803 [HikariPool-1 housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool -- HikariPool-1 - Fill pool skipped, pool has sufficient level or currently being filled.
+22:32:28.803 [HikariPool-1 housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool -- HikariPool-1 - Before cleanup stats (total=5, active=0, idle=5, waiting=0)
+22:32:28.804 [HikariPool-1 housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool -- HikariPool-1 - After cleanup  stats (total=5, active=0, idle=5, waiting=0)
+22:32:28.804 [HikariPool-1 housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool -- HikariPool-1 - Fill pool skipped, pool has sufficient level or currently being filled.
+22:32:58.804 [HikariPool-1 housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool -- HikariPool-1 - Before cleanup stats (total=5, active=0, idle=5, waiting=0)
+22:32:58.804 [HikariPool-1 housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool -- HikariPool-1 - After cleanup  stats (total=5, active=0, idle=5, waiting=0)
+22:32:58.804 [HikariPool-1 housekeeper] DEBUG com.zaxxer.hikari.pool.HikariPool -- HikariPool-1 - Fill pool skipped, pool has sufficient level or currently being filled.

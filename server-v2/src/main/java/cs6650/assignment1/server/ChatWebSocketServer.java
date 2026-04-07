@@ -124,6 +124,7 @@ public class ChatWebSocketServer extends WebSocketServer {
             
             // Send success acknowledgment back to sender
             ChatResponse response = new ChatResponse(
+                queueMessage.getMessageId(),
                 chatMessage.getUserId(),
                 chatMessage.getUsername(),
                 chatMessage.getMessage(),
@@ -189,6 +190,7 @@ public class ChatWebSocketServer extends WebSocketServer {
         try {
             // Convert QueueMessage to ChatResponse for clients
             ChatResponse response = new ChatResponse(
+                queueMessage.getMessageId(),
                 Integer.parseInt(queueMessage.getUserId()),
                 queueMessage.getUsername(),
                 queueMessage.getMessage(),

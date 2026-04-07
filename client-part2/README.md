@@ -46,6 +46,12 @@ Before running, update the `SERVER_URL` in `Main.java`:
 private static final String SERVER_URL = "ws://your-server-url:8080";
 ```
 
+After the benchmark finishes, the client also calls the `server-v2` metrics API and logs the JSON summary to the console. By default, that API is expected at port `8083` on the same host as the WebSocket server.
+
+```bash
+http://your-server-url:8083/metrics
+```
+
 For local testing:
 ```java
 private static final String SERVER_URL = "ws://localhost:8080";
@@ -68,6 +74,8 @@ Each message is tracked with:
 - Room ID
 
 All metrics are written to a CSV file in the `results/` directory.
+
+After the run, the client logs the metrics API response so you can capture a screenshot for the Assignment 3 report.
 
 ### 2. Statistical Analysis
 

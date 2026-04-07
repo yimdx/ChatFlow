@@ -3,6 +3,9 @@ package cs6650.assignment1;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import com.sun.net.httpserver.HttpServer;
+import cs6650.assignment1.api.MetricsApiServer;
+import cs6650.assignment1.db.DatabaseManager;
+import cs6650.assignment1.db.MessageRepository;
 import cs6650.assignment1.model.QueueMessage;
 import cs6650.assignment1.queue.MessagePublisher;
 import cs6650.assignment1.queue.RabbitMQChannelPool;
@@ -31,6 +34,11 @@ public class Main {
     private static final int ROOM_COUNT = getEnvInt("ROOM_COUNT", 20);
     private static final String SERVER_ID = getEnv("SERVER_ID", "server-1");
     private static final int BROADCAST_PORT = getEnvInt("BROADCAST_PORT", 8082);
+    private static final int METRICS_PORT = getEnvInt("METRICS_PORT", 8083);
+    private static final String METRICS_DB_URL = getEnv("METRICS_DB_URL", "jdbc:postgresql://localhost:5432/chatflow");
+    private static final String METRICS_DB_USERNAME = getEnv("METRICS_DB_USERNAME", "chatflow");
+    private static final String METRICS_DB_PASSWORD = getEnv("METRICS_DB_PASSWORD", "chatflow");
+    private static final int METRICS_DB_POOL_SIZE = getEnvInt("METRICS_DB_POOL_SIZE", 10);
     
     public static void main(String[] args) {
         logger.info("========================================");
@@ -46,6 +54,8 @@ public class Main {
         HealthCheckServer healthServer = null;
         ChatWebSocketServer wsServer = null;
         HttpServer broadcastServer = null;
+        DatabaseManager databaseManager = null;
+        MetricsApiServer metricsApiServer = null;
         
         try {
             // Initialize RabbitMQ connection pool
@@ -90,37 +100,57 @@ public class Main {
                     try {
                         String body = new String(exchange.getRequestBody().readAllBytes(), StandardCharsets.UTF_8);
                         QueueMessage message = objectMapper.readValue(body, QueueMessage.class);
-                        
-                        // Broadcast to all WebSocket clients in this room
                         finalWsServerForBroadcast.broadcastToRoom(message);
-                        
-                        // Send 200 OK response
-                        String response = "{\"status\":\"ok\"}";
-                        exchange.getResponseHeaders().set("Content-Type", "application/json");
-                        exchange.sendResponseHeaders(200, response.length());
-                        exchange.getResponseBody().write(response.getBytes(StandardCharsets.UTF_8));
-                        exchange.getResponseBody().close();
+                        sendJsonResponse(exchange, 200, "{\"status\":\"ok\"}");
                         
                     } catch (Exception e) {
                         logger.error("Error processing broadcast request", e);
-                        exchange.sendResponseHeaders(500, 0);
-                        exchange.getResponseBody().close();
+                        sendJsonResponse(exchange, 500, "{\"status\":\"error\"}");
                     }
                 } else {
-                    exchange.sendResponseHeaders(405, 0);
-                    exchange.getResponseBody().close();
+                    sendJsonResponse(exchange, 405, "{\"status\":\"method_not_allowed\"}");
+                }
+            });
+
+            broadcastServer.createContext("/broadcast/batch", exchange -> {
+                if ("POST".equals(exchange.getRequestMethod())) {
+                    try {
+                        String body = new String(exchange.getRequestBody().readAllBytes(), StandardCharsets.UTF_8);
+                        QueueMessage[] messages = objectMapper.readValue(body, QueueMessage[].class);
+
+                        for (QueueMessage message : messages) {
+                            finalWsServerForBroadcast.broadcastToRoom(message);
+                        }
+
+                        sendJsonResponse(exchange, 200, "{\"status\":\"ok\",\"broadcasted\":" + messages.length + "}");
+                    } catch (Exception e) {
+                        logger.error("Error processing batch broadcast request", e);
+                        sendJsonResponse(exchange, 500, "{\"status\":\"error\"}");
+                    }
+                } else {
+                    sendJsonResponse(exchange, 405, "{\"status\":\"method_not_allowed\"}");
                 }
             });
             
             broadcastServer.setExecutor(null);
             broadcastServer.start();
             logger.info("HTTP broadcast server started on port {}", BROADCAST_PORT);
+
+            // Start metrics/query API server backed by PostgreSQL
+            logger.info("Starting metrics API server on port {}...", METRICS_PORT);
+            databaseManager = new DatabaseManager(METRICS_DB_URL, METRICS_DB_USERNAME, METRICS_DB_PASSWORD, METRICS_DB_POOL_SIZE);
+            MessageRepository repository = new MessageRepository(databaseManager.getDataSource());
+            repository.initializeSchema();
+            metricsApiServer = new MetricsApiServer(METRICS_PORT, repository);
+            metricsApiServer.start();
             
             // Create final references for shutdown hook
             final RabbitMQChannelPool finalChannelPool = channelPool;
             final HealthCheckServer finalHealthServer = healthServer;
             final ChatWebSocketServer finalWsServer = wsServer;
             final HttpServer finalBroadcastServer = broadcastServer;
+            final DatabaseManager finalDatabaseManager = databaseManager;
+            final MetricsApiServer finalMetricsApiServer = metricsApiServer;
             
             // Add shutdown hook for graceful shutdown
             Runtime.getRuntime().addShutdownHook(new Thread(() -> {
@@ -135,8 +165,14 @@ public class Main {
                     if (finalHealthServer != null) {
                         finalHealthServer.stop();
                     }
+                    if (finalMetricsApiServer != null) {
+                        finalMetricsApiServer.stop();
+                    }
                     if (finalChannelPool != null) {
                         finalChannelPool.cleanup();
+                    }
+                    if (finalDatabaseManager != null) {
+                        finalDatabaseManager.close();
                     }
                     logger.info("Servers stopped successfully");
                 } catch (Exception e) {
@@ -151,6 +187,8 @@ public class Main {
             logger.info("Valid room IDs: 1-20");
             logger.info("Press Ctrl+C to stop");
             logger.info("Internal Broadcast HTTP endpoint: http://localhost:{}/broadcast", BROADCAST_PORT);
+            logger.info("Metrics API endpoint: http://localhost:{}/metrics", METRICS_PORT);
+            logger.info("Metrics query examples: /api/v1/messages/room/{{roomId}}, /api/v1/analytics/active-users");
             logger.info("========================================");
             
         } catch (Exception e) {
@@ -167,8 +205,14 @@ public class Main {
             if (healthServer != null) {
                 healthServer.stop();
             }
+            if (metricsApiServer != null) {
+                metricsApiServer.stop();
+            }
             if (channelPool != null) {
                 channelPool.cleanup();
+            }
+            if (databaseManager != null) {
+                databaseManager.close();
             }
             
             System.exit(1);
@@ -190,5 +234,14 @@ public class Main {
             }
         }
         return defaultValue;
+    }
+
+    private static void sendJsonResponse(com.sun.net.httpserver.HttpExchange exchange, int statusCode, String body) throws java.io.IOException {
+        byte[] bytes = body.getBytes(StandardCharsets.UTF_8);
+        exchange.getResponseHeaders().set("Content-Type", "application/json");
+        exchange.sendResponseHeaders(statusCode, bytes.length);
+        try (var responseBody = exchange.getResponseBody()) {
+            responseBody.write(bytes);
+        }
     }
 }

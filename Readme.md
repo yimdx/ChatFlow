@@ -160,6 +160,18 @@ ng
 
 ## Configuration
 
+### Assignment 3 Metrics API
+
+The DB-backed metrics and analytics retrieval endpoints are served by `server-v2` on port `8083` by default.
+
+Examples:
+
+```bash
+curl http://localhost:8083/health
+curl http://localhost:8083/metrics
+curl "http://localhost:8083/api/v1/analytics/active-users?start=2026-03-27T00:00:00Z&end=2026-03-27T01:00:00Z"
+```
+
 ### Thread Configuration (client-part1 & client-part2)
 ```java
 private static final int WARMUP_THREADS = 32;

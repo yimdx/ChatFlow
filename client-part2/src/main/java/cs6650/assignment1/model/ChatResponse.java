@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import java.time.Instant;
 
 public class ChatResponse {
+    private String messageId;
     private Integer userId;
     private String username;
     private String message;
@@ -21,8 +22,9 @@ public class ChatResponse {
     public ChatResponse() {
     }
     
-    public ChatResponse(Integer userId, String username, String message, Instant clientTimestamp, 
+    public ChatResponse(String messageId, Integer userId, String username, String message, Instant clientTimestamp,
                        Instant serverTimestamp, ChatMessage.MessageType messageType, String status) {
+        this.messageId = messageId;
         this.userId = userId;
         this.username = username;
         this.message = message;
@@ -33,6 +35,14 @@ public class ChatResponse {
     }
     
     // Getters and Setters
+    public String getMessageId() {
+        return messageId;
+    }
+
+    public void setMessageId(String messageId) {
+        this.messageId = messageId;
+    }
+
     public Integer getUserId() {
         return userId;
     }

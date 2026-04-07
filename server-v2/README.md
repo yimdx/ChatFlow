@@ -1,4 +1,4 @@
-# ChatFlow WebSocket Server
+# ChatFlow WebSocket Server v2
 
 ## Overview
 
@@ -8,6 +8,9 @@ A lightweight WebSocket server built with Java-WebSocket library that handles re
 
 - ✅ WebSocket endpoint: `ws://host:port/chat/{roomId}`
 - ✅ Room-based connections (1-20 rooms)
+- ✅ RabbitMQ producer pipeline for decoupled fan-out
+- ✅ HTTP broadcast endpoint used by `consumer-v3`
+- ✅ Database-backed metrics and analytics API
 - ✅ Message validation (userId, username, message, timestamp, messageType)
 - ✅ JSON message format
 - ✅ Error handling with detailed responses
@@ -44,6 +47,29 @@ java -jar target/WebSocketServer-1.0-SNAPSHOT.jar 9090
 ```bash
 mvn exec:java -Dexec.mainClass="cs6650.assignment1.Main"
 ```
+
+## API Endpoints
+
+- WebSocket: `ws://localhost:8081/chat/{roomId}`
+- Internal broadcast: `POST http://localhost:8082/broadcast`
+- Batch broadcast: `POST http://localhost:8082/broadcast/batch`
+- Metrics summary: `GET http://localhost:8083/metrics`
+- Core query examples:
+  - `GET /api/v1/messages/room/{roomId}?start=...&end=...&limit=1000&offset=0`
+  - `GET /api/v1/messages/user/{userId}?start=...&end=...&limit=1000&offset=0`
+  - `GET /api/v1/analytics/active-users?start=...&end=...`
+  - `GET /api/v1/analytics/user-rooms/{userId}`
+- Analytics query examples:
+  - `GET /api/v1/analytics/top-users?start=...&end=...&n=10`
+  - `GET /api/v1/analytics/top-rooms?start=...&end=...&n=10`
+  - `GET /api/v1/analytics/messages-rate?start=...&end=...&granularity=minute`
+  - `GET /api/v1/analytics/participation?start=...&end=...&n=10`
+
+The `/metrics` endpoint now returns one JSON payload containing both:
+- representative core-query results for the selected test window
+- analytics summaries for the same window
+
+This is the endpoint the client can call after a load test and log for the report screenshot.
 
 ## WebSocket Endpoint
 

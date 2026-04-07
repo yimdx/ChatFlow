@@ -79,8 +79,12 @@ public class MessageSender implements Runnable {
                             roomId
                         );
                         metricsQueue.offer(metric);
-                        
-                        sent = true;
+
+                        if ("success".equalsIgnoreCase(response.status)) {
+                            sent = true;
+                        } else {
+                            logger.warn("Send attempt {} received non-success status: {}", attempt + 1, response.status);
+                        }
                     } catch (Exception e) {
                         logger.warn("Send attempt {} failed", attempt + 1);
                         if (attempt < MAX_RETRIES - 1) {

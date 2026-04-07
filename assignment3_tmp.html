@@ -1,0 +1,992 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>assignment3.md</title>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+
+<style>
+/* https://github.com/microsoft/vscode/blob/master/extensions/markdown-language-features/media/markdown.css */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+body {
+	font-family: var(--vscode-markdown-font-family, -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif);
+	font-size: var(--vscode-markdown-font-size, 14px);
+	padding: 0 26px;
+	line-height: var(--vscode-markdown-line-height, 22px);
+	word-wrap: break-word;
+}
+
+#code-csp-warning {
+	position: fixed;
+	top: 0;
+	right: 0;
+	color: white;
+	margin: 16px;
+	text-align: center;
+	font-size: 12px;
+	font-family: sans-serif;
+	background-color:#444444;
+	cursor: pointer;
+	padding: 6px;
+	box-shadow: 1px 1px 1px rgba(0,0,0,.25);
+}
+
+#code-csp-warning:hover {
+	text-decoration: none;
+	background-color:#007acc;
+	box-shadow: 2px 2px 2px rgba(0,0,0,.25);
+}
+
+body.scrollBeyondLastLine {
+	margin-bottom: calc(100vh - 22px);
+}
+
+body.showEditorSelection .code-line {
+	position: relative;
+}
+
+body.showEditorSelection .code-active-line:before,
+body.showEditorSelection .code-line:hover:before {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 0;
+	left: -12px;
+	height: 100%;
+}
+
+body.showEditorSelection li.code-active-line:before,
+body.showEditorSelection li.code-line:hover:before {
+	left: -30px;
+}
+
+.vscode-light.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.15);
+}
+
+.vscode-light.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.40);
+}
+
+.vscode-light.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-dark.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.4);
+}
+
+.vscode-dark.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.60);
+}
+
+.vscode-dark.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-high-contrast.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 160, 0, 0.7);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 160, 0, 1);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+img {
+	max-width: 100%;
+	max-height: 100%;
+}
+
+a {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+a:focus,
+input:focus,
+select:focus,
+textarea:focus {
+	outline: 1px solid -webkit-focus-ring-color;
+	outline-offset: -1px;
+}
+
+hr {
+	border: 0;
+	height: 2px;
+	border-bottom: 2px solid;
+}
+
+h1 {
+	padding-bottom: 0.3em;
+	line-height: 1.2;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+}
+
+h1, h2, h3 {
+	font-weight: normal;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+table > thead > tr > th {
+	text-align: left;
+	border-bottom: 1px solid;
+}
+
+table > thead > tr > th,
+table > thead > tr > td,
+table > tbody > tr > th,
+table > tbody > tr > td {
+	padding: 5px 10px;
+}
+
+table > tbody > tr + tr > td {
+	border-top: 1px solid;
+}
+
+blockquote {
+	margin: 0 7px 0 5px;
+	padding: 0 16px 0 10px;
+	border-left-width: 5px;
+	border-left-style: solid;
+}
+
+code {
+	font-family: Menlo, Monaco, Consolas, "Droid Sans Mono", "Courier New", monospace, "Droid Sans Fallback";
+	font-size: 1em;
+	line-height: 1.357em;
+}
+
+body.wordWrap pre {
+	white-space: pre-wrap;
+}
+
+pre:not(.hljs),
+pre.hljs code > div {
+	padding: 16px;
+	border-radius: 3px;
+	overflow: auto;
+}
+
+pre code {
+	color: var(--vscode-editor-foreground);
+	tab-size: 4;
+}
+
+/** Theming */
+
+.vscode-light pre {
+	background-color: rgba(220, 220, 220, 0.4);
+}
+
+.vscode-dark pre {
+	background-color: rgba(10, 10, 10, 0.4);
+}
+
+.vscode-high-contrast pre {
+	background-color: rgb(0, 0, 0);
+}
+
+.vscode-high-contrast h1 {
+	border-color: rgb(0, 0, 0);
+}
+
+.vscode-light table > thead > tr > th {
+	border-color: rgba(0, 0, 0, 0.69);
+}
+
+.vscode-dark table > thead > tr > th {
+	border-color: rgba(255, 255, 255, 0.69);
+}
+
+.vscode-light h1,
+.vscode-light hr,
+.vscode-light table > tbody > tr + tr > td {
+	border-color: rgba(0, 0, 0, 0.18);
+}
+
+.vscode-dark h1,
+.vscode-dark hr,
+.vscode-dark table > tbody > tr + tr > td {
+	border-color: rgba(255, 255, 255, 0.18);
+}
+
+</style>
+
+<style>
+/* Tomorrow Theme */
+/* http://jmblog.github.com/color-themes-for-google-code-highlightjs */
+/* Original theme - https://github.com/chriskempson/tomorrow-theme */
+
+/* Tomorrow Comment */
+.hljs-comment,
+.hljs-quote {
+	color: #8e908c;
+}
+
+/* Tomorrow Red */
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-regexp,
+.hljs-deletion {
+	color: #c82829;
+}
+
+/* Tomorrow Orange */
+.hljs-number,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-literal,
+.hljs-type,
+.hljs-params,
+.hljs-meta,
+.hljs-link {
+	color: #f5871f;
+}
+
+/* Tomorrow Yellow */
+.hljs-attribute {
+	color: #eab700;
+}
+
+/* Tomorrow Green */
+.hljs-string,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-addition {
+	color: #718c00;
+}
+
+/* Tomorrow Blue */
+.hljs-title,
+.hljs-section {
+	color: #4271ae;
+}
+
+/* Tomorrow Purple */
+.hljs-keyword,
+.hljs-selector-tag {
+	color: #8959a8;
+}
+
+.hljs {
+	display: block;
+	overflow-x: auto;
+	color: #4d4d4c;
+	padding: 0.5em;
+}
+
+.hljs-emphasis {
+	font-style: italic;
+}
+
+.hljs-strong {
+	font-weight: bold;
+}
+</style>
+
+<style>
+/*
+ * Markdown PDF CSS
+ */
+
+ body {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif, "Meiryo";
+	padding: 0 12px;
+}
+
+pre {
+	background-color: #f8f8f8;
+	border: 1px solid #cccccc;
+	border-radius: 3px;
+	overflow-x: auto;
+	white-space: pre-wrap;
+	overflow-wrap: break-word;
+}
+
+pre:not(.hljs) {
+	padding: 23px;
+	line-height: 19px;
+}
+
+blockquote {
+	background: rgba(127, 127, 127, 0.1);
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.emoji {
+	height: 1.4em;
+}
+
+code {
+	font-size: 14px;
+	line-height: 19px;
+}
+
+/* for inline code */
+:not(pre):not(.hljs) > code {
+	color: #C9AE75; /* Change the old color so it seems less like an error */
+	font-size: inherit;
+}
+
+/* Page Break : use <div class="page"/> to insert page break
+-------------------------------------------------------- */
+.page {
+	page-break-after: always;
+}
+
+</style>
+
+<script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+</head>
+<body>
+  <script>
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: document.body.classList.contains('vscode-dark') || document.body.classList.contains('vscode-high-contrast')
+          ? 'dark'
+          : 'default'
+    });
+  </script>
+<h1 id="assignment-3-persistence-and-data-management">Assignment 3: Persistence and Data Management</h1>
+<p><strong>Course:</strong> CS6650<br>
+<strong>Project:</strong> ChatFlow<br>
+<strong>Repository:</strong> https://github.com/yimdx/ChatFlow<br>
+<strong>Date:</strong> 2026-04-06</p>
+<h2 id="1-overview">1. Overview</h2>
+<p>Assignment 3 extends the Assignment 2 queue-based architecture by adding persistent storage, query APIs, and analytics for chat activity. The design goal is to preserve the real-time behavior of ChatFlow while handling high write volume without turning the database into a bottleneck.</p>
+<p>This document provides:</p>
+<ul>
+<li>A concrete database design for required core and analytics queries.</li>
+<li>A <code>consumer-v3</code> write-behind architecture with batching and fault handling.</li>
+<li>Metrics and query APIs hosted in <code>server-v2</code>.</li>
+<li>Load-test plan, acceptance targets, and reporting format.</li>
+</ul>
+<h2 id="2-implementation-scope">2. Implementation Scope</h2>
+<p>The repository already includes:</p>
+<ul>
+<li><code>server-v2/</code> with RabbitMQ producer flow.</li>
+<li><code>consumer/</code> with multithreaded queue consumption and metrics endpoint.</li>
+<li><code>client-part2/</code> with per-message CSV metrics and percentile analysis.</li>
+<li><code>monitoring/</code> scripts for queue and system-level metrics.</li>
+</ul>
+<p>Assignment 3 adds:</p>
+<ul>
+<li>Persistent message storage.</li>
+<li>Query/analytics APIs backed by DB.</li>
+<li>Database-focused performance tuning and resilience logic.</li>
+</ul>
+<h2 id="3-database-choice-and-rationale">3. Database Choice and Rationale</h2>
+<h3 id="31-selected-database">3.1 Selected Database</h3>
+<p><strong>PostgreSQL 15+</strong> (single writer node to start, read replica optional later).</p>
+<h3 id="32-why-postgresql">3.2 Why PostgreSQL</h3>
+<ul>
+<li>Strong consistency and transactional guarantees for message durability.</li>
+<li>Excellent support for ordered range queries with composite indexes.</li>
+<li>Mature tooling for partitioning, backups, and observability.</li>
+<li>Supports <code>INSERT ... ON CONFLICT</code> for idempotent writes.</li>
+<li>Straightforward SQL for analytics and materialized views.</li>
+</ul>
+<h3 id="33-tradeoffs">3.3 Tradeoffs</h3>
+<ul>
+<li>Write-heavy workloads need careful batching and index discipline.</li>
+<li>Distinct-count analytics can become expensive without pre-aggregation.</li>
+<li>Partitioning strategy is required for long-term retention performance.</li>
+</ul>
+<h2 id="4-data-model">4. Data Model</h2>
+<h2 id="41-logical-model">4.1 Logical Model</h2>
+<p>Primary entity is <code>chat_messages</code> (append-heavy).
+Secondary table <code>user_room_activity</code> supports fast participation queries.
+Rollup table/materialized view supports analytics reads.</p>
+<h2 id="42-schema-sql">4.2 Schema (SQL)</h2>
+<pre class="hljs"><code><div><span class="hljs-keyword">CREATE</span> <span class="hljs-keyword">TABLE</span> <span class="hljs-keyword">IF</span> <span class="hljs-keyword">NOT</span> <span class="hljs-keyword">EXISTS</span> chat_messages (
+  message_id      <span class="hljs-keyword">UUID</span> PRIMARY <span class="hljs-keyword">KEY</span>,
+  room_id         <span class="hljs-built_in">INT</span> <span class="hljs-keyword">NOT</span> <span class="hljs-literal">NULL</span>,
+  user_id         <span class="hljs-built_in">BIGINT</span> <span class="hljs-keyword">NOT</span> <span class="hljs-literal">NULL</span>,
+  username        <span class="hljs-built_in">VARCHAR</span>(<span class="hljs-number">64</span>) <span class="hljs-keyword">NOT</span> <span class="hljs-literal">NULL</span>,
+  message_type    <span class="hljs-built_in">VARCHAR</span>(<span class="hljs-number">16</span>) <span class="hljs-keyword">NOT</span> <span class="hljs-literal">NULL</span>,
+  message_text    <span class="hljs-built_in">TEXT</span> <span class="hljs-keyword">NOT</span> <span class="hljs-literal">NULL</span>,
+  message_ts      TIMESTAMPTZ <span class="hljs-keyword">NOT</span> <span class="hljs-literal">NULL</span>,
+  server_id       <span class="hljs-built_in">VARCHAR</span>(<span class="hljs-number">64</span>) <span class="hljs-keyword">NOT</span> <span class="hljs-literal">NULL</span>,
+  client_ip       INET,
+  created_at      TIMESTAMPTZ <span class="hljs-keyword">NOT</span> <span class="hljs-literal">NULL</span> <span class="hljs-keyword">DEFAULT</span> <span class="hljs-keyword">NOW</span>()
+);
+
+<span class="hljs-keyword">CREATE</span> <span class="hljs-keyword">TABLE</span> <span class="hljs-keyword">IF</span> <span class="hljs-keyword">NOT</span> <span class="hljs-keyword">EXISTS</span> user_room_activity (
+  user_id         <span class="hljs-built_in">BIGINT</span> <span class="hljs-keyword">NOT</span> <span class="hljs-literal">NULL</span>,
+  room_id         <span class="hljs-built_in">INT</span> <span class="hljs-keyword">NOT</span> <span class="hljs-literal">NULL</span>,
+  first_seen_ts   TIMESTAMPTZ <span class="hljs-keyword">NOT</span> <span class="hljs-literal">NULL</span>,
+  last_seen_ts    TIMESTAMPTZ <span class="hljs-keyword">NOT</span> <span class="hljs-literal">NULL</span>,
+  message_count   <span class="hljs-built_in">BIGINT</span> <span class="hljs-keyword">NOT</span> <span class="hljs-literal">NULL</span> <span class="hljs-keyword">DEFAULT</span> <span class="hljs-number">0</span>,
+  PRIMARY <span class="hljs-keyword">KEY</span> (user_id, room_id)
+);
+
+<span class="hljs-keyword">CREATE</span> <span class="hljs-keyword">TABLE</span> <span class="hljs-keyword">IF</span> <span class="hljs-keyword">NOT</span> <span class="hljs-keyword">EXISTS</span> message_minute_stats (
+  bucket_minute   TIMESTAMPTZ <span class="hljs-keyword">NOT</span> <span class="hljs-literal">NULL</span>,
+  room_id         <span class="hljs-built_in">INT</span> <span class="hljs-keyword">NOT</span> <span class="hljs-literal">NULL</span>,
+  user_id         <span class="hljs-built_in">BIGINT</span> <span class="hljs-keyword">NOT</span> <span class="hljs-literal">NULL</span>,
+  msg_count       <span class="hljs-built_in">BIGINT</span> <span class="hljs-keyword">NOT</span> <span class="hljs-literal">NULL</span>,
+  PRIMARY <span class="hljs-keyword">KEY</span> (bucket_minute, room_id, user_id)
+);
+</div></code></pre>
+<h2 id="43-indexing-strategy">4.3 Indexing Strategy</h2>
+<pre class="hljs"><code><div><span class="hljs-comment">-- Core query 1: room + time range</span>
+<span class="hljs-keyword">CREATE</span> <span class="hljs-keyword">INDEX</span> <span class="hljs-keyword">IF</span> <span class="hljs-keyword">NOT</span> <span class="hljs-keyword">EXISTS</span> idx_messages_room_ts
+  <span class="hljs-keyword">ON</span> chat_messages (room_id, message_ts);
+
+<span class="hljs-comment">-- Core query 2: user history + optional date range</span>
+<span class="hljs-keyword">CREATE</span> <span class="hljs-keyword">INDEX</span> <span class="hljs-keyword">IF</span> <span class="hljs-keyword">NOT</span> <span class="hljs-keyword">EXISTS</span> idx_messages_user_ts
+  <span class="hljs-keyword">ON</span> chat_messages (user_id, message_ts <span class="hljs-keyword">DESC</span>);
+
+<span class="hljs-comment">-- Core query 3: active users in time range (distinct user_id)</span>
+<span class="hljs-keyword">CREATE</span> <span class="hljs-keyword">INDEX</span> <span class="hljs-keyword">IF</span> <span class="hljs-keyword">NOT</span> <span class="hljs-keyword">EXISTS</span> idx_messages_ts_user
+  <span class="hljs-keyword">ON</span> chat_messages (message_ts, user_id);
+
+<span class="hljs-comment">-- Core query 4: participated rooms by user</span>
+<span class="hljs-keyword">CREATE</span> <span class="hljs-keyword">INDEX</span> <span class="hljs-keyword">IF</span> <span class="hljs-keyword">NOT</span> <span class="hljs-keyword">EXISTS</span> idx_activity_user_last
+  <span class="hljs-keyword">ON</span> user_room_activity (user_id, last_seen_ts <span class="hljs-keyword">DESC</span>);
+</div></code></pre>
+<p>Notes:</p>
+<ul>
+<li>Keep indexes minimal to protect write throughput.</li>
+<li>Use monthly partitioning on <code>chat_messages.message_ts</code> once volume grows.</li>
+</ul>
+<h2 id="5-required-query-coverage">5. Required Query Coverage</h2>
+<h2 id="51-core-query-1-messages-in-room--time-range">5.1 Core Query 1: Messages in Room + Time Range</h2>
+<pre class="hljs"><code><div><span class="hljs-keyword">SELECT</span> message_id, room_id, user_id, username, message_type, message_text, message_ts
+<span class="hljs-keyword">FROM</span> chat_messages
+<span class="hljs-keyword">WHERE</span> room_id = $<span class="hljs-number">1</span>
+  <span class="hljs-keyword">AND</span> message_ts &gt;= $<span class="hljs-number">2</span>
+  <span class="hljs-keyword">AND</span> message_ts &lt;= $<span class="hljs-number">3</span>
+<span class="hljs-keyword">ORDER</span> <span class="hljs-keyword">BY</span> message_ts <span class="hljs-keyword">ASC</span>
+<span class="hljs-keyword">LIMIT</span> $<span class="hljs-number">4</span> <span class="hljs-keyword">OFFSET</span> $<span class="hljs-number">5</span>;
+</div></code></pre>
+<p>Target: <code>&lt;100ms</code> for 1000 rows.</p>
+<h2 id="52-core-query-2-user-message-history">5.2 Core Query 2: User Message History</h2>
+<pre class="hljs"><code><div><span class="hljs-keyword">SELECT</span> message_id, room_id, message_type, message_text, message_ts
+<span class="hljs-keyword">FROM</span> chat_messages
+<span class="hljs-keyword">WHERE</span> user_id = $<span class="hljs-number">1</span>
+  <span class="hljs-keyword">AND</span> ($<span class="hljs-number">2</span>::timestamptz <span class="hljs-keyword">IS</span> <span class="hljs-literal">NULL</span> <span class="hljs-keyword">OR</span> message_ts &gt;= $<span class="hljs-number">2</span>)
+  <span class="hljs-keyword">AND</span> ($<span class="hljs-number">3</span>::timestamptz <span class="hljs-keyword">IS</span> <span class="hljs-literal">NULL</span> <span class="hljs-keyword">OR</span> message_ts &lt;= $<span class="hljs-number">3</span>)
+<span class="hljs-keyword">ORDER</span> <span class="hljs-keyword">BY</span> message_ts <span class="hljs-keyword">DESC</span>
+<span class="hljs-keyword">LIMIT</span> $<span class="hljs-number">4</span> <span class="hljs-keyword">OFFSET</span> $<span class="hljs-number">5</span>;
+</div></code></pre>
+<p>Target: <code>&lt;200ms</code>.</p>
+<h2 id="53-core-query-3-active-users-in-window">5.3 Core Query 3: Active Users in Window</h2>
+<pre class="hljs"><code><div><span class="hljs-keyword">SELECT</span> <span class="hljs-keyword">COUNT</span>(<span class="hljs-keyword">DISTINCT</span> user_id) <span class="hljs-keyword">AS</span> active_users
+<span class="hljs-keyword">FROM</span> chat_messages
+<span class="hljs-keyword">WHERE</span> message_ts &gt;= $<span class="hljs-number">1</span>
+  <span class="hljs-keyword">AND</span> message_ts &lt;= $<span class="hljs-number">2</span>;
+</div></code></pre>
+<p>Target: <code>&lt;500ms</code>.</p>
+<h2 id="54-core-query-4-rooms-a-user-participated-in">5.4 Core Query 4: Rooms a User Participated In</h2>
+<pre class="hljs"><code><div><span class="hljs-keyword">SELECT</span> room_id, last_seen_ts, message_count
+<span class="hljs-keyword">FROM</span> user_room_activity
+<span class="hljs-keyword">WHERE</span> user_id = $<span class="hljs-number">1</span>
+<span class="hljs-keyword">ORDER</span> <span class="hljs-keyword">BY</span> last_seen_ts <span class="hljs-keyword">DESC</span>;
+</div></code></pre>
+<p>Target: <code>&lt;50ms</code>.</p>
+<h2 id="6-analytics-query-coverage">6. Analytics Query Coverage</h2>
+<h2 id="61-messages-per-second--minute">6.1 Messages per Second / Minute</h2>
+<p>Use <code>date_trunc('second'|'minute', message_ts)</code> on <code>chat_messages</code> for ad hoc analysis, or query <code>message_minute_stats</code> for production dashboards.</p>
+<h2 id="62-most-active-users">6.2 Most Active Users</h2>
+<pre class="hljs"><code><div><span class="hljs-keyword">SELECT</span> user_id, <span class="hljs-keyword">COUNT</span>(*) <span class="hljs-keyword">AS</span> total_messages
+<span class="hljs-keyword">FROM</span> chat_messages
+<span class="hljs-keyword">WHERE</span> message_ts <span class="hljs-keyword">BETWEEN</span> $<span class="hljs-number">1</span> <span class="hljs-keyword">AND</span> $<span class="hljs-number">2</span>
+<span class="hljs-keyword">GROUP</span> <span class="hljs-keyword">BY</span> user_id
+<span class="hljs-keyword">ORDER</span> <span class="hljs-keyword">BY</span> total_messages <span class="hljs-keyword">DESC</span>
+<span class="hljs-keyword">LIMIT</span> $<span class="hljs-number">3</span>;
+</div></code></pre>
+<h2 id="63-most-active-rooms">6.3 Most Active Rooms</h2>
+<pre class="hljs"><code><div><span class="hljs-keyword">SELECT</span> room_id, <span class="hljs-keyword">COUNT</span>(*) <span class="hljs-keyword">AS</span> total_messages
+<span class="hljs-keyword">FROM</span> chat_messages
+<span class="hljs-keyword">WHERE</span> message_ts <span class="hljs-keyword">BETWEEN</span> $<span class="hljs-number">1</span> <span class="hljs-keyword">AND</span> $<span class="hljs-number">2</span>
+<span class="hljs-keyword">GROUP</span> <span class="hljs-keyword">BY</span> room_id
+<span class="hljs-keyword">ORDER</span> <span class="hljs-keyword">BY</span> total_messages <span class="hljs-keyword">DESC</span>
+<span class="hljs-keyword">LIMIT</span> $<span class="hljs-number">3</span>;
+</div></code></pre>
+<h2 id="64-participation-patterns">6.4 Participation Patterns</h2>
+<pre class="hljs"><code><div><span class="hljs-keyword">SELECT</span> user_id,
+       <span class="hljs-keyword">COUNT</span>(<span class="hljs-keyword">DISTINCT</span> room_id) <span class="hljs-keyword">AS</span> rooms_joined,
+       <span class="hljs-keyword">MIN</span>(message_ts) <span class="hljs-keyword">AS</span> first_activity,
+       <span class="hljs-keyword">MAX</span>(message_ts) <span class="hljs-keyword">AS</span> last_activity,
+       <span class="hljs-keyword">COUNT</span>(*) <span class="hljs-keyword">AS</span> total_messages
+<span class="hljs-keyword">FROM</span> chat_messages
+<span class="hljs-keyword">WHERE</span> message_ts <span class="hljs-keyword">BETWEEN</span> $<span class="hljs-number">1</span> <span class="hljs-keyword">AND</span> $<span class="hljs-number">2</span>
+<span class="hljs-keyword">GROUP</span> <span class="hljs-keyword">BY</span> user_id
+<span class="hljs-keyword">ORDER</span> <span class="hljs-keyword">BY</span> total_messages <span class="hljs-keyword">DESC</span>
+<span class="hljs-keyword">LIMIT</span> $<span class="hljs-number">3</span>;
+</div></code></pre>
+<h2 id="7-metrics-api-contract">7. Metrics API Contract</h2>
+<p>Add endpoints to <code>server-v2</code> (it hosts the DB-backed retrieval API):</p>
+<ul>
+<li><code>GET /api/v1/messages/room/{roomId}?start=...&amp;end=...&amp;limit=...&amp;offset=...</code></li>
+<li><code>GET /api/v1/messages/user/{userId}?start=...&amp;end=...&amp;limit=...&amp;offset=...</code></li>
+<li><code>GET /api/v1/analytics/active-users?start=...&amp;end=...</code></li>
+<li><code>GET /api/v1/analytics/user-rooms/{userId}</code></li>
+<li><code>GET /api/v1/analytics/top-users?start=...&amp;end=...&amp;n=...</code></li>
+<li><code>GET /api/v1/analytics/top-rooms?start=...&amp;end=...&amp;n=...</code></li>
+<li><code>GET /api/v1/analytics/messages-rate?start=...&amp;end=...&amp;granularity=second|minute</code></li>
+</ul>
+<p>Example aggregate response format:</p>
+<pre class="hljs"><code><div>{
+  <span class="hljs-attr">"window"</span>: {
+    <span class="hljs-attr">"start"</span>: <span class="hljs-string">"2026-03-27T00:00:00Z"</span>,
+    <span class="hljs-attr">"end"</span>: <span class="hljs-string">"2026-03-27T00:30:00Z"</span>
+  },
+  <span class="hljs-attr">"core"</span>: {
+    <span class="hljs-attr">"activeUsers"</span>: <span class="hljs-number">1241</span>,
+    <span class="hljs-attr">"userRooms"</span>: [{<span class="hljs-attr">"roomId"</span>: <span class="hljs-number">3</span>, <span class="hljs-attr">"lastActivity"</span>: <span class="hljs-string">"2026-03-27T00:29:50Z"</span>}]
+  },
+  <span class="hljs-attr">"analytics"</span>: {
+    <span class="hljs-attr">"topUsers"</span>: [{<span class="hljs-attr">"userId"</span>: <span class="hljs-number">9021</span>, <span class="hljs-attr">"count"</span>: <span class="hljs-number">320</span>}],
+    <span class="hljs-attr">"topRooms"</span>: [{<span class="hljs-attr">"roomId"</span>: <span class="hljs-number">12</span>, <span class="hljs-attr">"count"</span>: <span class="hljs-number">18420</span>}],
+    <span class="hljs-attr">"rate"</span>: [{<span class="hljs-attr">"bucket"</span>: <span class="hljs-string">"2026-03-27T00:29:00Z"</span>, <span class="hljs-attr">"count"</span>: <span class="hljs-number">2050</span>}]
+  }
+}
+</div></code></pre>
+<p>Client action after load test:</p>
+<ul>
+<li>Call metrics endpoints automatically.</li>
+<li>Save JSON snapshots under <code>load-tests/results/</code>.</li>
+<li>Print summary in client logs and include screenshot in report.</li>
+</ul>
+<p>Expected client behavior:</p>
+<ul>
+<li>After the benchmark finishes, call <code>server-v2</code> metrics API.</li>
+<li>Log the returned JSON in the client console.</li>
+<li>Capture a screenshot of that console output and place it in the report.</li>
+</ul>
+<h2 id="8-consumer-v3-write-behind-design">8. Consumer-v3 Write-Behind Design</h2>
+<h2 id="81-pipeline">8.1 Pipeline</h2>
+<p><code>RabbitMQ consumer threads -&gt; in-memory write queue -&gt; DB writer workers -&gt; Postgres</code></p>
+<h2 id="82-thread-pools">8.2 Thread Pools</h2>
+<ul>
+<li>Queue consumers: pull from RabbitMQ and deserialize.</li>
+<li>DB writer workers: batch <code>INSERT ... ON CONFLICT DO NOTHING</code>.</li>
+<li>Stats workers: update minute rollups / activity table asynchronously.</li>
+</ul>
+<h2 id="83-batching-policy">8.3 Batching Policy</h2>
+<p>Test matrix (up to 5 runs):</p>
+<table>
+<thead>
+<tr>
+<th>Run</th>
+<th style="text-align:right">Batch Size</th>
+<th style="text-align:right">Flush Interval</th>
+<th style="text-align:right">Overall Throughput</th>
+<th style="text-align:right">Main-Phase Throughput</th>
+<th style="text-align:right">Mean</th>
+<th style="text-align:right">p50</th>
+<th style="text-align:right">p95</th>
+<th style="text-align:right">p99</th>
+<th style="text-align:right">Max</th>
+<th style="text-align:right">Success</th>
+<th style="text-align:right">Failures</th>
+<th style="text-align:right">Persisted Messages</th>
+<th>Queue State</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>B1</td>
+<td style="text-align:right">100</td>
+<td style="text-align:right">100ms</td>
+<td style="text-align:right">1097.03 msg/s</td>
+<td style="text-align:right">1446.43 msg/s</td>
+<td style="text-align:right">8.82 ms</td>
+<td style="text-align:right">1 ms</td>
+<td style="text-align:right">37 ms</td>
+<td style="text-align:right">61 ms</td>
+<td style="text-align:right">129 ms</td>
+<td style="text-align:right">13,755</td>
+<td style="text-align:right">6,245</td>
+<td style="text-align:right">19,982</td>
+<td>drained to 0</td>
+<td>stable</td>
+</tr>
+<tr>
+<td>B2</td>
+<td style="text-align:right">500</td>
+<td style="text-align:right">100ms</td>
+<td style="text-align:right">1217.66 msg/s</td>
+<td style="text-align:right">1655.42 msg/s</td>
+<td style="text-align:right">7.60 ms</td>
+<td style="text-align:right">0 ms</td>
+<td style="text-align:right">23 ms</td>
+<td style="text-align:right">146 ms</td>
+<td style="text-align:right">813 ms</td>
+<td style="text-align:right">12,427</td>
+<td style="text-align:right">7,573</td>
+<td style="text-align:right">19,394</td>
+<td>drained to 0</td>
+<td>best raw throughput, worse tail latency</td>
+</tr>
+<tr>
+<td>B3</td>
+<td style="text-align:right">1000</td>
+<td style="text-align:right">500ms</td>
+<td style="text-align:right">1165.03 msg/s</td>
+<td style="text-align:right">1555.76 msg/s</td>
+<td style="text-align:right">8.64 ms</td>
+<td style="text-align:right">1 ms</td>
+<td style="text-align:right">35 ms</td>
+<td style="text-align:right">58 ms</td>
+<td style="text-align:right">131 ms</td>
+<td style="text-align:right">13,613</td>
+<td style="text-align:right">6,387</td>
+<td style="text-align:right">19,965</td>
+<td>drained to 0</td>
+<td>best overall balance</td>
+</tr>
+<tr>
+<td>B4</td>
+<td style="text-align:right">5000</td>
+<td style="text-align:right">500ms</td>
+<td style="text-align:right">1050.92 msg/s</td>
+<td style="text-align:right">1344.83 msg/s</td>
+<td style="text-align:right">9.39 ms</td>
+<td style="text-align:right">0 ms</td>
+<td style="text-align:right">37 ms</td>
+<td style="text-align:right">97 ms</td>
+<td style="text-align:right">978 ms</td>
+<td style="text-align:right">12,526</td>
+<td style="text-align:right">7,474</td>
+<td style="text-align:right">19,916</td>
+<td>drained to 0</td>
+<td>slower, worse max latency</td>
+</tr>
+<tr>
+<td>B5</td>
+<td style="text-align:right">5000</td>
+<td style="text-align:right">1000ms</td>
+<td style="text-align:right">1130.07 msg/s</td>
+<td style="text-align:right">1533.72 msg/s</td>
+<td style="text-align:right">8.15 ms</td>
+<td style="text-align:right">0 ms</td>
+<td style="text-align:right">29 ms</td>
+<td style="text-align:right">154 ms</td>
+<td style="text-align:right">571 ms</td>
+<td style="text-align:right">11,466</td>
+<td style="text-align:right">8,534</td>
+<td style="text-align:right">19,505</td>
+<td>drained to 0</td>
+<td>stats-writer deadlock warning observed</td>
+</tr>
+</tbody>
+</table>
+<p>Observed trend:</p>
+<ul>
+<li>Smaller batches reduced worst-case write stalls but did not maximize throughput.</li>
+<li><code>batch=500</code> / <code>flush=100ms</code> produced the highest raw throughput, but tail latency degraded sharply.</li>
+<li><code>batch=5000</code> did not improve throughput enough to justify the larger p99/max latency and reduced stability.</li>
+<li><code>batch=1000</code> / <code>flush=500ms</code> provided the best throughput/latency/stability trade-off.</li>
+</ul>
+<p>Selected default for baseline, stress, and endurance runs: <strong>batch 1000, flush 500ms</strong>.</p>
+<h2 id="84-idempotency">8.4 Idempotency</h2>
+<ul>
+<li><code>message_id</code> is unique primary key.</li>
+<li>DB write uses <code>ON CONFLICT (message_id) DO NOTHING</code>.</li>
+<li>Duplicate deliveries from at-least-once queue semantics are safe.</li>
+</ul>
+<h2 id="85-error-recovery">8.5 Error Recovery</h2>
+<ul>
+<li>Retry with exponential backoff on transient DB failures.</li>
+<li>Dead-letter queue for poison/invalid records.</li>
+<li>Circuit breaker opens when DB failure rate crosses threshold.</li>
+<li>During open circuit: stop aggressive DB writes, keep bounded buffer, shed load if needed.</li>
+</ul>
+<h2 id="9-performance-optimizations">9. Performance Optimizations</h2>
+<h2 id="91-database-tuning">9.1 Database Tuning</h2>
+<ul>
+<li>Prepared statements for all write/read paths.</li>
+<li>Connection pool (HikariCP): start <code>maxPoolSize=30</code>, tune per host size.</li>
+<li>Keep transactions short and batch-oriented.</li>
+<li>Materialized view or rollup table for expensive analytics.</li>
+</ul>
+<h2 id="92-query-caching">9.2 Query Caching</h2>
+<ul>
+<li>Cache short-lived analytics (<code>top-users</code>, <code>top-rooms</code>, <code>rate</code>) for 5-15 seconds.</li>
+<li>Do not cache room timeline reads with strict ordering unless window is immutable.</li>
+</ul>
+<h2 id="93-system-resilience">9.3 System Resilience</h2>
+<p>To satisfy the resilience requirement, this design explicitly evaluates all three options below.</p>
+<h3 id="option-1-circuit-breaker-pattern">Option 1: Circuit Breaker Pattern</h3>
+<ul>
+<li>Purpose: protect PostgreSQL when transient failures or saturation begin.</li>
+<li>Trigger condition: rolling DB write failure rate exceeds threshold (example: <code>&gt;20%</code> over last <code>N</code> batches).</li>
+<li>Open behavior: pause aggressive writes, keep bounded queueing, route repeated failures to retry/DLQ path.</li>
+<li>Half-open behavior: allow a small probe window; close circuit only after sustained success.</li>
+<li>Benefit: prevents retry storms and protects downstream database recovery.</li>
+</ul>
+<h3 id="option-2-rate-limiting">Option 2: Rate Limiting</h3>
+<ul>
+<li>Purpose: smooth traffic spikes from RabbitMQ ingest into DB writer workers.</li>
+<li>Strategy: token-bucket or semaphore-based in-flight limits per writer worker.</li>
+<li>Enforcement point: before batch flush/persist path and optionally before server broadcast calls.</li>
+<li>Overflow policy: short wait, then nack/requeue or drop-to-DLQ based on reliability policy.</li>
+<li>Benefit: avoids queue-to-DB stampede and stabilizes p95/p99 latency.</li>
+</ul>
+<h3 id="option-3-caching-layer-optional">Option 3: Caching Layer (Optional)</h3>
+<ul>
+<li>Scope: read/query APIs only (hosted in <code>server-v2</code>).</li>
+<li>Candidate endpoints: <code>top-users</code>, <code>top-rooms</code>, <code>messages-rate</code>, aggregated <code>/metrics</code>.</li>
+<li>TTL recommendation: <code>5-15s</code> for analytics windows.</li>
+<li>Do not cache: strict ordered room timeline queries for active mutable ranges.</li>
+<li>Benefit: reduces repeated analytics query load on PostgreSQL under dashboard polling.</li>
+</ul>
+<h3 id="selected-combination-for-this-assignment">Selected Combination for This Assignment</h3>
+<p><strong>Option 1 + Option 2 enabled by default; Option 3 optional.</strong></p>
+<ul>
+<li>Circuit breaker is required for failure isolation.</li>
+<li>Light rate limiting is required for burst control.</li>
+<li>Caching remains optional and can be enabled for analytics-heavy read traffic.</li>
+</ul>
+<h2 id="10-load-testing-results">10. Load Testing Results</h2>
+<h2 id="101-test-definitions">10.1 Test Definitions</h2>
+<ol>
+<li>Baseline: <code>500,000</code> messages, run to completion.</li>
+<li>Stress: <code>1,000,000</code> messages, identify bottlenecks.</li>
+<li>Endurance: <code>30 minutes</code> at <code>80%</code> of max sustainable write rate.</li>
+</ol>
+<h2 id="102-metrics-to-collect">10.2 Metrics to Collect</h2>
+<ul>
+<li>Application: ingest throughput, write throughput, p50/p95/p99 write latency.</li>
+<li>Database: CPU, memory, active connections, lock waits, disk IO, buffer hit ratio.</li>
+<li>Queue: depth over time, consumer lag, retry counts, DLQ counts.</li>
+</ul>
+<h2 id="103-results-summary">10.3 Results Summary</h2>
+<table>
+<thead>
+<tr>
+<th>Test</th>
+<th style="text-align:right">Throughput (msg/s)</th>
+<th style="text-align:right">p50 (ms)</th>
+<th style="text-align:right">p95 (ms)</th>
+<th style="text-align:right">p99 (ms)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Baseline 500k</td>
+<td style="text-align:right">1778.68</td>
+<td style="text-align:right">0</td>
+<td style="text-align:right">7</td>
+<td style="text-align:right">129</td>
+</tr>
+<tr>
+<td>Stress 1M</td>
+<td style="text-align:right">2110.14</td>
+<td style="text-align:right">0</td>
+<td style="text-align:right">11</td>
+<td style="text-align:right">67</td>
+</tr>
+<tr>
+<td>Endurance 30m</td>
+<td style="text-align:right">875.90 avg</td>
+<td style="text-align:right">4</td>
+<td style="text-align:right">48.88</td>
+<td style="text-align:right">55.51</td>
+</tr>
+</tbody>
+</table>
+<h2 id="104-batch-size-optimization-decision">10.4 Batch Size Optimization Decision</h2>
+<p>The best-performing configuration for continued testing is <strong>batch size 1000 with a 500ms flush interval</strong>.</p>
+<p>Justification:</p>
+<ul>
+<li><code>B2</code> (<code>500 / 100ms</code>) had the highest raw throughput, but p99 latency (<code>146 ms</code>) and max latency (<code>813 ms</code>) were significantly worse than <code>B3</code>.</li>
+<li><code>B3</code> (<code>1000 / 500ms</code>) preserved near-top throughput while keeping tail latency low (<code>p99 = 58 ms</code>, <code>max = 131 ms</code>).</li>
+<li><code>B4</code> and <code>B5</code> showed that pushing batch size to <code>5000</code> did not improve throughput and increased worst-case latency.</li>
+<li>Queue snapshots for <code>B2</code>, <code>B3</code>, <code>B4</code>, and <code>B5</code> all drained to zero by the end of the run, so the choice is driven mainly by throughput/latency balance rather than queue backlog alone.</li>
+</ul>
+<p>Because the assignment emphasizes both throughput and real-time behavior, <code>B3</code> is the most defensible operating point.</p>
+<h2 id="105-baseline-test-result-500000-messages">10.5 Baseline Test Result (500,000 Messages)</h2>
+<p>Baseline configuration:</p>
+<ul>
+<li>Consumer config: <code>consumer.batch-1000.flush-500.env</code></li>
+<li>Client load: <code>TOTAL_MESSAGES=500000</code>, <code>MAIN_PHASE_THREADS=32</code>, <code>WARMUP_THREADS=8</code>, <code>WARMUP_MESSAGES_PER_THREAD=500</code></li>
+</ul>
+<p>Measured client-side results from <code>load-tests/results/baseline-500k/client-output.txt</code>:</p>
+<ul>
+<li>Successful messages: <code>161,747</code></li>
+<li>Failed messages: <code>338,222</code></li>
+<li>Total runtime: <code>281.108 s</code></li>
+<li>Overall throughput: <code>1778.68 msg/s</code></li>
+<li>Main-phase throughput: <code>1809.12 msg/s</code></li>
+<li>Mean response time: <code>6.25 ms</code></li>
+<li>p50: <code>0 ms</code></li>
+<li>p95: <code>7 ms</code></li>
+<li>p99: <code>129 ms</code></li>
+<li>Max response time: <code>1000 ms</code></li>
+</ul>
+<p>Observed system behavior:</p>
+<ul>
+<li>The RabbitMQ overview screenshot (<code>load-tests/results/baseline-500k/baseline-rabbitmq-overview.png</code>) shows short queue spikes with a peak of roughly <code>~110</code> queued messages, but the queue drained back to zero by the end of the run.</li>
+<li>The CloudWatch screenshot (<code>load-tests/results/baseline-500k/baseline-cloudwatch-summary.png</code>) shows the messaging tier as the hottest component during the run, with overall CPU and network activity rising sharply near the end of the test. PostgreSQL did not appear to be the dominant bottleneck in this baseline run.</li>
+<li>The saved metrics API response reports <code>340,188</code> persisted messages in the measured test window and <code>96,612</code> active users, with room <code>4</code> as the most active room (<code>34,778</code> messages).</li>
+</ul>
+<p>Interpretation:</p>
+<ul>
+<li>This baseline run completed and demonstrated sustained write throughput near <code>1.8k msg/s</code> at the client level.</li>
+<li>Tail latency remained acceptable through p95, but p99 increased to <code>129 ms</code>, indicating burstiness under heavier main-phase load.</li>
+<li>The mismatch between client-reported successes (<code>161,747</code>) and persisted messages recorded by the metrics API (<code>340,188</code>) suggests the primary bottleneck was in the client/server request path and timeout behavior rather than the persistence layer itself. Messages were still being accepted and persisted asynchronously even when the client recorded some sends as failed or timed out.</li>
+<li>RabbitMQ queue behavior remained healthy for this load level because backlog spikes were modest and drained quickly instead of growing without bound.</li>
+</ul>
+<p>Artifacts saved for the baseline run:</p>
+<ul>
+<li><code>load-tests/results/baseline-500k/client-output.txt</code></li>
+<li><code>load-tests/results/baseline-500k/client-part2.log</code></li>
+<li><code>load-tests/results/baseline-500k/metrics-api.txt</code></li>
+<li><code>load-tests/results/baseline-500k/consumer-tail.txt</code></li>
+<li><code>load-tests/results/baseline-500k/rabbitmq-queues-before.txt</code></li>
+<li><code>load-tests/results/baseline-500k/baseline-rabbitmq-overview.png</code></li>
+<li><code>load-tests/results/baseline-500k/baseline-cloudwatch-summary.png</code></li>
+</ul>
+<h2 id="106-stress-test-result-1000000-messages">10.6 Stress Test Result (1,000,000 Messages)</h2>
+<p>Stress configuration:</p>
+<ul>
+<li>Consumer config: <code>consumer.batch-1000.flush-500.env</code></li>
+<li>Client load: <code>TOTAL_MESSAGES=1000000</code>, <code>MAIN_PHASE_THREADS=32</code>, <code>WARMUP_THREADS=8</code>, <code>WARMUP_MESSAGES_PER_THREAD=500</code></li>
+</ul>
+<p>Measured client-side results from <code>load-tests/results/stress-1000k/client-output.txt</code>:</p>
+<ul>
+<li>Successful messages: <code>325,998</code></li>
+<li>Failed messages: <code>658,242</code></li>
+<li>Total runtime: <code>473.903 s</code></li>
+<li>Overall throughput: <code>2110.14 msg/s</code></li>
+<li>Main-phase throughput: <code>2139.37 msg/s</code></li>
+<li>Mean response time: <code>6.62 ms</code></li>
+<li>p50: <code>0 ms</code></li>
+<li>p95: <code>11 ms</code></li>
+<li>p99: <code>67 ms</code></li>
+<li>Max response time: <code>1190 ms</code></li>
+</ul>
+<p>Observed system behavior:</p>
+<ul>
+<li>The RabbitMQ overview screenshot (<code>load-tests/results/stress-1000k/stress-rabbitmq-overview.png</code>) shows only brief queue spikes, with total queued messages peaking at roughly <code>~6</code> before draining back to zero. This indicates that RabbitMQ remained stable under the 1M-message stress run.</li>
+<li>The CloudWatch dashboard screenshot (<code>load-tests/results/stress-1000k/stress-cloudwatch-summary.png</code>) shows the messaging tier and at least one application instance with noticeably higher CPU and network activity during the stress window. The system stayed active across all selected instances, but the workload concentrated most heavily on RabbitMQ and the front-end application tier.</li>
+<li>The metrics API response reports <code>623,450</code> persisted messages in the captured test window, <code>99,779</code> active users, and room <code>8</code> as the most active room (<code>49,818</code> messages).</li>
+<li>The consumer log shows successful, continuous broadcast activity throughout the tail of the run, and the saved consumer tail does not show DB write failures or DLQ growth.</li>
+<li>The server log shows successful publish/broadcast activity but also some <code>WebsocketNotConnectedException</code> errors near the end of the run, indicating client disconnects or dropped WebSocket sessions under load.</li>
+</ul>
+<p>Interpretation:</p>
+<ul>
+<li>The stress test achieved higher throughput than the baseline run, increasing from <code>1778.68 msg/s</code> to <code>2110.14 msg/s</code>.</li>
+<li>Tail latency improved compared with the baseline (<code>p99 = 67 ms</code> vs. <code>129 ms</code>), suggesting the chosen <code>1000 / 500ms</code> persistence configuration remained stable at this higher offered load.</li>
+<li>The primary degradation signal was not RabbitMQ backlog or DB failure. Instead, the system showed client/server path instability, reflected by a high number of client-reported failures and WebSocket disconnect exceptions on the server.</li>
+<li>In other words, the persistence layer continued to absorb and store messages effectively, while the interactive connection layer became the more visible bottleneck during the 1M-message run.</li>
+</ul>
+<p>Artifacts saved for the stress run:</p>
+<ul>
+<li><code>load-tests/results/stress-1000k/client-output.txt</code></li>
+<li><code>load-tests/results/stress-1000k/client-part2.log</code></li>
+<li><code>load-tests/results/stress-1000k/metrics-api.txt</code></li>
+<li><code>load-tests/results/stress-1000k/consumer-tail.txt</code></li>
+<li><code>load-tests/results/stress-1000k/server-tail.txt</code></li>
+<li><code>load-tests/results/stress-1000k/server-metrics.json</code></li>
+<li><code>load-tests/results/stress-1000k/rabbitmq-queues-before.txt</code></li>
+<li><code>load-tests/results/stress-1000k/stress-rabbitmq-overview.png</code></li>
+<li><code>load-tests/results/stress-1000k/stress-cloudwatch-summary.png</code></li>
+</ul>
+<h2 id="107-endurance-test-result-30-minutes">10.7 Endurance Test Result (30 Minutes)</h2>
+<p>Final endurance configuration:</p>
+<ul>
+<li>Consumer config: <code>consumer.batch-1000.flush-500.env</code></li>
+<li>Client load per iteration: <code>TOTAL_MESSAGES=20000</code>, <code>MAIN_PHASE_THREADS=12</code>, <code>WARMUP_THREADS=4</code>, <code>WARMUP_MESSAGES_PER_THREAD=200</code></li>
+<li>Execution pattern: repeated medium-size benchmark runs for approximately <code>30 minutes</code></li>
+</ul>
+<p>Important tuning note:</p>
+<ul>
+<li>An earlier endurance attempt with a more aggressive client load produced a RabbitMQ backlog of roughly <code>~168k</code> ready messages. That was too high for a stability-focused endurance test, so the final endurance run was performed with a more modest configuration.</li>
+</ul>
+<p>Completed endurance run summary from <code>load-tests/results/endurance-30m/iter01</code> through <code>iter74</code>:</p>
+<ul>
+<li>Iterations completed: <code>74</code></li>
+<li>Total successful messages: <code>1,480,000</code></li>
+<li>Total failed messages: <code>27</code></li>
+<li>Average overall throughput: <code>875.90 msg/s</code></li>
+<li>Average main-phase throughput: <code>1110.35 msg/s</code></li>
+<li>Average p50: <code>4 ms</code></li>
+<li>Average p95: <code>48.88 ms</code></li>
+<li>Average p99: <code>55.51 ms</code></li>
+<li>Average max response time: <code>131.04 ms</code></li>
+<li>Throughput range across iterations: <code>769.11 msg/s</code> to <code>935.41 msg/s</code></li>
+<li>First iteration throughput: <code>869.72 msg/s</code></li>
+<li>Last iteration throughput: <code>909.75 msg/s</code></li>
+<li>Aggregate benchmark runtime across client iterations: <code>1692.85 s</code> (plus inter-run delay, giving an overall wall-clock duration of about 30 minutes)</li>
+</ul>
+<p>Observed system behavior:</p>
+<ul>
+<li>The CloudWatch screenshot (<code>load-tests/results/endurance-30m/endurance-cloudwatch-summary.png</code>) shows moderate sustained CPU and network usage across the five instances over the endurance window. The server and RabbitMQ tiers were the busiest components, but utilization remained bounded instead of ramping upward continuously.</li>
+<li>The RabbitMQ screenshot (<code>load-tests/results/endurance-30m/endurance-rabbitmq-overview.png</code>) shows that an overly aggressive attempt temporarily drove queue depth close to <code>160k</code>, but backlog returned to zero after the load was reduced. This reinforced the decision to use a modest endurance configuration.</li>
+<li>Sample metrics API outputs from later endurance iterations reported stable persisted counts of <code>20,000</code> messages per iteration and active-user counts around <code>18k</code>, showing that the persistence pipeline remained healthy throughout the sustained run.</li>
+<li>Across the 74 saved client iterations, throughput stayed stable from the first run to the last, and failures remained extremely low (<code>27</code> out of <code>1.48M</code> sends).</li>
+</ul>
+<p>Interpretation:</p>
+<ul>
+<li>The final endurance test demonstrates that ChatFlow can sustain a moderate continuous workload for roughly 30 minutes without unbounded queue growth, widespread client failures, or visible performance collapse.</li>
+<li>The most important signal is stability over time: throughput at the end of the run was slightly better than at the beginning, and p95/p99 latency remained tightly clustered instead of drifting upward.</li>
+<li>The endurance run also helped identify an operational limit: if client concurrency is pushed too high, RabbitMQ backlog can spike dramatically. However, after reducing the offered load to a sustainable level, the system remained stable and the queue drained normally.</li>
+<li>This makes the chosen endurance configuration a reasonable estimate of the system's sustainable operating point on the current single-server deployment.</li>
+</ul>
+<p>Artifacts saved for the endurance run:</p>
+<ul>
+<li><code>load-tests/results/endurance-30m/iter01</code> through <code>load-tests/results/endurance-30m/iter74</code></li>
+<li><code>load-tests/results/endurance-30m/endurance-cloudwatch-summary.png</code></li>
+<li><code>load-tests/results/endurance-30m/endurance-rabbitmq-overview.png</code></li>
+</ul>
+<h2 id="11-repository-additions-included">11. Repository Additions Included</h2>
+<p>The repository now includes:</p>
+<ul>
+<li><code>database/</code>
+<ul>
+<li><code>schema.sql</code></li>
+<li><code>indexes.sql</code></li>
+<li><code>seed.sql</code> (optional)</li>
+</ul>
+</li>
+<li><code>consumer-v3/</code>
+<ul>
+<li>Updated consumer with write-behind persistence</li>
+</ul>
+</li>
+<li><code>monitoring/</code>
+<ul>
+<li>Add DB-focused metrics scripts if not already present</li>
+</ul>
+</li>
+<li><code>load-tests/</code>
+<ul>
+<li>Test configs and final result artifacts</li>
+</ul>
+</li>
+</ul>
+<h2 id="12-configuration-snapshot">12. Configuration Snapshot</h2>
+<ul>
+<li>Database URL and credentials source (env vars, no secrets committed).</li>
+<li>Connection pool: min/max, idle timeout, max lifetime.</li>
+<li>Batch config: size, flush interval, retry attempts, backoff base.</li>
+<li>Circuit breaker: failure threshold, open duration, half-open probes.</li>
+<li>Queue config: prefetch, consumer concurrency, DLQ binding.</li>
+</ul>
+
+</body>
+</html>

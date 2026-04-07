@@ -1,0 +1,200 @@
+22:23:11.666 [HTTP-Dispatcher] INFO  c.a.server.ChatWebSocketServer - Broadcasted message fa8826f4-9c15-435a-b1a7-a9cad1727e88 to room 18: 1 successful, 0 failed
+22:23:11.667 [HTTP-Dispatcher] INFO  c.a.server.ChatWebSocketServer - Broadcasted message 636992f7-4a48-4fac-a7d6-5e180a6ff544 to room 18: 1 successful, 0 failed
+22:23:11.667 [HTTP-Dispatcher] INFO  c.a.server.ChatWebSocketServer - Broadcasted message 924c5f6d-24fa-4dd4-a444-2f28d87d0bd2 to room 18: 1 successful, 0 failed
+22:23:11.667 [HTTP-Dispatcher] INFO  c.a.server.ChatWebSocketServer - Broadcasted message 8487770d-f860-436e-9db0-c264ff318127 to room 18: 1 successful, 0 failed
+22:23:11.667 [WebSocketWorker-16] INFO  c.a.server.ChatWebSocketServer - Published message 739d3d39-c14c-49e2-b44d-fb6a3846b46a to room 18 from user user30067
+22:23:11.667 [HTTP-Dispatcher] INFO  c.a.server.ChatWebSocketServer - Broadcasted message 970e7470-14d1-4af0-a75a-9607e3d081b2 to room 18: 1 successful, 0 failed
+22:23:11.667 [HTTP-Dispatcher] INFO  c.a.server.ChatWebSocketServer - Broadcasted message df8198d3-1e53-4f07-b31e-100fd89da13d to room 18: 1 successful, 0 failed
+22:23:11.667 [HTTP-Dispatcher] INFO  c.a.server.ChatWebSocketServer - Broadcasted message 53428666-7adc-4c8a-8fbf-ee57b58f33f1 to room 18: 1 successful, 0 failed
+22:23:11.667 [HTTP-Dispatcher] INFO  c.a.server.ChatWebSocketServer - Broadcasted message 2e4d3ed9-f5ca-4c71-8272-6fd9759d2b57 to room 18: 1 successful, 0 failed
+22:23:11.667 [HTTP-Dispatcher] INFO  c.a.server.ChatWebSocketServer - Broadcasted message 9643a915-ff14-4382-aada-e9c44fd2ccae to room 18: 1 successful, 0 failed
+22:23:11.667 [HTTP-Dispatcher] INFO  c.a.server.ChatWebSocketServer - Broadcasted message d3705725-1085-46b5-b83d-de1b3ce773f1 to room 18: 1 successful, 0 failed
+22:23:11.667 [HTTP-Dispatcher] INFO  c.a.server.ChatWebSocketServer - Broadcasted message 08fac4e3-3e09-49ba-b816-5b5c6aa96da0 to room 18: 1 successful, 0 failed
+22:23:11.667 [HTTP-Dispatcher] INFO  c.a.server.ChatWebSocketServer - Broadcasted message 00ac5713-91fa-4b15-bb9b-e3d604b12894 to room 18: 1 successful, 0 failed
+22:23:11.667 [HTTP-Dispatcher] INFO  c.a.server.ChatWebSocketServer - Broadcasted message 599da499-fa39-46df-ab1d-b85bcc9186b9 to room 18: 1 successful, 0 failed
+22:23:11.667 [HTTP-Dispatcher] INFO  c.a.server.ChatWebSocketServer - Broadcasted message edbfb0f7-f67e-4fe7-acb5-3a2dfe28a7ef to room 18: 1 successful, 0 failed
+22:23:11.667 [WebSocketWorker-16] INFO  c.a.server.ChatWebSocketServer - Published message 1bd85b3e-2273-4855-8cdb-5f568b0eaf19 to room 18 from user user51030
+22:23:11.668 [HTTP-Dispatcher] INFO  c.a.server.ChatWebSocketServer - Broadcasted message 2fa1f946-c334-4a66-b227-d05052b83bb6 to room 18: 1 successful, 0 failed
+22:23:11.668 [HTTP-Dispatcher] INFO  c.a.server.ChatWebSocketServer - Broadcasted message 6e73a276-7818-4728-b6cf-7945739c187f to room 18: 1 successful, 0 failed
+22:23:11.668 [HTTP-Dispatcher] INFO  c.a.server.ChatWebSocketServer - Broadcasted message 0d8b78db-f3ca-415d-a274-b7bb183db159 to room 18: 1 successful, 0 failed
+22:23:11.668 [HTTP-Dispatcher] INFO  c.a.server.ChatWebSocketServer - Broadcasted message fdcd3a38-0177-4565-9f85-81ffbb4605dc to room 18: 1 successful, 0 failed
+22:23:11.668 [HTTP-Dispatcher] INFO  c.a.server.ChatWebSocketServer - Broadcasted message 925dc91b-de0a-4cc2-896c-af28b2c8f42a to room 18: 1 successful, 0 failed
+22:23:11.668 [HTTP-Dispatcher] INFO  c.a.server.ChatWebSocketServer - Broadcasted message 66d1ef85-af03-41b8-aee0-97aa4f4dcb2f to room 18: 1 successful, 0 failed
+22:23:11.668 [HTTP-Dispatcher] INFO  c.a.server.ChatWebSocketServer - Broadcasted message e2731520-8009-40f0-9f52-301bc92b9b6c to room 18: 1 successful, 0 failed
+22:23:11.668 [HTTP-Dispatcher] INFO  c.a.server.ChatWebSocketServer - Broadcasted message 664280e9-d78b-4223-bee0-a4932f5c13dc to room 18: 1 successful, 0 failed
+22:23:11.668 [HTTP-Dispatcher] INFO  c.a.server.ChatWebSocketServer - Broadcasted message 8de8718a-5790-483f-9367-91e1eafcdf2e to room 18: 1 successful, 0 failed
+22:23:11.668 [HTTP-Dispatcher] INFO  c.a.server.ChatWebSocketServer - Broadcasted message 2865553d-81a8-4ef2-8261-498066cfda05 to room 18: 1 successful, 0 failed
+22:23:11.668 [HTTP-Dispatcher] INFO  c.a.server.ChatWebSocketServer - Broadcasted message e203a2df-2103-47b8-877f-e977814dd676 to room 18: 1 successful, 0 failed
+22:23:11.668 [HTTP-Dispatcher] INFO  c.a.server.ChatWebSocketServer - Broadcasted message e2353560-ff83-47d0-a9d3-7a0e5a2c79df to room 18: 1 successful, 0 failed
+22:23:11.668 [HTTP-Dispatcher] INFO  c.a.server.ChatWebSocketServer - Broadcasted message dd4892f8-c040-44b8-a6ef-1d0b1d881191 to room 18: 1 successful, 0 failed
+22:23:11.668 [HTTP-Dispatcher] INFO  c.a.server.ChatWebSocketServer - Broadcasted message 69432d93-a3fb-4a53-b643-419a683b6174 to room 18: 1 successful, 0 failed
+22:23:11.669 [HTTP-Dispatcher] INFO  c.a.server.ChatWebSocketServer - Broadcasted message 8317f0c9-7e28-4da8-b738-397223ef98fd to room 18: 1 successful, 0 failed
+22:23:11.669 [WebSocketWorker-16] INFO  c.a.server.ChatWebSocketServer - Published message 7173ee11-6ad1-414a-9a55-560087ba3d6f to room 18 from user user20678
+22:23:11.669 [HTTP-Dispatcher] INFO  c.a.server.ChatWebSocketServer - Broadcasted message 272f99c2-1d7a-46c6-b394-62a893c66450 to room 18: 1 successful, 0 failed
+22:23:11.669 [HTTP-Dispatcher] INFO  c.a.server.ChatWebSocketServer - Broadcasted message 3453f282-4f06-46b8-aef3-017594c53057 to room 18: 1 successful, 0 failed
+22:23:11.669 [HTTP-Dispatcher] INFO  c.a.server.ChatWebSocketServer - Broadcasted message 4b17c348-b2f6-424d-ad23-c11c6b829e53 to room 18: 1 successful, 0 failed
+22:23:11.669 [HTTP-Dispatcher] INFO  c.a.server.ChatWebSocketServer - Broadcasted message 1f4d5400-d2c2-4d15-baca-5c0ef3d00b67 to room 18: 1 successful, 0 failed
+22:23:11.669 [HTTP-Dispatcher] INFO  c.a.server.ChatWebSocketServer - Broadcasted message b4f4157e-83cd-4ff0-a153-b6a635d69651 to room 18: 1 successful, 0 failed
+22:23:11.669 [HTTP-Dispatcher] INFO  c.a.server.ChatWebSocketServer - Broadcasted message 50426fe5-9ad0-4d0d-8cfb-36aaa44e70d3 to room 18: 1 successful, 0 failed
+22:23:11.669 [HTTP-Dispatcher] INFO  c.a.server.ChatWebSocketServer - Broadcasted message 1626ec11-8469-4be1-83a1-74ac76ae9707 to room 18: 1 successful, 0 failed
+22:23:11.669 [HTTP-Dispatcher] INFO  c.a.server.ChatWebSocketServer - Broadcasted message 1ca36d28-bad5-40dd-860e-490b6781de84 to room 18: 1 successful, 0 failed
+22:23:11.669 [HTTP-Dispatcher] INFO  c.a.server.ChatWebSocketServer - Broadcasted message bf1404b0-0be3-4cd7-8b97-aa7967771461 to room 18: 1 successful, 0 failed
+22:23:11.669 [HTTP-Dispatcher] INFO  c.a.server.ChatWebSocketServer - Broadcasted message 35d1593d-c058-4333-9f26-1c264a5a2233 to room 18: 1 successful, 0 failed
+22:23:11.669 [HTTP-Dispatcher] INFO  c.a.server.ChatWebSocketServer - Broadcasted message b588bf89-756f-40bf-94fb-d5c5bedf44d1 to room 18: 1 successful, 0 failed
+22:23:11.670 [WebSocketWorker-16] INFO  c.a.server.ChatWebSocketServer - Published message 073c4f57-01c2-42ca-9313-a8c15ae26d40 to room 18 from user user16673
+22:23:11.670 [HTTP-Dispatcher] INFO  c.a.server.ChatWebSocketServer - Broadcasted message c7e3fc82-9a56-494d-bd2f-5e8eb79c3aaf to room 18: 1 successful, 0 failed
+22:23:11.670 [HTTP-Dispatcher] INFO  c.a.server.ChatWebSocketServer - Broadcasted message 68294343-4ebe-4adb-9c26-0d7211eb5b63 to room 18: 1 successful, 0 failed
+22:23:11.671 [WebSocketWorker-16] INFO  c.a.server.ChatWebSocketServer - Published message f10c4532-bb75-4a8e-83cf-483e9b978ab9 to room 18 from user user82816
+22:23:11.672 [WebSocketWorker-16] INFO  c.a.server.ChatWebSocketServer - Published message ee69a95c-1e10-48df-8bef-42df5b5572b2 to room 18 from user user83406
+22:23:11.673 [WebSocketWorker-16] INFO  c.a.server.ChatWebSocketServer - Published message 3251628b-4983-4bec-89e5-8cfa9b6a753e to room 18 from user user74196
+22:23:11.674 [WebSocketWorker-16] INFO  c.a.server.ChatWebSocketServer - Published message c7894545-301d-440b-8d35-57d3e0b39873 to room 18 from user user96421
+22:23:11.675 [WebSocketWorker-16] INFO  c.a.server.ChatWebSocketServer - Published message 7742137d-14f5-4abb-888f-d9e2313dee6e to room 18 from user user25422
+22:23:11.676 [WebSocketWorker-16] INFO  c.a.server.ChatWebSocketServer - Published message 151b3436-8683-4c01-8bc5-e0a41224e00d to room 18 from user user97074
+22:23:11.677 [WebSocketWorker-16] INFO  c.a.server.ChatWebSocketServer - Published message 787e248b-4666-4b42-9ad6-14bdc9ce3698 to room 18 from user user57147
+22:23:11.678 [WebSocketWorker-16] INFO  c.a.server.ChatWebSocketServer - Published message 1dc20b01-ecfd-44e2-8497-dde37a65c4b0 to room 18 from user user13774
+22:23:11.679 [WebSocketWorker-16] INFO  c.a.server.ChatWebSocketServer - Published message 97a27d4b-b9ef-4170-94b4-a9eec8abddf2 to room 18 from user user33101
+22:23:11.680 [WebSocketWorker-16] INFO  c.a.server.ChatWebSocketServer - Published message 745f5852-91f5-4f42-9b1e-f8f5623bc3f8 to room 18 from user user11738
+22:23:11.681 [WebSocketWorker-16] INFO  c.a.server.ChatWebSocketServer - Published message 05ba85a3-686f-4420-b2fe-541970e1a35a to room 18 from user user16835
+22:23:11.682 [WebSocketWorker-16] INFO  c.a.server.ChatWebSocketServer - Published message c7dcaa94-3522-4115-8652-6090c65b6557 to room 18 from user user20477
+22:23:11.683 [WebSocketWorker-16] INFO  c.a.server.ChatWebSocketServer - Published message e01de274-8112-4f42-a746-6bbbfe6ec5bf to room 18 from user user24650
+22:23:11.684 [WebSocketWorker-16] INFO  c.a.server.ChatWebSocketServer - Published message d9eb807c-e238-4087-b821-214e9b8a7b7c to room 18 from user user27217
+22:23:11.685 [WebSocketWorker-16] INFO  c.a.server.ChatWebSocketServer - Published message e46f4c25-c279-44d0-9ba8-2e919d139c51 to room 18 from user user12274
+22:23:11.686 [WebSocketWorker-16] INFO  c.a.server.ChatWebSocketServer - Published message d3759464-77c9-458b-b0ba-ffab50ce5a5f to room 18 from user user39069
+22:23:11.687 [WebSocketWorker-16] INFO  c.a.server.ChatWebSocketServer - Published message 49c6dbe8-441b-4b41-8586-e2fae3c81ffb to room 18 from user user82037
+22:23:11.688 [WebSocketWorker-16] INFO  c.a.server.ChatWebSocketServer - Published message 92673fba-d0f7-4871-9f5b-a962150e0c09 to room 18 from user user56327
+22:23:11.689 [WebSocketWorker-16] INFO  c.a.server.ChatWebSocketServer - Published message 23dc49aa-33ff-4583-a57e-0ac5694eb539 to room 18 from user user10069
+22:23:11.690 [WebSocketWorker-16] INFO  c.a.server.ChatWebSocketServer - Published message dbb90d00-68ca-4fd8-b0a5-7d66579701a0 to room 18 from user user92707
+22:23:11.692 [WebSocketWorker-16] INFO  c.a.server.ChatWebSocketServer - Published message 0a7504dc-e0f2-4bb4-888d-596e82c7e0fb to room 18 from user user84312
+22:23:11.693 [WebSocketWorker-16] INFO  c.a.server.ChatWebSocketServer - Published message 814adca6-c521-46d6-a770-e0435a6da834 to room 18 from user user55531
+22:23:11.694 [WebSocketWorker-16] INFO  c.a.server.ChatWebSocketServer - Published message 87e5bf57-320b-4b61-888a-ffe47a224414 to room 18 from user user63795
+22:23:11.695 [WebSocketWorker-16] INFO  c.a.server.ChatWebSocketServer - Published message 8b4fff35-35ab-464d-833c-0cf30f40115d to room 18 from user user36891
+22:23:11.696 [WebSocketWorker-16] INFO  c.a.server.ChatWebSocketServer - Published message 736f2d19-00f4-4be5-9d44-747eecce2e8d to room 18 from user user32919
+22:23:11.697 [WebSocketWorker-16] INFO  c.a.server.ChatWebSocketServer - Published message a4023003-fb4f-41a1-b5c7-b6c8a4378ece to room 18 from user user50688
+22:23:11.698 [WebSocketWorker-16] INFO  c.a.server.ChatWebSocketServer - Published message 5506625b-68f6-4215-9a15-4bcfc72424a1 to room 18 from user user60984
+22:23:11.699 [WebSocketWorker-16] INFO  c.a.server.ChatWebSocketServer - Published message 430b76db-f404-4826-9b82-60dea88a2eb3 to room 18 from user user47146
+22:23:11.700 [WebSocketWorker-16] INFO  c.a.server.ChatWebSocketServer - Published message 5cd09d7b-0333-42d8-acd8-c3d4e6081fad to room 18 from user user47345
+22:23:11.701 [WebSocketWorker-16] INFO  c.a.server.ChatWebSocketServer - Published message f8b0a325-f323-4693-8ce4-fa1fe0016149 to room 18 from user user87470
+22:23:11.702 [WebSocketWorker-16] INFO  c.a.server.ChatWebSocketServer - Published message c6aa8477-a942-4216-9b62-b71d41c5d1ab to room 18 from user user14083
+22:23:11.703 [WebSocketWorker-16] INFO  c.a.server.ChatWebSocketServer - Published message d0d6a4e0-31ca-4ac3-9803-702f33782100 to room 18 from user user91414
+22:23:11.704 [WebSocketWorker-16] INFO  c.a.server.ChatWebSocketServer - Published message ec4266bb-3bff-49ff-b998-dc546044c2b6 to room 18 from user user99738
+22:23:11.705 [WebSocketWorker-16] INFO  c.a.server.ChatWebSocketServer - Published message 9d32f508-5932-4157-b40a-a20f9e022ccc to room 18 from user user36577
+22:23:11.706 [WebSocketWorker-16] INFO  c.a.server.ChatWebSocketServer - Published message 93784bf4-9990-48c9-bca6-b4bbf97d3a2a to room 18 from user user21300
+22:23:11.707 [WebSocketWorker-16] INFO  c.a.server.ChatWebSocketServer - Published message c2f2c0ce-428d-4eac-810b-0ff7a9b2357e to room 18 from user user86186
+22:23:11.708 [WebSocketWorker-16] INFO  c.a.server.ChatWebSocketServer - Published message 0103368f-8e76-4f3a-bd46-70157e84149e to room 18 from user user70780
+22:23:11.708 [WebSocketWorker-16] INFO  c.a.server.ChatWebSocketServer - Published message d5137f71-4d71-4398-9b04-61a3849a47e1 to room 18 from user user84534
+22:23:11.710 [WebSocketWorker-16] INFO  c.a.server.ChatWebSocketServer - Published message 5405f232-6cb7-4efb-8852-9a4dbff7347b to room 18 from user user15262
+22:23:11.711 [WebSocketWorker-16] INFO  c.a.server.ChatWebSocketServer - Published message 20308e38-1a58-4cad-a067-448a2ff41d59 to room 18 from user user64894
+22:23:11.712 [WebSocketWorker-16] INFO  c.a.server.ChatWebSocketServer - Published message a5391806-05e8-4b61-880f-3d23e58a534b to room 18 from user user42641
+22:23:11.712 [WebSocketWorker-16] INFO  c.a.server.ChatWebSocketServer - Published message 7459563b-e3a5-4203-865d-9f5ba59c84f7 to room 18 from user user18905
+22:23:11.714 [WebSocketWorker-16] INFO  c.a.server.ChatWebSocketServer - Published message d435e201-e1a8-41bc-b56a-1a52d94044a0 to room 18 from user user34733
+22:23:11.715 [WebSocketWorker-16] INFO  c.a.server.ChatWebSocketServer - Published message 858ee50a-bbff-486a-9ac3-31eb1605e1ec to room 18 from user user17276
+22:23:11.716 [HTTP-Dispatcher] INFO  c.a.server.ChatWebSocketServer - Broadcasted message 7e9f203c-99de-4d8b-a57f-7d7a0f1c7514 to room 18: 1 successful, 0 failed
+22:23:11.716 [WebSocketWorker-16] INFO  c.a.server.ChatWebSocketServer - Published message 938e6458-75b0-4697-9bb9-9e292ced3426 to room 18 from user user25063
+22:23:11.716 [HTTP-Dispatcher] INFO  c.a.server.ChatWebSocketServer - Broadcasted message 151b3436-8683-4c01-8bc5-e0a41224e00d to room 18: 1 successful, 0 failed
+22:23:11.717 [HTTP-Dispatcher] INFO  c.a.server.ChatWebSocketServer - Broadcasted message 745f5852-91f5-4f42-9b1e-f8f5623bc3f8 to room 18: 1 successful, 0 failed
+22:23:11.717 [HTTP-Dispatcher] INFO  c.a.server.ChatWebSocketServer - Broadcasted message e46f4c25-c279-44d0-9ba8-2e919d139c51 to room 18: 1 successful, 0 failed
+22:23:11.717 [WebSocketWorker-16] INFO  c.a.server.ChatWebSocketServer - Published message e81f7668-7cc5-4b06-8855-269e6596d9df to room 18 from user user46612
+22:23:11.717 [HTTP-Dispatcher] INFO  c.a.server.ChatWebSocketServer - Broadcasted message 97a27d4b-b9ef-4170-94b4-a9eec8abddf2 to room 18: 1 successful, 0 failed
+22:23:11.717 [HTTP-Dispatcher] INFO  c.a.server.ChatWebSocketServer - Broadcasted message 8b4fff35-35ab-464d-833c-0cf30f40115d to room 18: 1 successful, 0 failed
+22:23:11.717 [HTTP-Dispatcher] INFO  c.a.server.ChatWebSocketServer - Broadcasted message 5cd09d7b-0333-42d8-acd8-c3d4e6081fad to room 18: 1 successful, 0 failed
+22:23:11.717 [HTTP-Dispatcher] INFO  c.a.server.ChatWebSocketServer - Broadcasted message 20308e38-1a58-4cad-a067-448a2ff41d59 to room 18: 1 successful, 0 failed
+22:23:11.717 [HTTP-Dispatcher] INFO  c.a.server.ChatWebSocketServer - Broadcasted message a5391806-05e8-4b61-880f-3d23e58a534b to room 18: 1 successful, 0 failed
+22:23:11.717 [HTTP-Dispatcher] INFO  c.a.server.ChatWebSocketServer - Broadcasted message 23dc49aa-33ff-4583-a57e-0ac5694eb539 to room 18: 1 successful, 0 failed
+22:23:11.717 [HTTP-Dispatcher] INFO  c.a.server.ChatWebSocketServer - Broadcasted message f8b0a325-f323-4693-8ce4-fa1fe0016149 to room 18: 1 successful, 0 failed
+22:23:11.718 [WebSocketWorker-16] INFO  c.a.server.ChatWebSocketServer - Published message f7f5dff1-3121-4ac9-b046-af2c5fa58448 to room 18 from user user36987
+22:23:11.718 [HTTP-Dispatcher] INFO  c.a.server.ChatWebSocketServer - Broadcasted message 9d32f508-5932-4157-b40a-a20f9e022ccc to room 18: 1 successful, 0 failed
+22:23:11.718 [HTTP-Dispatcher] INFO  c.a.server.ChatWebSocketServer - Broadcasted message d435e201-e1a8-41bc-b56a-1a52d94044a0 to room 18: 1 successful, 0 failed
+22:23:11.718 [HTTP-Dispatcher] INFO  c.a.server.ChatWebSocketServer - Broadcasted message ec4266bb-3bff-49ff-b998-dc546044c2b6 to room 18: 1 successful, 0 failed
+22:23:11.718 [HTTP-Dispatcher] INFO  c.a.server.ChatWebSocketServer - Broadcasted message d3759464-77c9-458b-b0ba-ffab50ce5a5f to room 18: 1 successful, 0 failed
+22:23:11.718 [HTTP-Dispatcher] INFO  c.a.server.ChatWebSocketServer - Broadcasted message d0d6a4e0-31ca-4ac3-9803-702f33782100 to room 18: 1 successful, 0 failed
+22:23:11.718 [HTTP-Dispatcher] INFO  c.a.server.ChatWebSocketServer - Broadcasted message c6aa8477-a942-4216-9b62-b71d41c5d1ab to room 18: 1 successful, 0 failed
+22:23:11.718 [HTTP-Dispatcher] INFO  c.a.server.ChatWebSocketServer - Broadcasted message 430b76db-f404-4826-9b82-60dea88a2eb3 to room 18: 1 successful, 0 failed
+22:23:11.718 [HTTP-Dispatcher] INFO  c.a.server.ChatWebSocketServer - Broadcasted message 49c6dbe8-441b-4b41-8586-e2fae3c81ffb to room 18: 1 successful, 0 failed
+22:23:11.718 [HTTP-Dispatcher] INFO  c.a.server.ChatWebSocketServer - Broadcasted message 93784bf4-9990-48c9-bca6-b4bbf97d3a2a to room 18: 1 successful, 0 failed
+22:23:11.718 [HTTP-Dispatcher] INFO  c.a.server.ChatWebSocketServer - Broadcasted message 87e5bf57-320b-4b61-888a-ffe47a224414 to room 18: 1 successful, 0 failed
+22:23:11.718 [WebSocketWorker-16] INFO  c.a.server.ChatWebSocketServer - Published message 1e1af014-f5b6-4809-9361-18f132a2cd29 to room 18 from user user71654
+22:23:11.718 [HTTP-Dispatcher] INFO  c.a.server.ChatWebSocketServer - Broadcasted message 1dc20b01-ecfd-44e2-8497-dde37a65c4b0 to room 18: 1 successful, 0 failed
+22:23:11.718 [HTTP-Dispatcher] INFO  c.a.server.ChatWebSocketServer - Broadcasted message dbb90d00-68ca-4fd8-b0a5-7d66579701a0 to room 18: 1 successful, 0 failed
+22:23:11.719 [HTTP-Dispatcher] INFO  c.a.server.ChatWebSocketServer - Broadcasted message d5137f71-4d71-4398-9b04-61a3849a47e1 to room 18: 1 successful, 0 failed
+22:23:11.719 [HTTP-Dispatcher] INFO  c.a.server.ChatWebSocketServer - Broadcasted message c2f2c0ce-428d-4eac-810b-0ff7a9b2357e to room 18: 1 successful, 0 failed
+22:23:11.719 [HTTP-Dispatcher] INFO  c.a.server.ChatWebSocketServer - Broadcasted message 0103368f-8e76-4f3a-bd46-70157e84149e to room 18: 1 successful, 0 failed
+22:23:11.719 [HTTP-Dispatcher] INFO  c.a.server.ChatWebSocketServer - Broadcasted message 5506625b-68f6-4215-9a15-4bcfc72424a1 to room 18: 1 successful, 0 failed
+22:23:11.719 [HTTP-Dispatcher] INFO  c.a.server.ChatWebSocketServer - Broadcasted message 787e248b-4666-4b42-9ad6-14bdc9ce3698 to room 18: 1 successful, 0 failed
+22:23:11.719 [HTTP-Dispatcher] INFO  c.a.server.ChatWebSocketServer - Broadcasted message ee69a95c-1e10-48df-8bef-42df5b5572b2 to room 18: 1 successful, 0 failed
+22:23:11.719 [HTTP-Dispatcher] INFO  c.a.server.ChatWebSocketServer - Broadcasted message c7dcaa94-3522-4115-8652-6090c65b6557 to room 18: 1 successful, 0 failed
+22:23:11.719 [HTTP-Dispatcher] INFO  c.a.server.ChatWebSocketServer - Broadcasted message f10c4532-bb75-4a8e-83cf-483e9b978ab9 to room 18: 1 successful, 0 failed
+22:23:11.719 [HTTP-Dispatcher] INFO  c.a.server.ChatWebSocketServer - Broadcasted message 92673fba-d0f7-4871-9f5b-a962150e0c09 to room 18: 1 successful, 0 failed
+22:23:11.719 [HTTP-Dispatcher] INFO  c.a.server.ChatWebSocketServer - Broadcasted message 814adca6-c521-46d6-a770-e0435a6da834 to room 18: 1 successful, 0 failed
+22:23:11.719 [HTTP-Dispatcher] INFO  c.a.server.ChatWebSocketServer - Broadcasted message 7459563b-e3a5-4203-865d-9f5ba59c84f7 to room 18: 1 successful, 0 failed
+22:23:11.719 [WebSocketWorker-16] INFO  c.a.server.ChatWebSocketServer - Published message 5e04b835-7905-4346-ab01-58d0d8fc3d02 to room 18 from user user36760
+22:23:11.720 [HTTP-Dispatcher] INFO  c.a.server.ChatWebSocketServer - Broadcasted message 736f2d19-00f4-4be5-9d44-747eecce2e8d to room 18: 1 successful, 0 failed
+22:23:11.720 [HTTP-Dispatcher] INFO  c.a.server.ChatWebSocketServer - Broadcasted message 7173ee11-6ad1-414a-9a55-560087ba3d6f to room 18: 1 successful, 0 failed
+22:23:11.720 [HTTP-Dispatcher] INFO  c.a.server.ChatWebSocketServer - Broadcasted message 1bd85b3e-2273-4855-8cdb-5f568b0eaf19 to room 18: 1 successful, 0 failed
+22:23:11.720 [HTTP-Dispatcher] INFO  c.a.server.ChatWebSocketServer - Broadcasted message 3251628b-4983-4bec-89e5-8cfa9b6a753e to room 18: 1 successful, 0 failed
+22:23:11.720 [HTTP-Dispatcher] INFO  c.a.server.ChatWebSocketServer - Broadcasted message 05ba85a3-686f-4420-b2fe-541970e1a35a to room 18: 1 successful, 0 failed
+22:23:11.720 [HTTP-Dispatcher] INFO  c.a.server.ChatWebSocketServer - Broadcasted message 7742137d-14f5-4abb-888f-d9e2313dee6e to room 18: 1 successful, 0 failed
+22:23:11.720 [HTTP-Dispatcher] INFO  c.a.server.ChatWebSocketServer - Broadcasted message 858ee50a-bbff-486a-9ac3-31eb1605e1ec to room 18: 1 successful, 0 failed
+22:23:11.720 [HTTP-Dispatcher] INFO  c.a.server.ChatWebSocketServer - Broadcasted message e01de274-8112-4f42-a746-6bbbfe6ec5bf to room 18: 1 successful, 0 failed
+22:23:11.720 [HTTP-Dispatcher] INFO  c.a.server.ChatWebSocketServer - Broadcasted message 11e04a25-6307-47aa-9323-b96d98caae88 to room 18: 1 successful, 0 failed
+22:23:11.720 [HTTP-Dispatcher] INFO  c.a.server.ChatWebSocketServer - Broadcasted message d9eb807c-e238-4087-b821-214e9b8a7b7c to room 18: 1 successful, 0 failed
+22:23:11.720 [HTTP-Dispatcher] INFO  c.a.server.ChatWebSocketServer - Broadcasted message 0a7504dc-e0f2-4bb4-888d-596e82c7e0fb to room 18: 1 successful, 0 failed
+22:23:11.720 [HTTP-Dispatcher] INFO  c.a.server.ChatWebSocketServer - Broadcasted message a4023003-fb4f-41a1-b5c7-b6c8a4378ece to room 18: 1 successful, 0 failed
+22:23:11.720 [WebSocketWorker-16] INFO  c.a.server.ChatWebSocketServer - Published message d6d5cfad-9f02-4cd0-a4e2-5ceb80765ad4 to room 18 from user user81129
+22:23:11.720 [HTTP-Dispatcher] INFO  c.a.server.ChatWebSocketServer - Broadcasted message 073c4f57-01c2-42ca-9313-a8c15ae26d40 to room 18: 1 successful, 0 failed
+22:23:11.721 [HTTP-Dispatcher] INFO  c.a.server.ChatWebSocketServer - Broadcasted message 5405f232-6cb7-4efb-8852-9a4dbff7347b to room 18: 1 successful, 0 failed
+22:23:11.721 [HTTP-Dispatcher] INFO  c.a.server.ChatWebSocketServer - Broadcasted message 739d3d39-c14c-49e2-b44d-fb6a3846b46a to room 18: 1 successful, 0 failed
+22:23:11.721 [HTTP-Dispatcher] INFO  c.a.server.ChatWebSocketServer - Broadcasted message c7894545-301d-440b-8d35-57d3e0b39873 to room 18: 1 successful, 0 failed
+22:23:11.722 [WebSocketWorker-16] INFO  c.a.server.ChatWebSocketServer - Published message 4583193e-9519-41c2-8610-0fc2e6fe497a to room 18 from user user60893
+22:23:11.723 [WebSocketWorker-16] INFO  c.a.server.ChatWebSocketServer - Published message e3e3c50e-037e-4c87-9b62-02b6889cad61 to room 18 from user user80316
+22:23:11.724 [WebSocketWorker-16] INFO  c.a.server.ChatWebSocketServer - Published message 340256dc-7f0b-4f34-bbd1-045a5026dbfd to room 18 from user user61899
+22:23:11.725 [WebSocketWorker-16] INFO  c.a.server.ChatWebSocketServer - Published message 518ba13b-8249-4fa3-9457-dd9bafe95afb to room 18 from user user87560
+22:23:11.726 [WebSocketWorker-16] INFO  c.a.server.ChatWebSocketServer - Published message ef3b8ae5-5a7f-4028-83ce-0c4f81bc864b to room 18 from user user81614
+22:23:11.726 [WebSocketSelector-18] INFO  c.a.server.ChatWebSocketServer - Connection closed for room 18: 1006 - 
+22:23:11.727 [WebSocketWorker-16] ERROR c.a.server.ChatWebSocketServer - Error processing message in room 18: null
+org.java_websocket.exceptions.WebsocketNotConnectedException: null
+	at org.java_websocket.WebSocketImpl.send(WebSocketImpl.java:674)
+	at org.java_websocket.WebSocketImpl.send(WebSocketImpl.java:650)
+	at cs6650.assignment1.server.ChatWebSocketServer.onMessage(ChatWebSocketServer.java:137)
+	at org.java_websocket.server.WebSocketServer.onWebsocketMessage(WebSocketServer.java:712)
+	at org.java_websocket.drafts.Draft_6455.processFrameText(Draft_6455.java:986)
+	at org.java_websocket.drafts.Draft_6455.processFrame(Draft_6455.java:910)
+	at org.java_websocket.WebSocketImpl.decodeFrames(WebSocketImpl.java:402)
+	at org.java_websocket.WebSocketImpl.decode(WebSocketImpl.java:234)
+	at org.java_websocket.server.WebSocketServer$WebSocketWorker.doDecode(WebSocketServer.java:1114)
+	at org.java_websocket.server.WebSocketServer$WebSocketWorker.run(WebSocketServer.java:1086)
+22:23:11.727 [WebSocketWorker-16] ERROR c.a.server.ChatWebSocketServer - Error sending error response
+org.java_websocket.exceptions.WebsocketNotConnectedException: null
+	at org.java_websocket.WebSocketImpl.send(WebSocketImpl.java:674)
+	at org.java_websocket.WebSocketImpl.send(WebSocketImpl.java:650)
+	at cs6650.assignment1.server.ChatWebSocketServer.onMessage(ChatWebSocketServer.java:150)
+	at org.java_websocket.server.WebSocketServer.onWebsocketMessage(WebSocketServer.java:712)
+	at org.java_websocket.drafts.Draft_6455.processFrameText(Draft_6455.java:986)
+	at org.java_websocket.drafts.Draft_6455.processFrame(Draft_6455.java:910)
+	at org.java_websocket.WebSocketImpl.decodeFrames(WebSocketImpl.java:402)
+	at org.java_websocket.WebSocketImpl.decode(WebSocketImpl.java:234)
+	at org.java_websocket.server.WebSocketServer$WebSocketWorker.doDecode(WebSocketServer.java:1114)
+	at org.java_websocket.server.WebSocketServer$WebSocketWorker.run(WebSocketServer.java:1086)
+22:23:11.728 [WebSocketWorker-16] ERROR c.a.server.ChatWebSocketServer - Error processing message in room null: null
+org.java_websocket.exceptions.WebsocketNotConnectedException: null
+	at org.java_websocket.WebSocketImpl.send(WebSocketImpl.java:674)
+	at org.java_websocket.WebSocketImpl.send(WebSocketImpl.java:650)
+	at cs6650.assignment1.server.ChatWebSocketServer.onMessage(ChatWebSocketServer.java:137)
+	at org.java_websocket.server.WebSocketServer.onWebsocketMessage(WebSocketServer.java:712)
+	at org.java_websocket.drafts.Draft_6455.processFrameText(Draft_6455.java:986)
+	at org.java_websocket.drafts.Draft_6455.processFrame(Draft_6455.java:910)
+	at org.java_websocket.WebSocketImpl.decodeFrames(WebSocketImpl.java:402)
+	at org.java_websocket.WebSocketImpl.decode(WebSocketImpl.java:234)
+	at org.java_websocket.server.WebSocketServer$WebSocketWorker.doDecode(WebSocketServer.java:1114)
+	at org.java_websocket.server.WebSocketServer$WebSocketWorker.run(WebSocketServer.java:1086)
+22:23:11.728 [WebSocketWorker-16] ERROR c.a.server.ChatWebSocketServer - Error sending error response
+org.java_websocket.exceptions.WebsocketNotConnectedException: null
+	at org.java_websocket.WebSocketImpl.send(WebSocketImpl.java:674)
+	at org.java_websocket.WebSocketImpl.send(WebSocketImpl.java:650)
+	at cs6650.assignment1.server.ChatWebSocketServer.onMessage(ChatWebSocketServer.java:150)
+	at org.java_websocket.server.WebSocketServer.onWebsocketMessage(WebSocketServer.java:712)
+	at org.java_websocket.drafts.Draft_6455.processFrameText(Draft_6455.java:986)
+	at org.java_websocket.drafts.Draft_6455.processFrame(Draft_6455.java:910)
+	at org.java_websocket.WebSocketImpl.decodeFrames(WebSocketImpl.java:402)
+	at org.java_websocket.WebSocketImpl.decode(WebSocketImpl.java:234)
+	at org.java_websocket.server.WebSocketServer$WebSocketWorker.doDecode(WebSocketServer.java:1114)
+	at org.java_websocket.server.WebSocketServer$WebSocketWorker.run(WebSocketServer.java:1086)

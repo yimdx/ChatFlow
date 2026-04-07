@@ -1,0 +1,24 @@
+Timeout: 60.0 seconds ...
+Listing queues for vhost / ...
+name	messages	consumers
+room.18	0	1
+room.11	0	1
+room.8	0	1
+room.13	0	1
+room.3	0	1
+room.10	0	1
+room.16	0	1
+room.17	0	1
+room.12	0	1
+room.5	0	1
+room.2	0	1
+chat.persist.dlq	0	0
+room.7	0	1
+room.14	0	1
+room.19	0	1
+room.4	0	1
+room.6	0	1
+room.1	0	1
+room.9	0	1
+room.15	0	1
+room.20	0	1

@@ -6,12 +6,12 @@ import org.slf4j.LoggerFactory;
 
 import java.time.Instant;
 import java.util.Random;
+import java.util.UUID;
 import java.util.concurrent.BlockingQueue;
 
 public class MessageGenerator implements Runnable {
     
     private static final Logger logger = LoggerFactory.getLogger(MessageGenerator.class);
-    private static final int TOTAL_MESSAGES = 500_000;
     private static final String[] PREDEFINED_MESSAGES = {
         "Hello everyone!",
         "How are you doing today?",
@@ -67,10 +67,12 @@ public class MessageGenerator implements Runnable {
     
     private final BlockingQueue<ChatMessage> messageQueue;
     private final Random random;
+    private final int totalMessages;
     
-    public MessageGenerator(BlockingQueue<ChatMessage> messageQueue) {
+    public MessageGenerator(BlockingQueue<ChatMessage> messageQueue, int totalMessages) {
         this.messageQueue = messageQueue;
         this.random = new Random();
+        this.totalMessages = totalMessages;
     }
     
     @Override
@@ -78,7 +80,7 @@ public class MessageGenerator implements Runnable {
         logger.info("Message generator started");
         
         try {
-            for (int i = 0; i < TOTAL_MESSAGES; i++) {
+            for (int i = 0; i < totalMessages; i++) {
                 ChatMessage message = generateRandomMessage();
                 messageQueue.put(message);
                 
@@ -86,7 +88,7 @@ public class MessageGenerator implements Runnable {
                     logger.info("Generated {} messages", i + 1);
                 }
             }
-            logger.info("Message generation completed. Total: {} messages", TOTAL_MESSAGES);
+            logger.info("Message generation completed. Total: {} messages", totalMessages);
         } catch (InterruptedException e) {
             logger.error("Message generator interrupted", e);
             Thread.currentThread().interrupt();
@@ -112,6 +114,6 @@ public class MessageGenerator implements Runnable {
             message = username + " left the chat";
         }
         
-        return new ChatMessage(userId, username, message, timestamp, messageType);
+        return new ChatMessage(UUID.randomUUID().toString(), userId, username, message, timestamp, messageType);
     }
 }
